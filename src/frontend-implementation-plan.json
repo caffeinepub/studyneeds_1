@@ -1,70 +1,85 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix admin panel routing error - 'search does not match any page'",
+  "title": "Fix admin panel URL routing and visibility issues",
   "requirements": [
     {
-      "id": "REQ-45",
-      "summary": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin",
+      "id": "REQ-48",
+      "summary": "Fix TanStack Router configuration to handle /admin route with hash-based routing and caffeineAdminToken query parameter",
       "acceptanceCriteria": [
-        "Navigating to /admin successfully loads the AdminDashboardPage without showing 'search does not match any page' error",
-        "The route definition in App.tsx correctly maps /admin to the AdminDashboardPage component",
-        "TanStack Router properly matches the /admin path and renders the protected admin route",
-        "Clicking the Admin Panel link in the Header successfully navigates to and displays the admin dashboard"
+        "Navigating to the full URL with /admin path successfully loads the AdminDashboardPage",
+        "The 'search does not match any documents' error no longer appears",
+        "The route handles the caffeineAdminToken query parameter correctly without breaking routing"
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Fix the TanStack Router configuration for the /admin route. Ensure the route object includes proper path matching configuration, verify the AdminRoute wrapper is correctly integrated, and confirm no conflicting route definitions exist. Add explicit search parameter validation if TanStack Router requires it for this route. Verify the route is properly registered in the router's route tree."
+          "description": "Update the TanStack Router route configuration for /admin to properly handle hash-based routing with caffeineAdminToken query parameter. Modify the validateSearch function to accept and preserve all query parameters without strict validation that may cause routing errors. Ensure the route matches /admin path correctly when accessed via direct URL navigation with hash fragments."
         },
         {
-          "path": "frontend/src/components/Header.tsx",
+          "path": "frontend/src/utils/urlParams.ts",
           "operation": "modify",
-          "description": "Verify the Admin Panel navigation link uses the correct routing method compatible with TanStack Router. Ensure the link properly triggers route navigation to /admin without search parameter conflicts. Test that clicking the link initiates proper route matching."
+          "description": "Enhance URL parameter extraction utilities to properly parse and handle caffeineAdminToken from hash-based URLs. Ensure the utility correctly extracts parameters from URLs like #caffeineAdminToken=TOKEN/admin and makes them available to the routing system."
         }
       ]
     },
     {
-      "id": "REQ-46",
-      "summary": "Verify that the AdminRoute protection wrapper is not interfering with route matching and properly renders the AdminDashboardPage",
+      "id": "REQ-49",
+      "summary": "Make Admin Panel navigation link visible in Header for authenticated admin users",
       "acceptanceCriteria": [
-        "AdminRoute component correctly wraps the admin dashboard route without breaking route matching",
-        "Authentication and admin role checks complete successfully before rendering the dashboard",
-        "The admin dashboard interface displays properly for authenticated admin users"
+        "Admin Panel link is visible in the header for users with admin role",
+        "The link is properly styled and integrated into the header layout",
+        "Clicking the link navigates to /admin successfully"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Ensure the Admin Panel link is consistently visible and properly rendered in the header navigation area for authenticated admin users. Verify that the conditional rendering logic using isCallerAdmin query is working correctly in both draft and production deployments. Check that the link styling matches the header design and that the navigation path is correct."
+        },
+        {
+          "path": "frontend/src/components/MobileMenu.tsx",
+          "operation": "modify",
+          "description": "Verify that the Admin Panel link is also visible in the mobile menu for authenticated admin users. Ensure consistent behavior between desktop and mobile navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-50",
+      "summary": "Verify AdminRoute component correctly handles authentication without interfering with TanStack Router path matching",
+      "acceptanceCriteria": [
+        "AdminRoute properly wraps the admin dashboard route without breaking routing",
+        "Authentication and admin role checks work correctly",
+        "Non-admin users see the unauthorized message as expected"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/AdminRoute.tsx",
           "operation": "modify",
-          "description": "Review the AdminRoute component to ensure it does not interfere with TanStack Router's route matching. Verify that loading states, authentication checks, and conditional rendering do not prevent the route from being recognized. Ensure the component returns proper React elements in all code paths and handles the route context correctly."
-        },
-        {
-          "path": "frontend/src/pages/AdminDashboardPage.tsx",
-          "operation": "modify",
-          "description": "Verify the AdminDashboardPage component is properly exported and can be rendered within the routing context. Ensure no props or context dependencies are causing rendering failures that might appear as routing errors."
+          "description": "Review and optimize the AdminRoute protection component to ensure it performs authentication and authorization checks without interfering with TanStack Router's path matching logic. Ensure loading states are handled properly and that the component doesn't cause routing errors or prevent the route from matching. Verify that the component correctly identifies admin users and shows appropriate unauthorized messages for non-admin users."
         }
       ]
     },
     {
-      "id": "REQ-47",
-      "summary": "Test the complete admin panel access flow end-to-end and verify all admin dashboard sections are accessible",
+      "id": "REQ-51",
+      "summary": "Test complete admin panel access flow end-to-end with authentication, navigation, and dashboard functionality",
       "acceptanceCriteria": [
-        "Admin users can successfully navigate to /admin from the header link",
-        "The admin dashboard loads completely without any routing errors",
-        "All three management tabs (Products, Orders, Users) are clickable and display their respective interfaces",
-        "No 'search does not match any page' error appears during navigation"
+        "Admin authentication works with the provided caffeineAdminToken",
+        "Direct URL navigation to /admin loads the dashboard",
+        "Header link navigation to /admin loads the dashboard",
+        "All three admin tabs (Products, Orders, Users) are accessible and functional"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Add error boundary or fallback handling around the admin route to provide better debugging information if routing issues persist. Ensure the route configuration includes proper error handling that distinguishes between authentication failures and route matching failures."
-        },
-        {
           "path": "frontend/src/pages/AdminDashboardPage.tsx",
           "operation": "modify",
-          "description": "Verify all three admin dashboard tabs (Products, Orders, Users) render correctly and do not trigger routing errors when switching between them. Ensure tab state management does not interfere with the parent route."
+          "description": "Verify that the AdminDashboardPage renders correctly when accessed via both direct URL navigation and header link navigation. Ensure all three tabs (Products, Orders, Users) are accessible and functional. Add console logging or error boundaries if needed to diagnose any remaining issues with the admin dashboard loading."
+        },
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Verify that the useActor hook correctly initializes the backend actor with admin authentication when the caffeineAdminToken is present. Ensure the admin token is properly extracted from URL parameters and used for access control initialization. Confirm that the actor is available before admin queries are executed."
         }
       ]
     }

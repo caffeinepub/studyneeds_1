@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 19,
+  "projectStateVersion": 21,
   "summary": "StudyNeeds - A comprehensive multi-service platform for students combining e-commerce (books, stationery, furniture), home tuition marketplace, documentation services, and career counseling. Building in phases starting with core e-commerce store.",
   "architectural_notes": [
     "Mobile-responsive design with Poppins/Roboto font",
@@ -15,7 +15,7 @@
     "SEO-friendly with fast loading and modern animations"
   ],
   "known_issues": [
-    "Admin panel route /admin returns 'search does not match any page' error - route not properly registered in TanStack Router configuration"
+    "Admin panel route still not accessible - URL /admin shows 'search did not match any documents' error and Admin Panel link not visible in header even in production"
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -282,6 +282,14 @@
         "REQ-47"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-properly-matches-when-users-navigate-to-the-url-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-the-route-must-handle-the-hash-based-routing-with-the-caffeineadmintoken-query-parameter-and-correctly-load-the-admindashboardpage-without-showing-your-search-did-not-match-any-documents-error",
+      "title": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -448,6 +456,30 @@
       "summary": "Verify that the AdminRoute protection wrapper is not interfering with route matching and that it properly renders the AdminDashboardPage when authentication and authorization succeed.",
       "reqIds": [
         "REQ-46"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-46",
+      "summary": "Ensure the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) is visible for authenticated admin users in both draft and production deployments - the link should appear in the header navigation area and be clickable",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-47",
+      "summary": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) correctly handles authentication and authorization checks while allowing the route to match properly - ensure it does not interfere with TanStack Router's path matching logic",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-48",
+      "summary": "Test the complete admin panel access flow end-to-end: authenticate as an admin user using the caffeineAdminToken, navigate to /admin via direct URL and via the header link, verify the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and confirm no routing errors occur",
+      "reqIds": [
+        "REQ-51"
       ],
       "status": "pending"
     }

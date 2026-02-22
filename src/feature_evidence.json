@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-diagnose-and-fix-the-tanstack-router-configuration-issue-causing-the-search-does-not-match-any-page-error-when-navigating-to-admin-verify-that-the-admin-route-is-properly-registered-in-the-router-configuration-and-that-path-matching-works-correctly-for-the-admin-path",
-      "featureTitle": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin. Verify that the admin route is properly registered in the router configuration and that path matching works correctly for the /admin path.",
+      "featureId": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-properly-matches-when-users-navigate-to-the-url-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-the-route-must-handle-the-hash-based-routing-with-the-caffeineadmintoken-query-parameter-and-correctly-load-the-admindashboardpage-without-showing-your-search-did-not-match-any-documents-error",
+      "featureTitle": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
       "files": [
-        "frontend/src/App.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/utils/urlParams.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -17,27 +18,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-45"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-test-the-complete-admin-panel-access-flow-end-to-end-log-in-as-an-admin-user-navigate-to-admin-via-the-header-link-verify-the-page-loads-without-routing-errors-and-confirm-all-admin-dashboard-sections-products-orders-users-are-accessible",
-      "featureTitle": "Test the complete admin panel access flow end-to-end: log in as an admin user, navigate to /admin via the header link, verify the page loads without routing errors, and confirm all admin dashboard sections (Products, Orders, Users) are accessible.",
-      "files": [
-        "frontend/src/App.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "blob-storage@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-47"
+        "REQ-48"
       ],
       "confidence": "high"
     }

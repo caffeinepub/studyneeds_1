@@ -1,5 +1,5 @@
 {
-  "frontend/src/App.tsx": "Main application component with TanStack Router setup including all routes (home, shop, product details, cart, checkout, order confirmation, admin), wrapped with WishlistProvider and CartProvider, with admin route now including validateSearch to fix routing error.",
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup including all routes, wrapped with WishlistProvider and CartProvider, with special handling in RootComponent to detect and navigate from malformed admin URLs (#caffeineAdminToken=TOKEN/admin) to proper route format.",
   "frontend/src/context/CartContext.tsx": "React context provider for shopping cart state management with localStorage persistence, including functions to add/update/remove items, calculate totals, and manage cart quantities.",
   "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including admin hooks (useIsCallerAdmin with improved error handling and caching, useGetAllProductsAdmin, useGetAllOrdersAdmin, useGetAllUsers, useAddProduct, useUpdateProduct, useDeleteProduct, useUpdateOrderStatus) with proper query invalidation and error handling.",
   "frontend/src/hooks/useGetCallerUserProfile.ts": "React Query hook to fetch current user profile with proper actor dependency handling to prevent profile setup modal flash on page load.",
@@ -36,5 +36,6 @@
   "frontend/src/components/admin/UsersManagement.tsx": "Users management component with search by name/email, table displaying user profiles with registration dates and order counts, UserDetailModal for viewing user details and order history.",
   "frontend/src/components/admin/UserDetailModal.tsx": "Modal displaying complete user profile information, registration date, total orders count, and full order history table with order details and status badges.",
   "frontend/src/context/WishlistContext.tsx": "React context provider for wishlist state management with localStorage persistence, providing functions to add/remove items and check wishlist status.",
-  "frontend/src/hooks/useWishlist.ts": "Custom hook that consumes WishlistContext and returns wishlist state and methods with proper error handling."
+  "frontend/src/hooks/useWishlist.ts": "Custom hook that consumes WishlistContext and returns wishlist state and methods with proper error handling.",
+  "frontend/src/utils/urlParams.ts": "Enhanced URL parameter parsing utility that handles both standard hash routing format (#/route?param=value) and special format (#param=value/route), with secure extraction and clearing of sensitive parameters like admin tokens from URL hash."
 }
