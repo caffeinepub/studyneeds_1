@@ -78,6 +78,7 @@ const orderConfirmationRoute = createRoute({
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin',
+  validateSearch: () => ({}),
   component: () => (
     <AdminRoute>
       <AdminDashboardPage />

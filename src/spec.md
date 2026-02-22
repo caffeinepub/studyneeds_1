@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Enable admin users to edit and add products across all existing product sections in the admin panel.
+**Goal:** Fix the TanStack Router configuration error that displays "search does not match any page" when navigating to the /admin route.
 
 **Planned changes:**
-- Extend existing admin panel to support full CRUD operations (create, read, update, delete) for products in all categories
-- Add product edit forms with fields for name, description, price, image, and category
-- Add product creation forms for adding new products to any section
-- Implement product listing views in admin panel showing products by category
+- Diagnose and fix the TanStack Router configuration issue causing the routing error for /admin
+- Verify the admin route is properly registered and path matching works correctly
+- Ensure AdminRoute protection wrapper doesn't interfere with route matching
+- Test the complete admin panel access flow end-to-end
 
-**User-visible outcome:** Admin users can manage the product catalog by adding new products and editing existing products across all sections (books, stationery, furniture, bags, dress, courses, notes, geometry) through the admin panel interface.
+**User-visible outcome:** Admin users can successfully navigate to /admin from the header link and access the admin dashboard without encountering routing errors. All admin management sections (Products, Orders, Users) remain fully accessible.

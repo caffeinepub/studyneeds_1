@@ -1,4 +1,45 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-diagnose-and-fix-the-tanstack-router-configuration-issue-causing-the-search-does-not-match-any-page-error-when-navigating-to-admin-verify-that-the-admin-route-is-properly-registered-in-the-router-configuration-and-that-path-matching-works-correctly-for-the-admin-path",
+      "featureTitle": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin. Verify that the admin route is properly registered in the router configuration and that path matching works correctly for the /admin path.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-45"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-test-the-complete-admin-panel-access-flow-end-to-end-log-in-as-an-admin-user-navigate-to-admin-via-the-header-link-verify-the-page-loads-without-routing-errors-and-confirm-all-admin-dashboard-sections-products-orders-users-are-accessible",
+      "featureTitle": "Test the complete admin panel access flow end-to-end: log in as an admin user, navigate to /admin via the header link, verify the page loads without routing errors, and confirm all admin dashboard sections (Products, Orders, Users) are accessible.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-47"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

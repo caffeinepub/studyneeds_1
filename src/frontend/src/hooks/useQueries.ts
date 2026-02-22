@@ -111,12 +111,14 @@ export function useIsCallerAdmin() {
       if (!actor) return false;
       try {
         return await actor.isCallerAdmin();
-      } catch {
+      } catch (error) {
+        console.error('Admin check error:', error);
         return false;
       }
     },
     enabled: !!actor && !isFetching,
-    retry: false,
+    retry: 1,
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
   });
 }
 
@@ -127,7 +129,12 @@ export function useGetAllProductsAdmin() {
     queryKey: ['admin', 'products'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.getAllProductsAdminProductQueries();
+      try {
+        return await actor.getAllProductsAdminProductQueries();
+      } catch (error) {
+        console.error('Get products error:', error);
+        return [];
+      }
     },
     enabled: !!actor && !isFetching,
   });
@@ -140,7 +147,12 @@ export function useGetAllOrdersAdmin() {
     queryKey: ['admin', 'orders'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.getAllOrdersAdminProductQueries();
+      try {
+        return await actor.getAllOrdersAdminProductQueries();
+      } catch (error) {
+        console.error('Get orders error:', error);
+        return [];
+      }
     },
     enabled: !!actor && !isFetching,
   });
@@ -153,7 +165,12 @@ export function useGetAllUsers() {
     queryKey: ['admin', 'users'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.getAllUsers();
+      try {
+        return await actor.getAllUsers();
+      } catch (error) {
+        console.error('Get users error:', error);
+        return [];
+      }
     },
     enabled: !!actor && !isFetching,
   });

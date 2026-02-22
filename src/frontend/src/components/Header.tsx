@@ -17,17 +17,19 @@ export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { getTotalItems } = useCart();
   const { identity, login, clear, loginStatus } = useInternetIdentity();
-  const { data: isAdmin } = useIsCallerAdmin();
+  const { data: isAdmin, isLoading: adminLoading } = useIsCallerAdmin();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const isAuthenticated = !!identity;
   const isLoggingIn = loginStatus === 'logging-in';
+  const showAdminLink = isAuthenticated && isAdmin === true && !adminLoading;
 
   const handleAuth = async () => {
     if (isAuthenticated) {
       await clear();
       queryClient.clear();
+      navigate({ to: '/' });
     } else {
       try {
         await login();
@@ -108,13 +110,13 @@ export default function Header() {
               </button>
 
               {/* Admin Dashboard Link */}
-              {isAuthenticated && isAdmin && (
+              {showAdminLink && (
                 <Link
                   to="/admin"
-                  className="hidden md:flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors text-blue-600"
+                  className="hidden md:flex items-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-blue-600 border border-blue-200"
                 >
                   <Shield className="w-5 h-5" />
-                  <span className="text-sm font-medium">Admin</span>
+                  <span className="text-sm font-medium">Admin Panel</span>
                 </Link>
               )}
 

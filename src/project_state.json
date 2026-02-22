@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 19,
   "summary": "StudyNeeds - A comprehensive multi-service platform for students combining e-commerce (books, stationery, furniture), home tuition marketplace, documentation services, and career counseling. Building in phases starting with core e-commerce store.",
   "architectural_notes": [
     "Mobile-responsive design with Poppins/Roboto font",
@@ -14,8 +14,10 @@
     "Teacher rating and AI recommendation placeholders",
     "SEO-friendly with fast loading and modern animations"
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Admin panel route /admin returns 'search does not match any page' error - route not properly registered in TanStack Router configuration"
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-homepage-that-serves-as-the-default-e-commerce-store-with-a-header-containing-studyneeds-logo-left-search-bar-center-location-selector-login-register-buttons-cart-icon-and-menu-categories-dropdown",
@@ -224,6 +226,62 @@
         "REQ-36"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-verify-adminroute-protection-component-is-correctly-wrapping-the-admin-dashboard-route-and-properly-checking-authentication-and-admin-authorization-before-allowing-access",
+      "title": "Verify AdminRoute protection component is correctly wrapping the admin dashboard route and properly checking authentication and admin authorization before allowing access",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visible-navigation-link-or-button-in-the-header-component-that-allows-authenticated-admin-users-to-easily-access-the-admin-panel-at-admin-without-manually-typing-the-url",
+      "title": "Add a visible navigation link or button in the Header component that allows authenticated admin users to easily access the admin panel at /admin without manually typing the URL",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-test-the-complete-admin-panel-workflow-end-to-end-including-accessing-admin-viewing-products-orders-users-tabs-adding-a-new-product-editing-an-existing-product-and-updating-an-order-status-to-ensure-all-functionality-works-correctly",
+      "title": "Test the complete admin panel workflow end-to-end including accessing /admin, viewing products/orders/users tabs, adding a new product, editing an existing product, and updating an order status to ensure all functionality works correctly",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-investigate-and-fix-the-routing-issue-preventing-the-admin-panel-from-displaying-when-users-navigate-to-admin-verify-that-the-route-definition-in-app-tsx-correctly-maps-to-admindashboardpage-ensure-adminroute-protection-component-is-properly-wrapping-the-route-and-confirm-that-authenticated-admin-users-can-successfully-load-the-admin-dashboard-interface",
+      "title": "Investigate and fix the routing issue preventing the admin panel from displaying when users navigate to /admin - verify that the route definition in App.tsx correctly maps to AdminDashboardPage, ensure AdminRoute protection component is properly wrapping the route, and confirm that authenticated admin users can successfully load the admin dashboard interface",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-check-that-the-adminroute-protection-component-is-correctly-checking-authentication-status-and-admin-role-before-allowing-access-and-verify-it-properly-renders-the-admindashboardpage-when-authorization-succeeds",
+      "title": "Check that the AdminRoute protection component is correctly checking authentication status and admin role before allowing access, and verify it properly renders the AdminDashboardPage when authorization succeeds",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-diagnose-and-fix-the-tanstack-router-configuration-issue-causing-the-search-does-not-match-any-page-error-when-navigating-to-admin-verify-that-the-admin-route-is-properly-registered-in-the-router-configuration-and-that-path-matching-works-correctly-for-the-admin-path",
+      "title": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin. Verify that the admin route is properly registered in the router configuration and that path matching works correctly for the /admin path.",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-test-the-complete-admin-panel-access-flow-end-to-end-log-in-as-an-admin-user-navigate-to-admin-via-the-header-link-verify-the-page-loads-without-routing-errors-and-confirm-all-admin-dashboard-sections-products-orders-users-are-accessible",
+      "title": "Test the complete admin panel access flow end-to-end: log in as an admin user, navigate to /admin via the header link, verify the page loads without routing errors, and confirm all admin dashboard sections (Products, Orders, Users) are accessible.",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -358,6 +416,38 @@
       "summary": "Create at least 6 demo Study Furniture products in the backend with complete details including product name, category (Study Furniture), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
       "reqIds": [
         "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Debug and fix the /admin route so that it properly loads the AdminDashboardPage component when users navigate to /admin or the full URL with /admin path",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Verify that the TanStack Router configuration in App.tsx includes the /admin route with proper lazy loading or direct component import, and ensure there are no conflicting route patterns that might prevent the admin route from matching",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-42",
+      "summary": "Test the complete navigation flow from clicking the Admin Panel link in the Header component through to successfully viewing the admin dashboard, ensuring the link correctly navigates to /admin and the page loads without errors",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-44",
+      "summary": "Verify that the AdminRoute protection wrapper is not interfering with route matching and that it properly renders the AdminDashboardPage when authentication and authorization succeed.",
+      "reqIds": [
+        "REQ-46"
       ],
       "status": "pending"
     }

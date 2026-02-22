@@ -1,17 +1,68 @@
 {
   "kind": "build_request",
-  "title": "Add admin panel for editing and adding products across different sections",
-  "projectName": "StudyNeeds",
-  "priority": "normal",
-  "requirements": [],
+  "title": "Fix admin panel routing error - 'search does not match any page'",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-45",
+      "text": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin. Verify that the admin route is properly registered in the router configuration and that path matching works correctly for the /admin path.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "your seach does not macth any page ese aata h"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigating to /admin successfully loads the AdminDashboardPage without showing 'search does not match any page' error",
+        "The route definition in App.tsx correctly maps /admin to the AdminDashboardPage component",
+        "TanStack Router properly matches the /admin path and renders the protected admin route",
+        "Clicking the Admin Panel link in the Header successfully navigates to and displays the admin dashboard"
+      ]
+    },
+    {
+      "id": "REQ-46",
+      "text": "Verify that the AdminRoute protection wrapper is not interfering with route matching and that it properly renders the AdminDashboardPage when authentication and authorization succeed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ]
+      },
+      "acceptanceCriteria": [
+        "AdminRoute component correctly wraps the admin dashboard route without breaking route matching",
+        "Authentication and admin role checks complete successfully before rendering the dashboard",
+        "The admin dashboard interface displays properly for authenticated admin users"
+      ]
+    },
+    {
+      "id": "REQ-47",
+      "text": "Test the complete admin panel access flow end-to-end: log in as an admin user, navigate to /admin via the header link, verify the page loads without routing errors, and confirm all admin dashboard sections (Products, Orders, Users) are accessible.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin users can successfully navigate to /admin from the header link",
+        "The admin dashboard loads completely without any routing errors",
+        "All three management tabs (Products, Orders, Users) are clickable and display their respective interfaces",
+        "No 'search does not match any page' error appears during navigation"
+      ]
+    }
+  ],
   "constraints": [
-    "Admin panel functionality already exists in the application",
-    "Do not duplicate existing admin features for product management"
+    "Do not modify the AdminRoute protection logic unless it is directly causing the routing issue",
+    "Preserve all existing admin dashboard functionality (Products, Orders, Users management)",
+    "Maintain the current authentication and authorization checks for admin access"
   ],
   "nonGoals": [
-    "Creating new admin functionality that already exists",
-    "Modifying the existing admin dashboard structure",
-    "Adding new product categories beyond what's already supported"
+    "Adding new admin features or functionality",
+    "Modifying the admin dashboard UI design",
+    "Changing the admin role assignment mechanism"
   ],
   "imageRequirements": {
     "required": [],
