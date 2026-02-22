@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "StudyNeeds - A comprehensive multi-service platform for students combining e-commerce (books, stationery, furniture), home tuition marketplace, documentation services, and career counseling. Building in phases starting with core e-commerce store.",
+  "architectural_notes": [
+    "Mobile-responsive design with Poppins/Roboto font",
+    "Blue (#2563eb) and Orange (#f97316) color theme",
+    "Flipkart/Amazon-style e-commerce UI design",
+    "WhatsApp chat button integration",
+    "Online payments + Cash on Delivery support",
+    "Login with OTP authentication",
+    "Multi-vendor marketplace ready architecture",
+    "Referral and wallet system support",
+    "Teacher rating and AI recommendation placeholders",
+    "SEO-friendly with fast loading and modern animations"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-homepage-that-serves-as-the-default-e-commerce-store-with-a-header-containing-studyneeds-logo-left-search-bar-center-location-selector-login-register-buttons-cart-icon-and-menu-categories-dropdown",
+      "title": "Create a homepage that serves as the default e-commerce store with a header containing StudyNeeds logo (left), search bar (center), location selector, Login/Register buttons, cart icon, and menu categories dropdown",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-promotional-banner-slider-on-the-homepage-showing-5-banners-back-to-school-sale-competitive-exam-books-study-furniture-deals-tuition-services-promotion-and-documentation-services-promotion",
+      "title": "Implement a promotional banner slider on the homepage showing 5 banners: Back to School Sale, Competitive Exam Books, Study Furniture Deals, Tuition Services Promotion, and Documentation Services Promotion",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-categories-section-with-icons-for-books-stationery-school-bags-school-dress-geometry-items-study-tables-furniture-notes-pdfs-and-digital-courses",
+      "title": "Create a categories section with icons for: Books, Stationery, School Bags, School Dress, Geometry Items, Study Tables & Furniture, Notes & PDFs, and Digital Courses",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-product-sections-on-homepage-trending-products-school-essentials-competitive-exam-books-budget-deals-under-199-combo-offers-and-study-furniture-each-product-card-must-show-product-image-title-price-discount-percentage-rating-add-to-cart-button-and-buy-now-button",
+      "title": "Display product sections on homepage: Trending Products, School Essentials, Competitive Exam Books, Budget Deals Under ₹199, Combo Offers, and Study Furniture. Each product card must show product image, title, price, discount percentage, rating, Add to Cart button, and Buy Now button",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-services-section-with-4-cards-e-commerce-store-home-tuition-consultancy-documentation-services-and-career-counselling-marked-as-coming-soon-each-card-includes-an-icon-short-description-and-action-button",
+      "title": "Create a services section with 4 cards: E-Commerce Store, Home Tuition Consultancy, Documentation Services, and Career Counselling (marked as Coming Soon). Each card includes an icon, short description, and action button",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-why-choose-studyneeds-section-highlighting-trusted-platform-affordable-pricing-local-support-verified-teachers-and-fast-delivery",
+      "title": "Add a 'Why Choose StudyNeeds' section highlighting: Trusted Platform, Affordable Pricing, Local Support, Verified Teachers, and Fast Delivery",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-testimonials-section-displaying-student-and-parent-reviews",
+      "title": "Implement a testimonials section displaying student and parent reviews",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-footer-with-sections-for-about-contact-policies-careers-seller-registration-social-media-links-address-and-newsletter-signup-form",
+      "title": "Create a footer with sections for: About, Contact, Policies, Careers, Seller Registration, Social Media links, Address, and Newsletter Signup form",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-shop-categories-page-showing-filterable-product-listings-by-category",
+      "title": "Create a Shop/Categories page showing filterable product listings by category",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-product-details-page-showing-full-product-information-image-gallery-price-discount-rating-reviews-quantity-selector-add-to-cart-and-buy-now-buttons",
+      "title": "Build a Product Details page showing full product information, image gallery, price, discount, rating, reviews, quantity selector, Add to Cart, and Buy Now buttons",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-shopping-cart-functionality-with-item-list-quantity-adjustment-price-calculation-and-proceed-to-checkout-button",
+      "title": "Implement shopping cart functionality with item list, quantity adjustment, price calculation, and proceed to checkout button",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-checkout-page-with-order-summary-delivery-address-form-payment-method-selection-online-payment-and-cash-on-delivery-and-place-order-button",
+      "title": "Create a checkout page with order summary, delivery address form, payment method selection (online payment and cash on delivery), and place order button",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-use-blue-2563eb-and-orange-f97316-as-primary-color-theme-with-white-background-throughout-the-application",
+      "title": "Use blue (#2563eb) and orange (#f97316) as primary color theme with white background throughout the application",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-poppins-or-roboto-font-family-throughout-the-application-for-all-text-elements",
+      "title": "Apply Poppins or Roboto font family throughout the application for all text elements",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-entire-application-is-fully-mobile-responsive-with-optimized-layouts-for-mobile-tablet-and-desktop-viewports",
+      "title": "Ensure entire application is fully mobile-responsive with optimized layouts for mobile, tablet, and desktop viewports",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-floating-whatsapp-chat-button-visible-on-all-pages-for-customer-support",
+      "title": "Add a floating WhatsApp chat button visible on all pages for customer support",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-deploy-the-complete-studyneeds-application-frontend-and-backend-to-the-internet-computer-network-for-production-access",
+      "title": "Deploy the complete StudyNeeds application (frontend and backend) to the Internet Computer network for production access",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-logo-in-the-header-component-with-the-uploaded-studyneeds-logo-image-logo-908978-removebg-preview-png-maintaining-the-same-layout-and-positioning-in-the-header-s-left-section",
+      "title": "Replace the existing logo in the Header component with the uploaded StudyNeeds logo image (logo_908978-removebg-preview.png) maintaining the same layout and positioning in the header's left section",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-admin-dashboard-page-accessible-from-the-frontend-with-sections-for-products-management-orders-management-and-users-management-the-dashboard-must-display-summary-statistics-including-total-products-total-orders-pending-orders-and-total-registered-users",
+      "title": "Create an Admin Dashboard page accessible from the frontend with sections for Products Management, Orders Management, and Users Management. The dashboard must display summary statistics including total products, total orders, pending orders, and total registered users.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-admin-products-management-interface-allowing-admins-to-view-all-products-in-a-table-grid-add-new-products-with-form-inputs-for-name-category-description-price-discount-rating-stock-and-image-edit-existing-products-delete-products-and-filter-search-products-by-category-or-name",
+      "title": "Implement admin Products Management interface allowing admins to view all products in a table/grid, add new products with form inputs for name, category, description, price, discount, rating, stock, and image, edit existing products, delete products, and filter/search products by category or name.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-admin-orders-management-interface-displaying-all-customer-orders-in-a-table-with-columns-for-order-id-customer-name-order-date-total-amount-payment-method-order-status-and-actions-admins-must-be-able-to-view-order-details-update-order-status-pending-processing-shipped-delivered-cancelled-and-filter-orders-by-status-or-date-range",
+      "title": "Implement admin Orders Management interface displaying all customer orders in a table with columns for order ID, customer name, order date, total amount, payment method, order status, and actions. Admins must be able to view order details, update order status (Pending, Processing, Shipped, Delivered, Cancelled), and filter orders by status or date range.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-admin-users-management-interface-displaying-all-registered-users-with-their-profile-information-including-name-email-phone-registration-date-and-order-count-admins-must-be-able-to-view-user-details-see-user-order-history-and-filter-users-by-registration-date-or-search-by-name-email",
+      "title": "Implement admin Users Management interface displaying all registered users with their profile information including name, email, phone, registration date, and order count. Admins must be able to view user details, see user order history, and filter users by registration date or search by name/email.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-protect-the-admin-dashboard-frontend-routes-with-authentication-and-authorization-checks-only-users-with-admin-role-should-be-able-to-access-the-admin-routes-display-an-unauthorized-access-message-and-redirect-non-admin-users-attempting-to-access-admin-pages",
+      "title": "Protect the Admin Dashboard frontend routes with authentication and authorization checks. Only users with Admin role should be able to access the /admin routes. Display an unauthorized access message and redirect non-admin users attempting to access admin pages.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-the-newly-created-demo-products-in-the-homepage-product-sections-populate-trending-products-section-with-a-mix-of-high-rated-products-from-all-categories-populate-school-essentials-section-with-products-from-stationery-and-school-bags-categories-populate-budget-deals-section-with-products-that-have-prices-under-199-and-populate-furniture-section-with-products-from-study-furniture-category",
+      "title": "Display the newly created demo products in the homepage product sections: populate Trending Products section with a mix of high-rated products from all categories, populate School Essentials section with products from Stationery and School Bags categories, populate Budget Deals section with products that have prices under ₹199, and populate Furniture section with products from Study Furniture category",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-wishlist-icon-button-to-each-productcard-component-that-allows-users-to-toggle-wishlist-status-for-that-product-with-visual-feedback-filled-heart-when-wishlisted-outline-heart-when-not-wishlisted",
+      "title": "Add a Wishlist icon button to each ProductCard component that allows users to toggle wishlist status for that product with visual feedback (filled heart when wishlisted, outline heart when not wishlisted)",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-productcard-component-prominently-displays-a-discount-badge-showing-the-discount-percentage-when-a-product-has-a-discount-greater-than-0",
+      "title": "Ensure ProductCard component prominently displays a discount badge showing the discount percentage when a product has a discount greater than 0%",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Core e-commerce homepage with product listings, search, cart, and categories",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Shop/Categories and Product Details pages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Shopping cart and checkout functionality",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Home Tuition Consultancy page with teacher/student forms and listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Documentation Services page with service categories and request form",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Career Counselling coming soon page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "User Dashboard (student view with orders, requests, profile)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Teacher Dashboard (leads, profile, earnings, reviews)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Store and manage product catalog in backend including product name, category, price, discount, rating, images, and stock quantity",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Implement backend order management system storing customer orders with items, quantities, delivery address, payment method, order status, and timestamps",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add demo product data across categories: Stationery, Books, School Bags, Pens & Geometry",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Populate the backend with comprehensive demo product data across multiple categories: Stationery (notebooks, pens, pencils, erasers, sharpeners, rulers, staplers, glue sticks), Books (textbooks for classes 1-12, competitive exam books for JEE/NEET/UPSC, reference books, story books), School Bags (backpacks, trolley bags, lunch bags, pencil cases), and Pens & Geometry (gel pens, ballpoint pens, fountain pens, compass sets, protractors, geometry boxes, dividers). Each product must include name, category, description, price, discount percentage, rating (1-5 stars), stock quantity, and at least one product image reference.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Add backend functions to support admin operations including getAllOrders to fetch all orders with customer details, updateOrderStatus to change order status by order ID, getAllUsers to retrieve all registered user profiles with order counts, deleteProduct to remove a product by ID, and updateProduct to modify existing product details.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Implement role-based access control in the backend by adding an Admin role to the AccessControl system. Restrict all admin management functions (getAllOrders, updateOrderStatus, getAllUsers, deleteProduct, updateProduct) to users with Admin role only. Create a mechanism to assign Admin role to specific Internet Identity principals.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Create at least 8 demo Stationery products in the backend with complete details including product name, category (Stationery), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "Create at least 8 demo Books products in the backend with complete details including product name, category (Books), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Create at least 6 demo School Bags products in the backend with complete details including product name, category (School Bags), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Create at least 6 demo Pens & Geometry products in the backend with complete details including product name, category (Pens & Geometry), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Create at least 6 demo Study Furniture products in the backend with complete details including product name, category (Study Furniture), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "StudyNeeds",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "build_request",
+  "title": "Add admin panel for editing and adding products across different sections",
+  "projectName": "StudyNeeds",
+  "priority": "normal",
+  "requirements": [],
+  "constraints": [
+    "Admin panel functionality already exists in the application",
+    "Do not duplicate existing admin features for product management"
+  ],
+  "nonGoals": [
+    "Creating new admin functionality that already exists",
+    "Modifying the existing admin dashboard structure",
+    "Adding new product categories beyond what's already supported"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
