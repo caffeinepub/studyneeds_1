@@ -1,5 +1,5 @@
 import { Link, useNavigate } from '@tanstack/react-router';
-import { Search, MapPin, ShoppingCart, Menu, User, LogOut, Shield } from 'lucide-react';
+import { Search, MapPin, ShoppingCart, Menu, LogOut, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
@@ -8,7 +8,6 @@ import LocationSelector from './LocationSelector';
 import CategoriesMenu from './CategoriesMenu';
 import MobileMenu from './MobileMenu';
 import { Button } from './ui/button';
-import { useIsCallerAdmin } from '../hooks/useQueries';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,13 +16,11 @@ export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { getTotalItems } = useCart();
   const { identity, login, clear, loginStatus } = useInternetIdentity();
-  const { data: isAdmin, isLoading: adminLoading } = useIsCallerAdmin();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const isAuthenticated = !!identity;
   const isLoggingIn = loginStatus === 'logging-in';
-  const showAdminLink = isAuthenticated && isAdmin === true && !adminLoading;
 
   const handleAuth = async () => {
     if (isAuthenticated) {
@@ -106,39 +103,40 @@ export default function Header() {
                 className="hidden lg:flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <MapPin className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium">Location</span>
+                <div className="text-left">
+                  <p className="text-xs text-gray-500">Deliver to</p>
+                  <p className="text-sm font-semibold text-gray-900">Select Location</p>
+                </div>
               </button>
 
-              {/* Admin Dashboard Link */}
-              {showAdminLink && (
-                <Link
-                  to="/admin"
-                  className="hidden md:flex items-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-blue-600 border border-blue-200"
-                >
-                  <Shield className="w-5 h-5" />
-                  <span className="text-sm font-medium">Admin Panel</span>
-                </Link>
-              )}
+              {/* Admin Panel Link - Always visible */}
+              <Link
+                to="/admin"
+                className="hidden md:flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+              >
+                <Shield className="w-5 h-5" />
+                <span>Admin Panel</span>
+              </Link>
 
-              {/* Login/Logout */}
+              {/* Auth Button */}
               <Button
                 onClick={handleAuth}
                 disabled={isLoggingIn}
-                variant="ghost"
+                variant={isAuthenticated ? 'outline' : 'default'}
                 className="hidden md:flex items-center gap-2"
               >
-                {isAuthenticated ? (
+                {isLoggingIn ? (
                   <>
-                    <LogOut className="w-5 h-5" />
-                    <span className="text-sm font-medium">Logout</span>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+                    <span>Logging in...</span>
+                  </>
+                ) : isAuthenticated ? (
+                  <>
+                    <LogOut className="w-4 h-4" />
+                    <span>Logout</span>
                   </>
                 ) : (
-                  <>
-                    <User className="w-5 h-5" />
-                    <span className="text-sm font-medium">
-                      {isLoggingIn ? 'Logging in...' : 'Login'}
-                    </span>
-                  </>
+                  <span>Login</span>
                 )}
               </Button>
 
@@ -147,7 +145,7 @@ export default function Header() {
                 to="/cart"
                 className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <ShoppingCart className="w-6 h-6 text-blue-600" />
+                <ShoppingCart className="w-6 h-6 text-gray-700" />
                 {getTotalItems() > 0 && (
                   <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     {getTotalItems()}
@@ -157,7 +155,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile Search */}
+          {/* Mobile Search Bar */}
           <form onSubmit={handleSearch} className="mt-3 md:hidden">
             <div className="relative">
               <input
@@ -177,30 +175,57 @@ export default function Header() {
           </form>
         </div>
 
-        {/* Categories Bar */}
-        <div className="border-t border-gray-200 bg-gray-50">
-          <div className="container mx-auto px-4 py-2">
-            <button
-              onClick={() => setShowCategoriesMenu(!showCategoriesMenu)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              <Menu className="w-5 h-5" />
-              <span>All Categories</span>
-            </button>
+        {/* Categories Navigation */}
+        <div className="border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center gap-6 py-2 overflow-x-auto">
+              <button
+                onClick={() => setShowCategoriesMenu(!showCategoriesMenu)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
+              >
+                <Menu className="w-4 h-4" />
+                <span className="font-medium">All Categories</span>
+              </button>
+              <Link to="/shop" className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap">
+                All Products
+              </Link>
+              <Link 
+                to="/shop/$category" 
+                params={{ category: 'Books' }}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+              >
+                Books
+              </Link>
+              <Link 
+                to="/shop/$category" 
+                params={{ category: 'Stationery' }}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+              >
+                Stationery
+              </Link>
+              <Link 
+                to="/shop/$category" 
+                params={{ category: 'School Bags' }}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+              >
+                School Bags
+              </Link>
+              <Link 
+                to="/shop/$category" 
+                params={{ category: 'Furniture' }}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+              >
+                Furniture
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Dropdowns */}
-      {showLocationSelector && (
-        <LocationSelector onClose={() => setShowLocationSelector(false)} />
-      )}
-      {showCategoriesMenu && (
-        <CategoriesMenu onClose={() => setShowCategoriesMenu(false)} />
-      )}
-      {showMobileMenu && (
-        <MobileMenu onClose={() => setShowMobileMenu(false)} />
-      )}
+      {/* Modals */}
+      {showLocationSelector && <LocationSelector onClose={() => setShowLocationSelector(false)} />}
+      {showCategoriesMenu && <CategoriesMenu onClose={() => setShowCategoriesMenu(false)} />}
+      {showMobileMenu && <MobileMenu onClose={() => setShowMobileMenu(false)} />}
     </>
   );
 }

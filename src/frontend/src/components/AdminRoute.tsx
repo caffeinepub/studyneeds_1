@@ -2,7 +2,7 @@ import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useIsCallerAdmin } from '../hooks/useQueries';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { AlertCircle, Shield } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 interface AdminRouteProps {
   children: React.ReactNode;
@@ -22,11 +22,9 @@ export default function AdminRoute({ children }: AdminRouteProps) {
     if (!isLoading) {
       if (!isAuthenticated) {
         // Not logged in - redirect immediately
-        console.log('AdminRoute: Not authenticated, redirecting to home');
         navigate({ to: '/' });
       } else if (isAuthenticated && isFetched && isAdmin === false) {
         // Logged in but not admin - show message then redirect
-        console.log('AdminRoute: Authenticated but not admin, showing unauthorized message');
         setShowUnauthorized(true);
         const timer = setTimeout(() => {
           navigate({ to: '/' });
@@ -38,7 +36,6 @@ export default function AdminRoute({ children }: AdminRouteProps) {
 
   // Show loading state while checking authentication and admin status
   if (isLoading) {
-    console.log('AdminRoute: Loading...', { isInitializing, adminLoading, isFetched, isAdmin });
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -68,10 +65,8 @@ export default function AdminRoute({ children }: AdminRouteProps) {
 
   // Only render children if authenticated and admin
   if (!isAuthenticated || isAdmin !== true) {
-    console.log('AdminRoute: Not rendering children', { isAuthenticated, isAdmin });
     return null;
   }
 
-  console.log('AdminRoute: Rendering admin dashboard');
   return <>{children}</>;
 }

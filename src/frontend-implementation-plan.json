@@ -1,85 +1,112 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix admin panel URL routing and visibility issues",
+  "title": "Fix admin panel product management functionality",
   "requirements": [
     {
-      "id": "REQ-48",
-      "summary": "Fix TanStack Router configuration to handle /admin route with hash-based routing and caffeineAdminToken query parameter",
+      "id": "REQ-71",
+      "summary": "Fix useGetAllProducts hook to properly fetch and display products in admin Products Management table with error handling and loading states",
       "acceptanceCriteria": [
-        "Navigating to the full URL with /admin path successfully loads the AdminDashboardPage",
-        "The 'search does not match any documents' error no longer appears",
-        "The route handles the caffeineAdminToken query parameter correctly without breaking routing"
+        "useGetAllProducts hook successfully fetches products from backend",
+        "Products display correctly in ProductsManagement component table",
+        "Loading states and error messages are shown appropriately",
+        "Products list automatically refreshes after successful product creation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Update the TanStack Router route configuration for /admin to properly handle hash-based routing with caffeineAdminToken query parameter. Modify the validateSearch function to accept and preserve all query parameters without strict validation that may cause routing errors. Ensure the route matches /admin path correctly when accessed via direct URL navigation with hash fragments."
+          "description": "Fix the useGetAllProducts React Query hook to properly call backend getAllProducts function with correct error handling. Ensure the query is properly configured with queryKey ['products'], retry logic, and refetchOnMount settings. Add console logging for debugging fetch errors with detailed error context."
         },
         {
-          "path": "frontend/src/utils/urlParams.ts",
+          "path": "frontend/src/components/admin/ProductsManagement.tsx",
           "operation": "modify",
-          "description": "Enhance URL parameter extraction utilities to properly parse and handle caffeineAdminToken from hash-based URLs. Ensure the utility correctly extracts parameters from URLs like #caffeineAdminToken=TOKEN/admin and makes them available to the routing system."
+          "description": "Update ProductsManagement component to properly display loading states, error messages, and empty states when products fail to load. Ensure the component correctly uses the useGetAllProducts hook and handles all possible states (loading, error, empty, success). Add user-friendly error messages that guide troubleshooting."
         }
       ]
     },
     {
-      "id": "REQ-49",
-      "summary": "Make Admin Panel navigation link visible in Header for authenticated admin users",
+      "id": "REQ-72",
+      "summary": "Fix useCreateProduct mutation hook to properly submit product data and invalidate query cache for automatic list refresh",
       "acceptanceCriteria": [
-        "Admin Panel link is visible in the header for users with admin role",
-        "The link is properly styled and integrated into the header layout",
-        "Clicking the link navigates to /admin successfully"
+        "useCreateProduct mutation successfully submits product data to backend createProduct function",
+        "Mutation handles success and error responses correctly",
+        "Query cache is invalidated after successful creation to refresh products list",
+        "Success/error feedback is displayed to user",
+        "Form resets only after successful product creation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Header.tsx",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Ensure the Admin Panel link is consistently visible and properly rendered in the header navigation area for authenticated admin users. Verify that the conditional rendering logic using isCallerAdmin query is working correctly in both draft and production deployments. Check that the link styling matches the header design and that the navigation path is correct."
-        },
-        {
-          "path": "frontend/src/components/MobileMenu.tsx",
-          "operation": "modify",
-          "description": "Verify that the Admin Panel link is also visible in the mobile menu for authenticated admin users. Ensure consistent behavior between desktop and mobile navigation."
+          "description": "Fix the useCreateProduct mutation hook to properly submit complete Product objects to the backend createProduct function. Ensure all Product fields (id, name, category, price, discount, stockQuantity, description, images as ExternalBlob array) are correctly formatted. Add onSuccess callback that invalidates the 'products' query cache to trigger automatic refresh. Implement comprehensive error handling with detailed console logging for mutation failures, including network errors and validation errors. Add success/error toast notifications or callbacks for UI feedback."
         }
       ]
     },
     {
-      "id": "REQ-50",
-      "summary": "Verify AdminRoute component correctly handles authentication without interfering with TanStack Router path matching",
+      "id": "REQ-73",
+      "summary": "Fix ProductFormModal component to ensure form submission calls useCreateProduct with all required fields and handles loading/error states correctly",
       "acceptanceCriteria": [
-        "AdminRoute properly wraps the admin dashboard route without breaking routing",
-        "Authentication and admin role checks work correctly",
-        "Non-admin users see the unauthorized message as expected"
+        "ProductFormModal correctly collects all form field values (name, category, price, discount, stock, description, images)",
+        "Form submission triggers useCreateProduct mutation with complete product data",
+        "Loading state ('Saving...') displays correctly during submission",
+        "Form only resets after receiving successful response from backend",
+        "Error messages display if submission fails"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/AdminRoute.tsx",
+          "path": "frontend/src/components/admin/ProductFormModal.tsx",
           "operation": "modify",
-          "description": "Review and optimize the AdminRoute protection component to ensure it performs authentication and authorization checks without interfering with TanStack Router's path matching logic. Ensure loading states are handled properly and that the component doesn't cause routing errors or prevent the route from matching. Verify that the component correctly identifies admin users and shows appropriate unauthorized messages for non-admin users."
+          "description": "Fix the ProductFormModal form submission handler to properly collect all form fields and construct a complete Product object with id (generate using crypto.randomUUID() or Date.now().toString()), name, category, price (as number), discount (as bigint), stockQuantity (as bigint), description, rating (default to 0), and images (as ExternalBlob array). Ensure the mutation's isLoading state correctly controls the 'Saving...' button text. Only reset the form after mutation.isSuccess is true, not immediately on submission. Display error messages from mutation.error in the UI. Add console logging for form data validation and submission process."
         }
       ]
     },
     {
-      "id": "REQ-51",
-      "summary": "Test complete admin panel access flow end-to-end with authentication, navigation, and dashboard functionality",
+      "id": "REQ-74",
+      "summary": "Add comprehensive error logging to frontend useCreateProduct mutation to capture and display exact error messages",
       "acceptanceCriteria": [
-        "Admin authentication works with the provided caffeineAdminToken",
-        "Direct URL navigation to /admin loads the dashboard",
-        "Header link navigation to /admin loads the dashboard",
-        "All three admin tabs (Products, Orders, Users) are accessible and functional"
+        "Frontend displays user-friendly error messages from backend responses",
+        "Console errors provide clear diagnostic information for debugging",
+        "Network request failures are caught and logged with status codes"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/AdminDashboardPage.tsx",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Verify that the AdminDashboardPage renders correctly when accessed via both direct URL navigation and header link navigation. Ensure all three tabs (Products, Orders, Users) are accessible and functional. Add console logging or error boundaries if needed to diagnose any remaining issues with the admin dashboard loading."
+          "description": "Add comprehensive error logging to useCreateProduct mutation's onError callback. Log the complete error object, error message, and mutation variables (product data being submitted). Capture and log network error details including status codes if available. Ensure error messages are user-friendly and actionable (e.g., 'Failed to create product. Please check all fields and try again.'). Add console.group to organize debug output clearly."
         },
         {
-          "path": "frontend/src/hooks/useActor.ts",
+          "path": "frontend/src/components/admin/ProductFormModal.tsx",
           "operation": "modify",
-          "description": "Verify that the useActor hook correctly initializes the backend actor with admin authentication when the caffeineAdminToken is present. Ensure the admin token is properly extracted from URL parameters and used for access control initialization. Confirm that the actor is available before admin queries are executed."
+          "description": "Add detailed console logging throughout the form submission process: log the raw form data collected, the constructed Product object before submission, and any validation errors. Log when the mutation starts, succeeds, or fails with timestamps. Display user-friendly error messages from the mutation in a visible error state within the modal (e.g., error alert or text below the form)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-75",
+      "summary": "Test the complete product management workflow end-to-end to verify demo products display, form submission works, and products persist",
+      "acceptanceCriteria": [
+        "Demo products are visible in Products Management table on page load",
+        "Add Product form successfully submits and creates new product",
+        "New product appears in products table immediately without manual refresh",
+        "Products persist in backend storage and remain visible after page refresh",
+        "No console errors appear during the entire workflow"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Ensure useGetAllProducts is configured with staleTime: 0 and refetchOnMount: true to guarantee fresh data on every mount. Verify the query correctly triggers refetch after cache invalidation from useCreateProduct's onSuccess. Add console logging to track query refetch cycles and data updates for debugging the complete workflow."
+        },
+        {
+          "path": "frontend/src/components/admin/ProductsManagement.tsx",
+          "operation": "modify",
+          "description": "Verify that ProductsManagement component correctly displays all products from useGetAllProducts including demo products. Ensure the table updates immediately when the query refetches after product creation. Add console logging to track when the products list updates and confirm new products appear. Test that the component handles empty state appropriately when no products exist."
+        },
+        {
+          "path": "frontend/src/components/admin/ProductFormModal.tsx",
+          "operation": "modify",
+          "description": "Verify the complete form submission flow: form validation, Product object construction with all required fields (ensure images are ExternalBlob instances), mutation call, loading state display, success handling (form reset + modal close), and error handling. Add console logging at each step to verify the workflow. Ensure the 'Saving...' indicator appears during submission and the form only resets after successful backend confirmation."
         }
       ]
     }

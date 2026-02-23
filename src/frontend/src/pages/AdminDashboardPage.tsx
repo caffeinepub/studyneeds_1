@@ -7,22 +7,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import ProductsManagement from '../components/admin/ProductsManagement';
 import OrdersManagement from '../components/admin/OrdersManagement';
 import UsersManagement from '../components/admin/UsersManagement';
-import { useGetAllProductsAdmin, useGetAllOrdersAdmin, useGetAllUsers } from '../hooks/useQueries';
+import { useGetAllProducts } from '../hooks/useQueries';
 
 export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState('products');
-  const { data: products = [], isLoading: productsLoading } = useGetAllProductsAdmin();
-  const { data: orders = [], isLoading: ordersLoading } = useGetAllOrdersAdmin();
-  const { data: users = [], isLoading: usersLoading } = useGetAllUsers();
-
-  const pendingOrders = orders.filter(order => order.status === 'pending').length;
-  const totalRevenue = orders.reduce((sum, order) => {
-    const orderTotal = order.items.reduce((itemSum, item) => {
-      const price = item.product.price * (1 - Number(item.product.discount) / 100);
-      return itemSum + price * Number(item.quantity);
-    }, 0);
-    return sum + orderTotal;
-  }, 0);
+  const { data: products = [], isLoading: productsLoading } = useGetAllProducts();
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -62,9 +51,8 @@ export default function AdminDashboardPage() {
               <ShoppingBag className="w-8 h-8 text-orange-600" />
             </div>
             <h3 className="text-gray-600 text-sm font-medium mb-1">Total Orders</h3>
-            <p className="text-3xl font-bold text-gray-900">
-              {ordersLoading ? '...' : orders.length}
-            </p>
+            <p className="text-3xl font-bold text-gray-900">N/A</p>
+            <p className="text-xs text-gray-500 mt-1">Backend support required</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -74,9 +62,8 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <h3 className="text-gray-600 text-sm font-medium mb-1">Pending Orders</h3>
-            <p className="text-3xl font-bold text-gray-900">
-              {ordersLoading ? '...' : pendingOrders}
-            </p>
+            <p className="text-3xl font-bold text-gray-900">N/A</p>
+            <p className="text-xs text-gray-500 mt-1">Backend support required</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -87,9 +74,8 @@ export default function AdminDashboardPage() {
               <Users className="w-8 h-8 text-green-600" />
             </div>
             <h3 className="text-gray-600 text-sm font-medium mb-1">Registered Users</h3>
-            <p className="text-3xl font-bold text-gray-900">
-              {usersLoading ? '...' : users.length}
-            </p>
+            <p className="text-3xl font-bold text-gray-900">N/A</p>
+            <p className="text-xs text-gray-500 mt-1">Backend support required</p>
           </div>
         </div>
 

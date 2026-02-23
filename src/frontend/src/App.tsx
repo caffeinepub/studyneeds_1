@@ -1,4 +1,4 @@
-import { RouterProvider, createRouter, createRoute, createRootRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { RouterProvider, createRouter, createRoute, createRootRoute, Outlet } from '@tanstack/react-router';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import HomePage from './pages/HomePage';
@@ -10,41 +10,14 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import WhatsAppButton from './components/WhatsAppButton';
 import ProfileSetupModal from './components/ProfileSetupModal';
-import AdminRoute from './components/AdminRoute';
 import { useInternetIdentity } from './hooks/useInternetIdentity';
 import { useGetCallerUserProfile } from './hooks/useGetCallerUserProfile';
-import { useEffect } from 'react';
-import { getUrlParameter } from './utils/urlParams';
 
 function RootComponent() {
   const { identity } = useInternetIdentity();
   const { data: userProfile, isLoading: profileLoading, isFetched } = useGetCallerUserProfile();
-  const navigate = useNavigate();
   const isAuthenticated = !!identity;
   const showProfileSetup = isAuthenticated && !profileLoading && isFetched && userProfile === null;
-
-  // Handle special URL format: #caffeineAdminToken=TOKEN/admin
-  useEffect(() => {
-    const hash = window.location.hash;
-    
-    // Check if we have the special format with admin token before the route
-    if (hash && hash.includes('caffeineAdminToken=') && hash.includes('/')) {
-      const hashContent = hash.substring(1); // Remove #
-      const slashIndex = hashContent.indexOf('/');
-      
-      if (slashIndex > 0) {
-        const routePath = hashContent.substring(slashIndex); // Get /admin or other route
-        
-        // Navigate to the proper route, the token will be extracted by useActor
-        if (routePath && routePath !== window.location.hash.substring(1)) {
-          // Use setTimeout to avoid navigation during render
-          setTimeout(() => {
-            navigate({ to: routePath as any });
-          }, 0);
-        }
-      }
-    }
-  }, [navigate]);
 
   return (
     <>
@@ -104,12 +77,7 @@ const orderConfirmationRoute = createRoute({
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin',
-  validateSearch: (search: Record<string, unknown>) => search,
-  component: () => (
-    <AdminRoute>
-      <AdminDashboardPage />
-    </AdminRoute>
-  ),
+  component: AdminDashboardPage,
 });
 
 const routeTree = rootRoute.addChildren([

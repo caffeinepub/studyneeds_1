@@ -1,56 +1,91 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-22T10:41:16.268Z",
+  "generatedAt": "2026-02-22T13:03:20.520Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 1,
+    "total": 7,
+    "implemented": 5,
     "items": [
       {
-        "id": "REQ-48",
-        "summary": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
+        "id": "REQ-69",
+        "summary": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-70",
+        "summary": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-71",
+        "summary": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/utils/urlParams.ts"
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductsManagement.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/utils/urlParams.ts"
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductsManagement.tsx"
         ]
       },
       {
-        "id": "REQ-49",
-        "summary": "Ensure the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) is visible for authenticated admin users in both draft and production deployments - the link should appear in the header navigation area and be clickable",
-        "status": "missing",
+        "id": "REQ-72",
+        "summary": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Header.tsx",
-          "frontend/src/components/MobileMenu.tsx"
+          "frontend/src/hooks/useQueries.ts"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
       },
       {
-        "id": "REQ-50",
-        "summary": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) correctly handles authentication and authorization checks while allowing the route to match properly - ensure it does not interfere with TanStack Router's path matching logic",
-        "status": "missing",
+        "id": "REQ-73",
+        "summary": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/AdminRoute.tsx"
+          "frontend/src/components/admin/ProductFormModal.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/admin/ProductFormModal.tsx"
+        ]
       },
       {
-        "id": "REQ-51",
-        "summary": "Test the complete admin panel access flow end-to-end: authenticate as an admin user using the caffeineAdminToken, navigate to /admin via direct URL and via the header link, verify the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and confirm no routing errors occur",
-        "status": "missing",
+        "id": "REQ-74",
+        "summary": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/AdminDashboardPage.tsx",
-          "frontend/src/hooks/useActor.ts"
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductFormModal.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductFormModal.tsx"
+        ]
+      },
+      {
+        "id": "REQ-75",
+        "summary": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductsManagement.tsx",
+          "frontend/src/components/admin/ProductFormModal.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/admin/ProductsManagement.tsx",
+          "frontend/src/components/admin/ProductFormModal.tsx"
+        ]
       }
     ]
   },
@@ -60,8 +95,19 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/utils/urlParams.ts",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/admin/OrderDetailModal.tsx",
+    "frontend/src/components/admin/OrdersManagement.tsx",
+    "frontend/src/components/admin/ProductFormModal.tsx",
+    "frontend/src/components/admin/ProductsManagement.tsx",
+    "frontend/src/components/admin/UserDetailModal.tsx",
+    "frontend/src/components/admin/UsersManagement.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/AdminDashboardPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

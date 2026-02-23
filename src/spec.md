@@ -1,12 +1,15 @@
 # Specification
 
 ## Summary
-**Goal:** Fix admin panel URL routing and visibility issues to enable proper access to the admin dashboard.
+**Goal:** Fix the admin panel product management functionality so that products can be successfully created, stored, and displayed.
 
 **Planned changes:**
-- Fix TanStack Router configuration to properly handle /admin route with hash-based routing and caffeineAdminToken query parameter
-- Make Admin Panel navigation link visible in header for authenticated admin users
-- Verify AdminRoute protection component works without interfering with route matching
-- Test complete admin panel access flow end-to-end
+- Debug and fix backend createProduct API to properly save products to Map storage
+- Debug and fix backend getAllProducts query to return all stored products including demo products
+- Fix frontend useGetAllProducts hook to properly fetch and display products in admin table
+- Fix frontend useCreateProduct mutation to submit data correctly and refresh products list
+- Fix ProductFormModal component to properly handle form submission and loading states
+- Add comprehensive error logging to both backend and frontend for product creation failures
+- Test complete end-to-end workflow to verify products are created, displayed, and persist after refresh
 
-**User-visible outcome:** Admin users can successfully navigate to the admin panel via direct URL or header link without seeing routing errors, and all admin dashboard tabs are accessible.
+**User-visible outcome:** Admin users can successfully add new products through the Add Product form, see them immediately appear in the Products Management table alongside demo products, and verify they persist after page refresh.

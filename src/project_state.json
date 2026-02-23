@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 21,
+  "projectStateVersion": 31,
   "summary": "StudyNeeds - A comprehensive multi-service platform for students combining e-commerce (books, stationery, furniture), home tuition marketplace, documentation services, and career counseling. Building in phases starting with core e-commerce store.",
   "architectural_notes": [
     "Mobile-responsive design with Poppins/Roboto font",
@@ -15,7 +15,9 @@
     "SEO-friendly with fast loading and modern animations"
   ],
   "known_issues": [
-    "Admin panel route still not accessible - URL /admin shows 'search did not match any documents' error and Admin Panel link not visible in header even in production"
+    "Admin panel product add functionality not working - products not saving to backend and not displaying in list after form submission",
+    "Demo products not displaying in Products tab - backend product query may be failing",
+    "Console showing 8 issues that may be related to backend-frontend API connection problems"
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -290,6 +292,110 @@
         "REQ-48"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-properly-handle-the-admin-route-with-hash-based-routing-containing-caffeineadmintoken-query-parameter-ensure-the-route-matches-correctly-when-navigating-to-urls-like-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-without-showing-search-did-not-match-any-documents-error",
+      "title": "Fix the TanStack Router configuration in frontend/src/App.tsx to properly handle the /admin route with hash-based routing containing caffeineAdminToken query parameter - ensure the route matches correctly when navigating to URLs like https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin without showing 'search did not match any documents' error",
+      "reqIds": [
+        "REQ-52"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-admin-panel-navigation-link-in-the-header-component-is-consistently-visible-and-functional-for-authenticated-admin-users-in-both-draft-and-production-deployments-the-link-must-appear-in-the-header-navigation-and-be-clickable",
+      "title": "Ensure the Admin Panel navigation link in the Header component is consistently visible and functional for authenticated admin users in both draft and production deployments - the link must appear in the header navigation and be clickable",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-the-adminroute-protection-component-does-not-interfere-with-tanstack-router-path-matching-while-still-enforcing-authentication-and-authorization-checks-ensure-it-renders-admindashboardpage-when-authorization-succeeds",
+      "title": "Verify the AdminRoute protection component does not interfere with TanStack Router path matching while still enforcing authentication and authorization checks - ensure it renders AdminDashboardPage when authorization succeeds",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-authentication-and-authorization-checks-from-the-admin-panel-navigation-link-in-the-header-component-frontend-src-components-header-tsx-so-the-admin-panel-link-is-always-visible-to-all-users-regardless-of-authentication-status",
+      "title": "Remove all authentication and authorization checks from the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) so the Admin Panel link is always visible to all users regardless of authentication status",
+      "reqIds": [
+        "REQ-60"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-authentication-and-authorization-checks-from-the-admin-panel-navigation-link-in-the-mobilemenu-component-frontend-src-components-mobilemenu-tsx-so-the-admin-panel-link-is-always-visible-in-the-mobile-menu-to-all-users-regardless-of-authentication-status",
+      "title": "Remove all authentication and authorization checks from the Admin Panel navigation link in the MobileMenu component (frontend/src/components/MobileMenu.tsx) so the Admin Panel link is always visible in the mobile menu to all users regardless of authentication status",
+      "reqIds": [
+        "REQ-61"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-simplify-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-matches-correctly-for-hash-based-routing-with-caffeineadmintoken-query-parameter-verify-the-route-definition-uses-proper-path-matching-without-complex-search-validation",
+      "title": "Simplify the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route matches correctly for hash-based routing with caffeineAdminToken query parameter - verify the route definition uses proper path matching without complex search validation",
+      "reqIds": [
+        "REQ-62"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-adminroute-protection-component-wrapper-from-the-admin-route-definition-in-frontend-src-app-tsx-render-admindashboardpage-directly-without-any-authentication-or-authorization-checks",
+      "title": "Remove the AdminRoute protection component wrapper from the /admin route definition in frontend/src/App.tsx - render AdminDashboardPage directly without any authentication or authorization checks",
+      "reqIds": [
+        "REQ-64"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-simplify-the-admin-route-configuration-in-frontend-src-app-tsx-to-use-basic-path-matching-without-search-validation-remove-all-validatesearch-search-schema-and-complex-routing-parameters",
+      "title": "Simplify the /admin route configuration in frontend/src/App.tsx to use basic path matching without search validation - remove all validateSearch, search schema, and complex routing parameters",
+      "reqIds": [
+        "REQ-65"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-frontend-usegetallproducts-react-query-hook-in-frontend-src-hooks-usequeries-ts-to-properly-fetch-and-display-products-in-the-admin-products-management-table-ensure-error-handling-displays-meaningful-messages-and-loading-states-work-correctly",
+      "title": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
+      "reqIds": [
+        "REQ-71"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-frontend-usecreateproduct-mutation-hook-in-frontend-src-hooks-usequeries-ts-to-properly-submit-new-product-data-to-the-backend-and-handle-the-response-ensure-the-mutation-invalidates-the-products-query-cache-to-trigger-automatic-list-refresh-after-successful-creation",
+      "title": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+      "reqIds": [
+        "REQ-72"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-and-fix-the-productformmodal-component-in-frontend-src-components-admin-productformmodal-tsx-to-ensure-form-submission-properly-calls-the-usecreateproduct-mutation-with-all-required-fields-and-handles-loading-error-states-correctly",
+      "title": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+      "reqIds": [
+        "REQ-73"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-comprehensive-error-logging-to-both-backend-createproduct-function-and-frontend-usecreateproduct-mutation-to-capture-and-display-exact-error-messages-when-product-creation-fails-log-validation-errors-storage-errors-and-network-errors-with-detailed-context",
+      "title": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
+      "reqIds": [
+        "REQ-74"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-test-the-complete-product-management-workflow-end-to-end-after-fixes-navigate-to-admin-products-tab-verify-demo-products-display-in-the-table-fill-out-add-product-form-with-test-data-submit-the-form-verify-saving-indicator-appears-briefly-confirm-new-product-appears-in-the-products-table-immediately-after-submission-and-verify-the-product-persists-after-page-refresh",
+      "title": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+      "reqIds": [
+        "REQ-75"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -480,6 +586,94 @@
       "summary": "Test the complete admin panel access flow end-to-end: authenticate as an admin user using the caffeineAdminToken, navigate to /admin via direct URL and via the header link, verify the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and confirm no routing errors occur",
       "reqIds": [
         "REQ-51"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-52",
+      "summary": "Test the complete end-to-end admin panel access flow: authenticate as admin user using caffeineAdminToken, navigate to /admin via both direct URL and header link, verify AdminDashboardPage loads with all tabs (Products, Orders, Users) accessible, and confirm zero routing errors occur",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-53",
+      "summary": "Add a visible Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) that displays only for authenticated admin users. The link must be prominently placed in the desktop header navigation area, styled consistently with other header elements, and navigate to /admin when clicked.",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-54",
+      "summary": "Add an Admin Panel navigation link in the MobileMenu component (frontend/src/components/MobileMenu.tsx) that displays only for authenticated admin users. The link must be visible in the mobile slide-out menu, styled consistently with other menu items, and navigate to /admin when clicked.",
+      "reqIds": [
+        "REQ-57"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-55",
+      "summary": "Verify that the useIsCallerAdmin hook correctly identifies admin users based on authentication state and admin role assignment. Ensure the hook returns accurate boolean values for admin status checking across all components.",
+      "reqIds": [
+        "REQ-58"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-56",
+      "summary": "Test the complete admin panel access workflow end-to-end: authenticate as an admin user, verify the Admin Panel link appears in both desktop header and mobile menu, click the link to navigate to /admin, confirm the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and verify zero routing errors occur throughout the flow.",
+      "reqIds": [
+        "REQ-59"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-60",
+      "summary": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) properly renders the AdminDashboardPage without interfering with TanStack Router path matching - ensure the component wraps the dashboard page correctly while still performing necessary authorization checks",
+      "reqIds": [
+        "REQ-63"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-63",
+      "summary": "Verify the Admin Panel link in Header component (frontend/src/components/Header.tsx) remains permanently visible to all users without any conditional rendering based on authentication or admin status",
+      "reqIds": [
+        "REQ-66"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-64",
+      "summary": "Verify the Admin Panel link in MobileMenu component (frontend/src/components/MobileMenu.tsx) remains permanently visible to all users without any conditional rendering based on authentication or admin status",
+      "reqIds": [
+        "REQ-67"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-65",
+      "summary": "Test the complete admin panel access flow end-to-end: navigate to /admin via direct URL and via header/mobile menu links, verify AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible without any routing errors or authorization blocks",
+      "reqIds": [
+        "REQ-68"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-66",
+      "summary": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
+      "reqIds": [
+        "REQ-69"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-67",
+      "summary": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
+      "reqIds": [
+        "REQ-70"
       ],
       "status": "pending"
     }

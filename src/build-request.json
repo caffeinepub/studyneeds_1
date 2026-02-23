@@ -1,91 +1,157 @@
 {
   "kind": "build_request",
-  "title": "Fix admin panel URL routing and visibility issues",
+  "title": "Fix admin panel product management functionality",
   "projectName": "StudyNeeds",
   "priority": "high",
   "requirements": [
     {
-      "id": "REQ-48",
-      "text": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
-      "target": "frontend",
+      "id": "REQ-69",
+      "text": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-latest"
         ],
         "quotes": [
-          "maine ish url ko search kiyalikh rha h your search did not match any documents"
+          "products add kr rha hu to add nhi ho rha add krne pr saving likhta but product show nhi ho rha h"
         ]
       },
       "acceptanceCriteria": [
-        "Navigating to the full URL with /admin path successfully loads the AdminDashboardPage",
-        "The 'search does not match any documents' error no longer appears",
-        "The route handles the caffeineAdminToken query parameter correctly without breaking routing"
+        "createProduct backend function successfully stores new products with all fields (name, category, price, discount, stock, description, images)",
+        "Function returns proper success response when product is created",
+        "Products are persisted in backend Map storage and retrievable via getAllProducts query"
       ]
     },
     {
-      "id": "REQ-49",
-      "text": "Ensure the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) is visible for authenticated admin users in both draft and production deployments - the link should appear in the header navigation area and be clickable",
-      "target": "frontend",
+      "id": "REQ-70",
+      "text": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-latest"
         ],
         "quotes": [
-          "draft k header m bhi admin pannel nhi dikh rha h"
+          "demo products nhi dikh rhei phle se koi product nhi dikh ra bilkul khali h"
         ]
       },
       "acceptanceCriteria": [
-        "Admin Panel link is visible in the header for users with admin role",
-        "The link is properly styled and integrated into the header layout",
-        "Clicking the link navigates to /admin successfully"
+        "getAllProducts query returns complete list of all stored products including demo products",
+        "Products are returned with all required fields populated correctly",
+        "Query executes without errors and returns data in expected format"
       ]
     },
     {
-      "id": "REQ-50",
-      "text": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) correctly handles authentication and authorization checks while allowing the route to match properly - ensure it does not interfere with TanStack Router's path matching logic",
+      "id": "REQ-71",
+      "text": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-latest"
+        ],
+        "quotes": [
+          "Products tab mein demo products bhi nahi dikh rahe"
         ]
       },
       "acceptanceCriteria": [
-        "AdminRoute properly wraps the admin dashboard route without breaking routing",
-        "Authentication and admin role checks work correctly",
-        "Non-admin users see the unauthorized message as expected"
+        "useGetAllProducts hook successfully fetches products from backend",
+        "Products display correctly in ProductsManagement component table",
+        "Loading states and error messages are shown appropriately",
+        "Products list automatically refreshes after successful product creation"
       ]
     },
     {
-      "id": "REQ-51",
-      "text": "Test the complete admin panel access flow end-to-end: authenticate as an admin user using the caffeineAdminToken, navigate to /admin via direct URL and via the header link, verify the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and confirm no routing errors occur",
+      "id": "REQ-72",
+      "text": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "Add Product form fill karne ke baad Saving instantly dikhta hai aur form clear ho jata hai lekin naya product Products list mein add nahi hota"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useCreateProduct mutation successfully submits product data to backend createProduct function",
+        "Mutation handles success and error responses correctly",
+        "Query cache is invalidated after successful creation to refresh products list",
+        "Success/error feedback is displayed to user",
+        "Form resets only after successful product creation"
+      ]
+    },
+    {
+      "id": "REQ-73",
+      "text": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "form submit k baad wo permanently saving pe stuck nhi hota saving turant leta h or form se sare images detailes ht jate h"
+        ]
+      },
+      "acceptanceCriteria": [
+        "ProductFormModal correctly collects all form field values (name, category, price, discount, stock, description, images)",
+        "Form submission triggers useCreateProduct mutation with complete product data",
+        "Loading state ('Saving...') displays correctly during submission",
+        "Form only resets after receiving successful response from backend",
+        "Error messages display if submission fails"
+      ]
+    },
+    {
+      "id": "REQ-74",
+      "text": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
       "target": "both",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-latest"
         ],
         "quotes": [
-          "ab kya kru btao"
+          "Console mein 8 issues dikhai de rahe hain"
         ]
       },
       "acceptanceCriteria": [
-        "Admin authentication works with the provided caffeineAdminToken",
-        "Direct URL navigation to /admin loads the dashboard",
-        "Header link navigation to /admin loads the dashboard",
-        "All three admin tabs (Products, Orders, Users) are accessible and functional"
+        "Backend logs detailed error information when product creation fails",
+        "Frontend displays user-friendly error messages from backend responses",
+        "Console errors provide clear diagnostic information for debugging",
+        "Network request failures are caught and logged with status codes"
+      ]
+    },
+    {
+      "id": "REQ-75",
+      "text": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "refresh krne pr bhi product khali rhta h"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Demo products are visible in Products Management table on page load",
+        "Add Product form successfully submits and creates new product",
+        "New product appears in products table immediately without manual refresh",
+        "Products persist in backend storage and remain visible after page refresh",
+        "No console errors appear during the entire workflow"
       ]
     }
   ],
   "constraints": [
-    "Do not modify the Internet Identity authentication flow or useInternetIdentity hook",
-    "Do not change the backend access control logic",
-    "Preserve the existing TanStack Router setup while fixing the /admin route",
-    "Do not break existing routes or navigation functionality"
+    "Maintain single-actor architecture in backend/main.mo",
+    "Keep all product storage logic in the main actor using Map data structure",
+    "Do not modify authentication or authorization logic",
+    "Preserve existing demo product data during fixes",
+    "Maintain compatibility with existing ProductCard and ProductsManagement components"
   ],
   "nonGoals": [
-    "Adding new admin features or capabilities",
-    "Redesigning the admin dashboard UI",
-    "Modifying the authentication mechanism",
-    "Changing the overall routing architecture"
+    "Redesigning the admin panel UI layout",
+    "Adding new product fields beyond what exists",
+    "Implementing product image upload to backend (images remain as URLs)",
+    "Adding bulk product import/export functionality",
+    "Implementing product search or advanced filtering in admin panel"
   ],
   "imageRequirements": {
     "required": [],

@@ -2,11 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-properly-matches-when-users-navigate-to-the-url-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-the-route-must-handle-the-hash-based-routing-with-the-caffeineadmintoken-query-parameter-and-correctly-load-the-admindashboardpage-without-showing-your-search-did-not-match-any-documents-error",
-      "featureTitle": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
+      "featureId": "feature-fix-the-frontend-usegetallproducts-react-query-hook-in-frontend-src-hooks-usequeries-ts-to-properly-fetch-and-display-products-in-the-admin-products-management-table-ensure-error-handling-displays-meaningful-messages-and-loading-states-work-correctly",
+      "featureTitle": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/utils/urlParams.ts"
+        "frontend/src/components/admin/ProductsManagement.tsx",
+        "frontend/src/hooks/useQueries.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -18,7 +18,90 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-48"
+        "REQ-71"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-frontend-usecreateproduct-mutation-hook-in-frontend-src-hooks-usequeries-ts-to-properly-submit-new-product-data-to-the-backend-and-handle-the-response-ensure-the-mutation-invalidates-the-products-query-cache-to-trigger-automatic-list-refresh-after-successful-creation",
+      "featureTitle": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-72"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-verify-and-fix-the-productformmodal-component-in-frontend-src-components-admin-productformmodal-tsx-to-ensure-form-submission-properly-calls-the-usecreateproduct-mutation-with-all-required-fields-and-handles-loading-error-states-correctly",
+      "featureTitle": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+      "files": [
+        "frontend/src/components/admin/ProductFormModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-73"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-comprehensive-error-logging-to-both-backend-createproduct-function-and-frontend-usecreateproduct-mutation-to-capture-and-display-exact-error-messages-when-product-creation-fails-log-validation-errors-storage-errors-and-network-errors-with-detailed-context",
+      "featureTitle": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
+      "files": [
+        "frontend/src/components/admin/ProductFormModal.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-74"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-test-the-complete-product-management-workflow-end-to-end-after-fixes-navigate-to-admin-products-tab-verify-demo-products-display-in-the-table-fill-out-add-product-form-with-test-data-submit-the-form-verify-saving-indicator-appears-briefly-confirm-new-product-appears-in-the-products-table-immediately-after-submission-and-verify-the-product-persists-after-page-refresh",
+      "featureTitle": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+      "files": [
+        "frontend/src/components/admin/ProductFormModal.tsx",
+        "frontend/src/components/admin/ProductsManagement.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-75"
       ],
       "confidence": "high"
     }

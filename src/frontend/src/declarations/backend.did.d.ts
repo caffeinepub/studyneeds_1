@@ -11,34 +11,6 @@ import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
 export type ExternalBlob = Uint8Array;
-export interface Order {
-  'id' : string,
-  'status' : OrderStatus,
-  'deliveryAddress' : string,
-  'paymentMethod' : PaymentMethod,
-  'userId' : Principal,
-  'isPaid' : boolean,
-  'timestamp' : Time,
-  'items' : Array<OrderItem>,
-}
-export interface OrderAdminQueries {
-  'id' : string,
-  'status' : OrderStatus,
-  'deliveryAddress' : string,
-  'paymentMethod' : PaymentMethod,
-  'userId' : Principal,
-  'isPaid' : boolean,
-  'timestamp' : Time,
-  'items' : Array<OrderItem>,
-}
-export interface OrderItem { 'quantity' : bigint, 'product' : Product }
-export type OrderStatus = { 'shipped' : null } |
-  { 'cancelled' : null } |
-  { 'pending' : null } |
-  { 'delivered' : null } |
-  { 'confirmed' : null };
-export type PaymentMethod = { 'cashOnDelivery' : null } |
-  { 'onlinePayment' : null };
 export interface Product {
   'id' : string,
   'stockQuantity' : bigint,
@@ -49,24 +21,6 @@ export interface Product {
   'rating' : number,
   'price' : number,
   'images' : Array<ExternalBlob>,
-}
-export interface ProductAdminQueries {
-  'id' : string,
-  'stockQuantity' : bigint,
-  'name' : string,
-  'description' : string,
-  'discount' : bigint,
-  'category' : string,
-  'rating' : number,
-  'price' : number,
-  'images' : Array<ExternalBlob>,
-}
-export type Time = bigint;
-export interface UserAdminQueries {
-  'principal' : Principal,
-  'orderCount' : bigint,
-  'registrationDate' : Time,
-  'profile' : UserProfile,
 }
 export interface UserProfile {
   'name' : string,
@@ -105,60 +59,17 @@ export interface _SERVICE {
   >,
   '_caffeineStorageUpdateGatewayPrincipals' : ActorMethod<[], undefined>,
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
-  'addProduct' : ActorMethod<
-    [
-      string,
-      string,
-      string,
-      number,
-      bigint,
-      number,
-      Array<ExternalBlob>,
-      bigint,
-      string,
-    ],
-    undefined
-  >,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
-  'deleteProduct' : ActorMethod<[string], undefined>,
-  'getAllOrders' : ActorMethod<[], Array<Order>>,
-  'getAllOrdersAdminProductQueries' : ActorMethod<[], Array<OrderAdminQueries>>,
+  'createProduct' : ActorMethod<[Product], boolean>,
+  'customQueryExample' : ActorMethod<[bigint], bigint>,
   'getAllProducts' : ActorMethod<[], Array<Product>>,
-  'getAllProductsAdminProductQueries' : ActorMethod<
-    [],
-    Array<ProductAdminQueries>
-  >,
-  'getAllUsers' : ActorMethod<[], Array<UserAdminQueries>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
-  'getOrder' : ActorMethod<[string], Order>,
-  'getOrderInternal' : ActorMethod<[string], [] | [Order]>,
   'getProduct' : ActorMethod<[string], Product>,
   'getProductsByCategory' : ActorMethod<[string], Array<Product>>,
-  'getUserOrders' : ActorMethod<[], Array<Order>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
-  'markOrderAsPaid' : ActorMethod<[string], undefined>,
-  'placeOrder' : ActorMethod<
-    [string, Principal, Array<OrderItem>, string, PaymentMethod],
-    undefined
-  >,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
-  'updateOrderStatus' : ActorMethod<[string, OrderStatus], undefined>,
-  'updateProduct' : ActorMethod<
-    [
-      string,
-      string,
-      string,
-      number,
-      bigint,
-      number,
-      Array<ExternalBlob>,
-      bigint,
-      string,
-    ],
-    undefined
-  >,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

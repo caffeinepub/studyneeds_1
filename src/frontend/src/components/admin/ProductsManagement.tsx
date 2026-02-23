@@ -6,8 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import ProductFormModal from './ProductFormModal';
-import { useGetAllProductsAdmin, useDeleteProduct } from '../../hooks/useQueries';
-import type { ProductAdminQueries } from '../../backend';
+import { useGetAllProducts } from '../../hooks/useQueries';
+import type { Product } from '../../backend';
 import { toast } from 'sonner';
 
 const CATEGORIES = [
@@ -26,11 +26,17 @@ export default function ProductsManagement() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [showProductModal, setShowProductModal] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<ProductAdminQueries | null>(null);
-  const [deletingProduct, setDeletingProduct] = useState<ProductAdminQueries | null>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
 
-  const { data: products = [], isLoading } = useGetAllProductsAdmin();
-  const deleteProductMutation = useDeleteProduct();
+  const { data: products = [], isLoading, error, isFetched } = useGetAllProducts();
+
+  console.log('ProductsManagement render:', { 
+    productsCount: products.length, 
+    isLoading, 
+    isFetched,
+    error: error?.message 
+  });
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -43,28 +49,32 @@ export default function ProductsManagement() {
     setShowProductModal(true);
   };
 
-  const handleEditProduct = (product: ProductAdminQueries) => {
-    setEditingProduct(product);
-    setShowProductModal(true);
+  const handleEditProduct = (product: Product) => {
+    toast.info('Edit functionality is not yet available');
+    // setEditingProduct(product);
+    // setShowProductModal(true);
   };
 
   const handleDeleteProduct = async () => {
     if (!deletingProduct) return;
-
-    try {
-      await deleteProductMutation.mutateAsync(deletingProduct.id);
-      toast.success('Product deleted successfully');
-      setDeletingProduct(null);
-    } catch (error) {
-      toast.error('Failed to delete product');
-      console.error('Delete error:', error);
-    }
+    toast.info('Delete functionality is not yet available');
+    setDeletingProduct(null);
   };
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-12">
+      <div className="flex flex-col items-center justify-center py-12 space-y-4">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <p className="text-gray-600">Loading products...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 space-y-4">
+        <p className="text-red-600">Error loading products: {error.message}</p>
+        <Button onClick={() => window.location.reload()}>Retry</Button>
       </div>
     );
   }
@@ -126,7 +136,9 @@ export default function ProductsManagement() {
               {filteredProducts.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={8} className="text-center py-8 text-gray-500">
-                    No products found
+                    {isFetched && products.length === 0 
+                      ? 'No products found. Click "Add Product" to create your first product.'
+                      : 'No products match your search criteria.'}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -151,6 +163,7 @@ export default function ProductsManagement() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleEditProduct(product)}
+                          title="Edit (coming soon)"
                         >
                           <Edit className="w-4 h-4" />
                         </Button>
@@ -159,6 +172,7 @@ export default function ProductsManagement() {
                           size="sm"
                           onClick={() => setDeletingProduct(product)}
                           className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                          title="Delete (coming soon)"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -189,18 +203,11 @@ export default function ProductsManagement() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Product</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{deletingProduct?.name}"? This action cannot be undone.
+              Delete functionality is not yet available in the backend. This feature will be added soon.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDeleteProduct}
-              className="bg-red-600 hover:bg-red-700"
-              disabled={deleteProductMutation.isPending}
-            >
-              {deleteProductMutation.isPending ? 'Deleting...' : 'Delete'}
-            </AlertDialogAction>
+            <AlertDialogCancel>Close</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

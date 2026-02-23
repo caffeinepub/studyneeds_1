@@ -6,7 +6,6 @@
 /**
  * Extracts a URL parameter from the current URL
  * Works with both query strings (?param=value) and hash-based routing (#/?param=value)
- * Also handles special format: #param=value/route
  *
  * @param paramName - The name of the parameter to extract
  * @returns The parameter value if found, null otherwise
@@ -22,35 +21,10 @@ export function getUrlParameter(paramName: string): string | null {
 
     // If not found, try to extract from hash (for hash-based routing)
     const hash = window.location.hash;
-    
-    if (!hash || hash.length <= 1) {
-        return null;
-    }
-
-    // Remove the leading #
-    const hashContent = hash.substring(1);
-
-    // Handle special format: #caffeineAdminToken=TOKEN/admin
-    // This format has the parameter before the route path
-    if (hashContent.includes('=') && hashContent.includes('/')) {
-        const slashIndex = hashContent.indexOf('/');
-        const beforeSlash = hashContent.substring(0, slashIndex);
-        
-        // Check if the part before slash contains our parameter
-        if (beforeSlash.includes(paramName + '=')) {
-            const params = new URLSearchParams(beforeSlash);
-            const value = params.get(paramName);
-            if (value !== null) {
-                return value;
-            }
-        }
-    }
-
-    // Standard format: #/route?param=value
-    const queryStartIndex = hashContent.indexOf('?');
+    const queryStartIndex = hash.indexOf('?');
 
     if (queryStartIndex !== -1) {
-        const hashQuery = hashContent.substring(queryStartIndex + 1);
+        const hashQuery = hash.substring(queryStartIndex + 1);
         const hashParams = new URLSearchParams(hashQuery);
         return hashParams.get(paramName);
     }
@@ -128,7 +102,6 @@ export function clearSessionParameter(key: string): void {
  * Removes a specific parameter from the URL hash without reloading the page
  * Preserves route information and other parameters in the hash
  * Used to remove sensitive data from the address bar after extracting it
- * Handles both standard format (#/route?param=value) and special format (#param=value/route)
  *
  * @param paramName - The parameter to remove from the hash
  *
@@ -136,11 +109,6 @@ export function clearSessionParameter(key: string): void {
  * // URL: https://app.com/#/dashboard?caffeineAdminToken=xxx&other=value
  * // After clearParamFromHash('caffeineAdminToken')
  * // URL: https://app.com/#/dashboard?other=value
- * 
- * @example
- * // URL: https://app.com/#caffeineAdminToken=xxx/admin
- * // After clearParamFromHash('caffeineAdminToken')
- * // URL: https://app.com/#/admin
  */
 function clearParamFromHash(paramName: string): void {
     if (!window.history.replaceState) {
@@ -155,27 +123,7 @@ function clearParamFromHash(paramName: string): void {
     // Remove the leading #
     const hashContent = hash.substring(1);
 
-    // Handle special format: #caffeineAdminToken=TOKEN/admin
-    if (hashContent.includes('=') && hashContent.includes('/')) {
-        const slashIndex = hashContent.indexOf('/');
-        const beforeSlash = hashContent.substring(0, slashIndex);
-        const afterSlash = hashContent.substring(slashIndex);
-        
-        // Check if the part before slash contains our parameter
-        if (beforeSlash.includes(paramName + '=')) {
-            const params = new URLSearchParams(beforeSlash);
-            params.delete(paramName);
-            
-            // Reconstruct: if there are remaining params, keep them; otherwise just use the route
-            const remainingParams = params.toString();
-            const newHash = remainingParams ? remainingParams + afterSlash : afterSlash;
-            const newUrl = window.location.pathname + window.location.search + '#' + newHash;
-            window.history.replaceState(null, '', newUrl);
-            return;
-        }
-    }
-
-    // Standard format: #/route?param=value
+    // Split route path from query string
     const queryStartIndex = hashContent.indexOf('?');
 
     if (queryStartIndex === -1) {
@@ -207,9 +155,8 @@ function clearParamFromHash(paramName: string): void {
  * Gets a secret from the URL hash fragment only (more secure than query params)
  * Hash fragments aren't sent to servers or logged in access logs
  * The hash is immediately cleared from the URL after extraction to prevent history leakage
- * Handles both standard format (#/route?param=value) and special format (#param=value/route)
  *
- * Usage: https://yourapp.com/#secret=xxx or https://yourapp.com/#/route?secret=xxx
+ * Usage: https://yourapp.com/#secret=xxx
  *
  * @param paramName - The name of the secret parameter
  * @returns The secret value if found (from hash or session), null otherwise
@@ -221,8 +168,16 @@ export function getSecretFromHash(paramName: string): string | null {
         return existingSecret;
     }
 
-    // Try to extract from hash using the enhanced getUrlParameter
-    const secret = getUrlParameter(paramName);
+    // Try to extract from hash
+    const hash = window.location.hash;
+    if (!hash || hash.length <= 1) {
+        return null;
+    }
+
+    // Remove the leading #
+    const hashContent = hash.substring(1);
+    const params = new URLSearchParams(hashContent);
+    const secret = params.get(paramName);
 
     if (secret) {
         // Store in session for persistence

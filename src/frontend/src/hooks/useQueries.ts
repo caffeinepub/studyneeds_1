@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
 import { Principal } from '@dfinity/principal';
-import type { Product, Order, OrderItem, PaymentMethod, UserProfile, ProductAdminQueries, OrderAdminQueries, UserAdminQueries, OrderStatus, ExternalBlob } from '../backend';
+import type { Product, UserProfile } from '../backend';
 
 export function useGetAllProducts() {
   const { actor, isFetching } = useActor();
@@ -10,9 +10,19 @@ export function useGetAllProducts() {
     queryKey: ['products'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.getAllProducts();
+      try {
+        console.log('Fetching all products...');
+        const products = await actor.getAllProducts();
+        console.log('Products fetched successfully:', products.length);
+        return products;
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+      }
     },
     enabled: !!actor && !isFetching,
+    staleTime: 0,
+    refetchOnMount: true,
   });
 }
 
@@ -43,46 +53,6 @@ export function useGetProductsByCategory(category: string) {
       return actor.getProductsByCategory(category);
     },
     enabled: !!actor && !isFetching && !!category,
-  });
-}
-
-export function usePlaceOrder() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async ({
-      id,
-      userId,
-      items,
-      deliveryAddress,
-      paymentMethod,
-    }: {
-      id: string;
-      userId: Principal;
-      items: OrderItem[];
-      deliveryAddress: string;
-      paymentMethod: PaymentMethod;
-    }) => {
-      if (!actor) throw new Error('Actor not available');
-      await actor.placeOrder(id, userId, items, deliveryAddress, paymentMethod);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
-    },
-  });
-}
-
-export function useGetUserOrders() {
-  const { actor, isFetching } = useActor();
-
-  return useQuery<Order[]>({
-    queryKey: ['orders', 'user'],
-    queryFn: async () => {
-      if (!actor) return [];
-      return actor.getUserOrders();
-    },
-    enabled: !!actor && !isFetching,
   });
 }
 
@@ -118,164 +88,50 @@ export function useIsCallerAdmin() {
     },
     enabled: !!actor && !isFetching,
     retry: 1,
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 }
 
-export function useGetAllProductsAdmin() {
-  const { actor, isFetching } = useActor();
+export function useCreateProduct() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
 
-  return useQuery<ProductAdminQueries[]>({
-    queryKey: ['admin', 'products'],
-    queryFn: async () => {
-      if (!actor) return [];
+  return useMutation({
+    mutationFn: async (product: Product) => {
+      if (!actor) throw new Error('Actor not available');
+      
+      console.group('🔵 Creating Product');
+      console.log('Product data:', {
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        price: product.price,
+        discount: product.discount,
+        stockQuantity: product.stockQuantity,
+        rating: product.rating,
+        description: product.description,
+        imagesCount: product.images.length,
+      });
+      
       try {
-        return await actor.getAllProductsAdminProductQueries();
-      } catch (error) {
-        console.error('Get products error:', error);
-        return [];
+        const result = await actor.createProduct(product);
+        console.log('✅ Product created successfully:', result);
+        console.groupEnd();
+        return result;
+      } catch (error: any) {
+        console.error('❌ Product creation failed:', error);
+        console.error('Error message:', error.message || 'Unknown error');
+        console.error('Error details:', error);
+        console.groupEnd();
+        throw new Error(error.message || 'Failed to create product. Please check all fields and try again.');
       }
     },
-    enabled: !!actor && !isFetching,
-  });
-}
-
-export function useGetAllOrdersAdmin() {
-  const { actor, isFetching } = useActor();
-
-  return useQuery<OrderAdminQueries[]>({
-    queryKey: ['admin', 'orders'],
-    queryFn: async () => {
-      if (!actor) return [];
-      try {
-        return await actor.getAllOrdersAdminProductQueries();
-      } catch (error) {
-        console.error('Get orders error:', error);
-        return [];
-      }
-    },
-    enabled: !!actor && !isFetching,
-  });
-}
-
-export function useGetAllUsers() {
-  const { actor, isFetching } = useActor();
-
-  return useQuery<UserAdminQueries[]>({
-    queryKey: ['admin', 'users'],
-    queryFn: async () => {
-      if (!actor) return [];
-      try {
-        return await actor.getAllUsers();
-      } catch (error) {
-        console.error('Get users error:', error);
-        return [];
-      }
-    },
-    enabled: !!actor && !isFetching,
-  });
-}
-
-export function useAddProduct() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (product: {
-      id: string;
-      name: string;
-      category: string;
-      price: number;
-      discount: bigint;
-      rating: number;
-      images: ExternalBlob[];
-      stockQuantity: bigint;
-      description: string;
-    }) => {
-      if (!actor) throw new Error('Actor not available');
-      await actor.addProduct(
-        product.id,
-        product.name,
-        product.category,
-        product.price,
-        product.discount,
-        product.rating,
-        product.images,
-        product.stockQuantity,
-        product.description
-      );
-    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
+      console.log('🔄 Invalidating product queries...');
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },
-  });
-}
-
-export function useUpdateProduct() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (product: {
-      id: string;
-      name: string;
-      category: string;
-      price: number;
-      discount: bigint;
-      rating: number;
-      images: ExternalBlob[];
-      stockQuantity: bigint;
-      description: string;
-    }) => {
-      if (!actor) throw new Error('Actor not available');
-      await actor.updateProduct(
-        product.id,
-        product.name,
-        product.category,
-        product.price,
-        product.discount,
-        product.rating,
-        product.images,
-        product.stockQuantity,
-        product.description
-      );
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-    },
-  });
-}
-
-export function useDeleteProduct() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (productId: string) => {
-      if (!actor) throw new Error('Actor not available');
-      await actor.deleteProduct(productId);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-    },
-  });
-}
-
-export function useUpdateOrderStatus() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async ({ orderId, status }: { orderId: string; status: OrderStatus }) => {
-      if (!actor) throw new Error('Actor not available');
-      await actor.updateOrderStatus(orderId, status);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'orders'] });
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
+    onError: (error: any) => {
+      console.error('🔴 Mutation error handler:', error);
     },
   });
 }
