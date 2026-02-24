@@ -1,5 +1,6 @@
 import { ShoppingBag, GraduationCap, FileText, Briefcase } from 'lucide-react';
 import { Button } from './ui/button';
+import { useNavigate } from '@tanstack/react-router';
 
 const services = [
   {
@@ -8,20 +9,23 @@ const services = [
     icon: '/assets/generated/icon-ecommerce.dim_80x80.png',
     action: 'Shop Now',
     available: true,
+    route: '/shop',
   },
   {
     title: 'Home Tuition Consultancy',
     description: 'Find verified teachers or register as a tutor for home and online classes',
-    icon: ShoppingBag,
-    action: 'Coming in Phase 2',
-    available: false,
+    icon: GraduationCap,
+    action: 'Explore Now',
+    available: true,
+    route: '/tuition',
   },
   {
-    title: 'Documentation Services',
-    description: 'Get help with certificates, forms, applications, and cyber services',
+    title: 'Documentation & Cyber Services',
+    description: 'Apply for government documents, exam forms, and digital services from home or visit our center for assistance',
     icon: FileText,
-    action: 'Coming in Phase 2',
-    available: false,
+    action: 'Apply Now',
+    available: true,
+    route: '/documentation',
   },
   {
     title: 'Career Counselling',
@@ -34,6 +38,14 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const navigate = useNavigate();
+
+  const handleServiceClick = (service: typeof services[0]) => {
+    if (service.available && service.route) {
+      navigate({ to: service.route });
+    }
+  };
+
   return (
     <section className="py-12 bg-gradient-to-br from-blue-50 to-orange-50 rounded-2xl">
       <div className="text-center mb-8">
@@ -44,7 +56,10 @@ export default function ServicesSection() {
         {services.map((service) => (
           <div
             key={service.title}
-            className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all relative"
+            className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all relative ${
+              service.available ? 'cursor-pointer' : ''
+            }`}
+            onClick={() => handleServiceClick(service)}
           >
             {service.badge && (
               <div className="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">

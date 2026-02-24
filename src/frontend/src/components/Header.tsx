@@ -50,7 +50,7 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         {/* Top Bar */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4">
+        <div className="bg-gradient-to-r from-[oklch(0.22_0.10_260)] to-[oklch(0.18_0.08_260)] text-white py-2 px-4">
           <div className="container mx-auto flex justify-between items-center text-sm">
             <p className="hidden md:block">Welcome to StudyNeeds - Your One-Stop Student Solution</p>
             <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for products, books, stationery..."
-                  className="w-full px-4 py-2.5 pr-12 border-2 border-blue-600 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2.5 pr-12 border-2 border-[oklch(0.22_0.10_260)] rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
                 />
                 <button
                   type="submit"
@@ -102,7 +102,7 @@ export default function Header() {
                 onClick={() => setShowLocationSelector(!showLocationSelector)}
                 className="hidden lg:flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <MapPin className="w-5 h-5 text-blue-600" />
+                <MapPin className="w-5 h-5 text-[oklch(0.22_0.10_260)]" />
                 <div className="text-left">
                   <p className="text-xs text-gray-500">Deliver to</p>
                   <p className="text-sm font-semibold text-gray-900">Select Location</p>
@@ -112,7 +112,7 @@ export default function Header() {
               {/* Admin Panel Link - Always visible */}
               <Link
                 to="/admin"
-                className="hidden md:flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+                className="hidden md:flex items-center gap-2 px-4 py-2 bg-[oklch(0.22_0.10_260)] hover:bg-[oklch(0.18_0.08_260)] text-white rounded-lg transition-colors font-medium"
               >
                 <Shield className="w-5 h-5" />
                 <span>Admin Panel</span>
@@ -163,7 +163,7 @@ export default function Header() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full px-4 py-2 pr-12 border-2 border-blue-600 rounded-lg focus:outline-none focus:border-orange-500"
+                className="w-full px-4 py-2 pr-12 border-2 border-[oklch(0.22_0.10_260)] rounded-lg focus:outline-none focus:border-orange-500"
               />
               <button
                 type="submit"
@@ -181,39 +181,39 @@ export default function Header() {
             <div className="flex items-center gap-6 py-2 overflow-x-auto">
               <button
                 onClick={() => setShowCategoriesMenu(!showCategoriesMenu)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
+                className="flex items-center gap-2 px-4 py-2 bg-[oklch(0.22_0.10_260)] text-white rounded-lg hover:bg-[oklch(0.18_0.08_260)] transition-colors whitespace-nowrap"
               >
                 <Menu className="w-4 h-4" />
                 <span className="font-medium">All Categories</span>
               </button>
-              <Link to="/shop" className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap">
+              <Link to="/shop" className="text-sm font-medium text-gray-700 hover:text-[oklch(0.22_0.10_260)] whitespace-nowrap">
                 All Products
               </Link>
               <Link 
                 to="/shop/$category" 
                 params={{ category: 'Books' }}
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+                className="text-sm font-medium text-gray-700 hover:text-[oklch(0.22_0.10_260)] whitespace-nowrap"
               >
                 Books
               </Link>
               <Link 
                 to="/shop/$category" 
                 params={{ category: 'Stationery' }}
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+                className="text-sm font-medium text-gray-700 hover:text-[oklch(0.22_0.10_260)] whitespace-nowrap"
               >
                 Stationery
               </Link>
               <Link 
                 to="/shop/$category" 
                 params={{ category: 'School Bags' }}
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+                className="text-sm font-medium text-gray-700 hover:text-[oklch(0.22_0.10_260)] whitespace-nowrap"
               >
                 School Bags
               </Link>
               <Link 
                 to="/shop/$category" 
                 params={{ category: 'Furniture' }}
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 whitespace-nowrap"
+                className="text-sm font-medium text-gray-700 hover:text-[oklch(0.22_0.10_260)] whitespace-nowrap"
               >
                 Furniture
               </Link>

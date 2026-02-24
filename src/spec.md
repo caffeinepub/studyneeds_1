@@ -1,15 +1,18 @@
 # Specification
 
 ## Summary
-**Goal:** Fix the admin panel product management functionality so that products can be successfully created, stored, and displayed.
+**Goal:** Create a complete Documentation & Cyber Services page with online service request forms, admin management, and backend data storage for government document services, exam forms, and cyber cafe utilities.
 
 **Planned changes:**
-- Debug and fix backend createProduct API to properly save products to Map storage
-- Debug and fix backend getAllProducts query to return all stored products including demo products
-- Fix frontend useGetAllProducts hook to properly fetch and display products in admin table
-- Fix frontend useCreateProduct mutation to submit data correctly and refresh products list
-- Fix ProductFormModal component to properly handle form submission and loading states
-- Add comprehensive error logging to both backend and frontend for product creation failures
-- Test complete end-to-end workflow to verify products are created, displayed, and persist after refresh
+- Create DocumentationPage component with hero section, service categories (Government Certificates, ID & Personal Documents, Job/Exam/Education Services, Cyber Cafe & Utility Services), pricing, comparison of online vs centre services, how it works section, why choose us section, terms & conditions, and privacy policy
+- Implement service request form with fields for full name, mobile number, service dropdown, mode selection (online/centre visit), document uploads, and message textarea
+- Add backend DocumentationRequest data model and functions: createDocumentationRequest (with blob storage for uploaded files), getDocumentationRequests (admin-only), updateDocumentationRequestStatus (admin-only), getDocumentationRequestDocuments (admin-only)
+- Create React Query hooks for all documentation request operations
+- Build DocumentationRequestsManagement admin component with request table showing name, mobile, service, mode, status, date, and actions
+- Create DocumentationRequestDetailModal for viewing complete request details, downloading documents, and updating status
+- Add Documentation Requests tab to AdminDashboardPage with summary card
+- Add floating WhatsApp button with pre-filled message specific to documentation services
+- Update ServicesSection to remove "Coming Soon" from Documentation card and enable navigation to /documentation route
+- Apply StudyNeeds theme styling (primary blue #2563eb, secondary orange #f97316) throughout all new components
 
-**User-visible outcome:** Admin users can successfully add new products through the Add Product form, see them immediately appear in the Products Management table alongside demo products, and verify they persist after page refresh.
+**User-visible outcome:** Users can browse documentation and cyber services, submit service requests online with document uploads, and contact via WhatsApp or phone. Admins can view all service requests, update statuses, and download uploaded documents through the admin dashboard.

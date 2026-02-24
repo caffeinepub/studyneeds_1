@@ -6,9 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import ProductFormModal from './ProductFormModal';
-import { useGetAllProducts } from '../../hooks/useQueries';
+import { useGetAllProducts, useDeleteProduct } from '../../hooks/useQueries';
 import type { Product } from '../../backend';
-import { toast } from 'sonner';
 
 const CATEGORIES = [
   'All Categories',
@@ -30,6 +29,7 @@ export default function ProductsManagement() {
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
 
   const { data: products = [], isLoading, error, isFetched } = useGetAllProducts();
+  const deleteProductMutation = useDeleteProduct();
 
   console.log('ProductsManagement render:', { 
     productsCount: products.length, 
@@ -50,21 +50,26 @@ export default function ProductsManagement() {
   };
 
   const handleEditProduct = (product: Product) => {
-    toast.info('Edit functionality is not yet available');
-    // setEditingProduct(product);
-    // setShowProductModal(true);
+    setEditingProduct(product);
+    setShowProductModal(true);
   };
 
   const handleDeleteProduct = async () => {
     if (!deletingProduct) return;
-    toast.info('Delete functionality is not yet available');
-    setDeletingProduct(null);
+    
+    try {
+      await deleteProductMutation.mutateAsync(deletingProduct.id);
+      setDeletingProduct(null);
+    } catch (error) {
+      // Error is already handled by the mutation hook
+      console.error('Delete error:', error);
+    }
   };
 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 space-y-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[oklch(0.22_0.10_260)]"></div>
         <p className="text-gray-600">Loading products...</p>
       </div>
     );
@@ -84,7 +89,7 @@ export default function ProductsManagement() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Products Management</h2>
-        <Button onClick={handleAddProduct} className="bg-blue-600 hover:bg-blue-700">
+        <Button onClick={handleAddProduct} className="bg-[oklch(0.22_0.10_260)] hover:bg-[oklch(0.18_0.08_260)]">
           <Plus className="w-4 h-4 mr-2" />
           Add Product
         </Button>
@@ -163,7 +168,7 @@ export default function ProductsManagement() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleEditProduct(product)}
-                          title="Edit (coming soon)"
+                          title="Edit product"
                         >
                           <Edit className="w-4 h-4" />
                         </Button>
@@ -172,7 +177,7 @@ export default function ProductsManagement() {
                           size="sm"
                           onClick={() => setDeletingProduct(product)}
                           className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          title="Delete (coming soon)"
+                          title="Delete product"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -203,11 +208,18 @@ export default function ProductsManagement() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Product</AlertDialogTitle>
             <AlertDialogDescription>
-              Delete functionality is not yet available in the backend. This feature will be added soon.
+              Are you sure you want to delete this product? This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Close</AlertDialogCancel>
+            <AlertDialogCancel onClick={() => setDeletingProduct(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteProduct}
+              className="bg-red-600 hover:bg-red-700"
+              disabled={deleteProductMutation.isPending}
+            >
+              {deleteProductMutation.isPending ? 'Deleting...' : 'Delete'}
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

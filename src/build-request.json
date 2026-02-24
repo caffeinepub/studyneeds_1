@@ -1,157 +1,493 @@
 {
   "kind": "build_request",
-  "title": "Fix admin panel product management functionality",
-  "projectName": "StudyNeeds",
-  "priority": "high",
+  "title": "Complete Documentation & Cyber Services Page",
+  "projectName": "StudyNeeds Platform",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-69",
-      "text": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
+      "id": "REQ-1",
+      "text": "Create a new DocumentationPage component at frontend/src/pages/DocumentationPage.tsx with complete page structure including hero section, service categories, pricing, forms, and all sections as specified",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Online Documentation & Cyber Services",
+          "Apply for government documents, exam forms, and digital services from home or visit our center for assistance"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page displays professional hero section with title 'Online Documentation & Cyber Services' and subtitle",
+        "Three CTA buttons present: 'Apply Online', 'Visit Our Centre', 'Chat on WhatsApp'",
+        "Trust badges displayed: Fast Service, Secure Documents, Trusted Support",
+        "All sections render correctly on desktop and mobile"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement four service category sections with cards and icons: 1) Government Certificate Services (Caste, Income, Residence, Birth, E-Shram, Labour, Ayushman, Ration Card), 2) ID & Personal Document Services (PAN, Aadhaar, Voter ID, Passport, PVC Card with note about biometric requiring centre visit), 3) Job, Exam & Education Services (Government Job Forms, Admit Card, Result, Scholarship, College Admission, Online Counselling), 4) Cyber Cafe & Utility Services (Tickets, Bill Payment, Mobile Recharge, Resume, Applications, Print/Scan/Lamination, Passport Photo)",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Government Certificate Services",
+          "ID & Personal Document Services",
+          "Job, Exam & Education Services",
+          "Cyber Cafe & Utility Services"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Four distinct service category cards displayed with appropriate icons",
+        "All services listed under correct categories",
+        "Note about Aadhaar biometric requiring centre visit is visible",
+        "Cards are responsive and styled with StudyNeeds theme colors"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create Online vs Centre Visit comparison section displaying two columns: 'Services Possible From Home' (PAN Apply, Certificates Apply, Job Forms, Scholarship, Admit Card, Result, Bill Payment, Resume, Ticket Booking) and 'Services Requiring Centre Visit' (Aadhaar Biometric, Photo Capture, Document Scan, PVC Printing, Lamination)",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Services Possible From Home",
+          "Services Requiring Centre Visit"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Comparison table or two-column layout clearly shows online vs centre services",
+        "All services listed in correct categories",
+        "Section is visually distinct and easy to understand",
+        "Responsive layout for mobile devices"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement pricing section displaying starting service charges: Form Filling (₹50 onwards), Certificates (₹100 onwards), PAN Apply (₹150 onwards), Scholarship Forms (₹100 onwards), Resume (₹99 onwards), Printing (₹5 per page), with note 'Government fees are separate and payable as per official rules'",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Form Filling: ₹50 onwards",
+          "Government fees are separate and payable as per official rules"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pricing items displayed with correct amounts",
+        "Government fees disclaimer note is prominently visible",
+        "Pricing section uses cards or table format",
+        "Mobile responsive layout"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Create service request form component with fields: Full Name, Mobile Number, Service Needed (dropdown with all service options), Mode (radio buttons for 'Online Service' or 'Visit Centre'), Upload Documents (file input accepting multiple files), Message (textarea), and Submit Request button",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Full Name",
+          "Mobile Number",
+          "Service Needed (Dropdown)",
+          "Mode: Online Service / Visit Centre",
+          "Upload Documents"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All form fields present with correct input types",
+        "Service dropdown populated with relevant service options",
+        "Mode selection allows choosing between online and centre visit",
+        "File upload field accepts multiple document uploads",
+        "Form validates required fields before submission",
+        "Success message displays after submission: 'Our team will contact you shortly'"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add backend data model for DocumentationRequest with fields: id, fullName, mobileNumber, serviceNeeded, mode (online/centre), uploadedDocuments (array of blob data), message, timestamp, status (pending/processing/completed), and implement createDocumentationRequest function in main.mo to store requests with uploaded file blobs",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-user-request"
         ],
         "quotes": [
-          "products add kr rha hu to add nhi ho rha add krne pr saving likhta but product show nhi ho rha h"
+          "Upload Documents",
+          "yes stored in canister"
         ]
       },
       "acceptanceCriteria": [
-        "createProduct backend function successfully stores new products with all fields (name, category, price, discount, stock, description, images)",
-        "Function returns proper success response when product is created",
-        "Products are persisted in backend Map storage and retrievable via getAllProducts query"
+        "DocumentationRequest type defined with all required fields",
+        "createDocumentationRequest function accepts and stores all form data including file uploads",
+        "Files stored as blobs in canister storage",
+        "Function returns success/error result",
+        "Requests stored in stable variable for persistence"
       ]
     },
     {
-      "id": "REQ-70",
-      "text": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
+      "id": "REQ-7",
+      "text": "Implement getDocumentationRequests backend function that returns all documentation requests with admin-only access control using existing isAdmin check pattern",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-user-request"
         ],
         "quotes": [
-          "demo products nhi dikh rhei phle se koi product nhi dikh ra bilkul khali h"
+          "Admin can: View all service requests"
         ]
       },
       "acceptanceCriteria": [
-        "getAllProducts query returns complete list of all stored products including demo products",
-        "Products are returned with all required fields populated correctly",
-        "Query executes without errors and returns data in expected format"
+        "Function returns array of all documentation requests",
+        "Access restricted to admin users only",
+        "Returns error if non-admin attempts to access",
+        "Includes all request fields including uploaded document references"
       ]
     },
     {
-      "id": "REQ-71",
-      "text": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
+      "id": "REQ-8",
+      "text": "Add updateDocumentationRequestStatus backend function allowing admin to change request status to pending, processing, or completed",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Admin can: Update status (Pending / Processing / Completed)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Function accepts request ID and new status",
+        "Admin-only access control implemented",
+        "Updates status of specified request",
+        "Returns success/error result"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement getDocumentationRequestDocuments backend function that returns uploaded file blobs for a specific request, accessible to admin users",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Admin can: Download uploaded files"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Function accepts request ID and returns associated file blobs",
+        "Admin-only access control implemented",
+        "Returns array of document blobs with metadata",
+        "Handles cases where request has no uploaded documents"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Create React Query hooks in frontend/src/hooks/useQueries.ts for documentation requests: useCreateDocumentationRequest mutation, useGetDocumentationRequests query, useUpdateDocumentationRequestStatus mutation, and useGetDocumentationRequestDocuments query",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
-        ],
-        "quotes": [
-          "Products tab mein demo products bhi nahi dikh rahe"
+          "msg-user-request"
         ]
       },
       "acceptanceCriteria": [
-        "useGetAllProducts hook successfully fetches products from backend",
-        "Products display correctly in ProductsManagement component table",
-        "Loading states and error messages are shown appropriately",
-        "Products list automatically refreshes after successful product creation"
+        "All four hooks implemented following existing query hook patterns",
+        "Mutation hooks show toast notifications on success/error",
+        "Query invalidation configured for mutations",
+        "Hooks use useActor to get backend actor instance"
       ]
     },
     {
-      "id": "REQ-72",
-      "text": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+      "id": "REQ-11",
+      "text": "Wire service request form to use useCreateDocumentationRequest mutation hook, handling file uploads by converting files to blob format before submission, and displaying success message modal or toast after successful submission",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-user-request"
         ],
         "quotes": [
-          "Add Product form fill karne ke baad Saving instantly dikhta hai aur form clear ho jata hai lekin naya product Products list mein add nahi hota"
+          "Our team will contact you shortly"
         ]
       },
       "acceptanceCriteria": [
-        "useCreateProduct mutation successfully submits product data to backend createProduct function",
-        "Mutation handles success and error responses correctly",
-        "Query cache is invalidated after successful creation to refresh products list",
-        "Success/error feedback is displayed to user",
-        "Form resets only after successful product creation"
+        "Form submission triggers mutation with all field data",
+        "Files converted to appropriate blob format for backend storage",
+        "Loading state shown during submission",
+        "Success message 'Our team will contact you shortly' displays after successful submission",
+        "Form resets after successful submission",
+        "Error messages shown if submission fails"
       ]
     },
     {
-      "id": "REQ-73",
-      "text": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+      "id": "REQ-12",
+      "text": "Create DocumentationRequestsManagement admin component at frontend/src/components/admin/DocumentationRequestsManagement.tsx displaying table of all documentation requests with columns: Name, Mobile, Service, Mode, Status, Date, and Actions (View Details, Update Status)",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-user-request"
         ],
         "quotes": [
-          "form submit k baad wo permanently saving pe stuck nhi hota saving turant leta h or form se sare images detailes ht jate h"
+          "Admin can: View all service requests",
+          "Update status (Pending / Processing / Completed)"
         ]
       },
       "acceptanceCriteria": [
-        "ProductFormModal correctly collects all form field values (name, category, price, discount, stock, description, images)",
-        "Form submission triggers useCreateProduct mutation with complete product data",
-        "Loading state ('Saving...') displays correctly during submission",
-        "Form only resets after receiving successful response from backend",
-        "Error messages display if submission fails"
+        "Component fetches and displays all documentation requests using useGetDocumentationRequests hook",
+        "Table shows all specified columns with proper formatting",
+        "Search functionality filters requests by name or mobile number",
+        "Status filter dropdown allows filtering by pending/processing/completed",
+        "Loading and error states handled appropriately"
       ]
     },
     {
-      "id": "REQ-74",
-      "text": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
-      "target": "both",
+      "id": "REQ-13",
+      "text": "Create DocumentationRequestDetailModal component showing complete request information including personal details, service requested, mode, uploaded documents list with download buttons, message, status, and status update dropdown for admin",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-user-request"
         ],
         "quotes": [
-          "Console mein 8 issues dikhai de rahe hain"
+          "Admin can: View all service requests",
+          "Update status",
+          "Download uploaded files"
         ]
       },
       "acceptanceCriteria": [
-        "Backend logs detailed error information when product creation fails",
-        "Frontend displays user-friendly error messages from backend responses",
-        "Console errors provide clear diagnostic information for debugging",
-        "Network request failures are caught and logged with status codes"
+        "Modal displays all request fields in organized layout",
+        "Uploaded documents shown with download functionality using useGetDocumentationRequestDocuments",
+        "Status dropdown allows admin to update request status",
+        "Status update triggers useUpdateDocumentationRequestStatus mutation",
+        "Modal has close button and proper styling"
       ]
     },
     {
-      "id": "REQ-75",
-      "text": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
-      "target": "both",
+      "id": "REQ-14",
+      "text": "Add Documentation Requests tab to AdminDashboardPage component at frontend/src/pages/AdminDashboardPage.tsx, displaying DocumentationRequestsManagement component and adding a summary card showing total documentation requests count",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
-        ],
-        "quotes": [
-          "refresh krne pr bhi product khali rhta h"
+          "msg-user-request"
         ]
       },
       "acceptanceCriteria": [
-        "Demo products are visible in Products Management table on page load",
-        "Add Product form successfully submits and creates new product",
-        "New product appears in products table immediately without manual refresh",
-        "Products persist in backend storage and remain visible after page refresh",
-        "No console errors appear during the entire workflow"
+        "New tab 'Documentation Requests' added to admin dashboard tabs",
+        "Tab displays DocumentationRequestsManagement component",
+        "Summary card shows count of total documentation requests",
+        "Tab follows existing admin dashboard styling and layout patterns"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Add How It Works section with three steps: Step 1 'Submit your request online', Step 2 'Our team verifies documents', Step 3 'Service completed or visit scheduled', displayed with icons and step numbers",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Submit your request online",
+          "Our team verifies documents",
+          "Service completed or visit scheduled"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Three-step process displayed in order",
+        "Each step has descriptive text matching specifications",
+        "Icons or numbers indicate step sequence",
+        "Section is visually distinct and easy to understand"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Implement Why Choose The Cyber Point section displaying five features: Trusted Local Service, Affordable Charges, Fast Processing, Experienced Operators, Secure Document Handling, each with icons and brief descriptions",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Trusted Local Service",
+          "Affordable Charges",
+          "Fast Processing",
+          "Experienced Operators",
+          "Secure Document Handling"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All five features displayed with appropriate icons",
+        "Features arranged in grid or card layout",
+        "Text content matches specifications exactly",
+        "Section styled consistently with StudyNeeds theme"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Add Terms & Conditions section displaying all specified terms: service charges non-refundable after submission, government fees separate, approval depends on authority, incorrect information user responsibility, processing time may vary, Aadhaar services require physical presence",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Service charges are non-refundable after submission",
+          "Government fees are separate",
+          "Approval depends on government authority"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All six terms listed clearly",
+        "Terms presented in readable format (bullet points or numbered list)",
+        "Section visually separated from other content",
+        "Text matches specifications exactly"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Add Privacy Policy note section stating 'User documents are kept confidential and used only for service processing'",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "User documents are kept confidential and used only for service processing"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Privacy note displayed prominently",
+        "Text matches specification exactly",
+        "Positioned appropriately near forms or at page bottom"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Add Call to Action section with heading 'Need Help?' and three buttons: 'Chat on WhatsApp', 'Call Now', 'Visit Centre', with WhatsApp button opening WhatsApp Web with pre-filled message 'Hello, I want documentation service from StudyNeeds'",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Need Help?",
+          "Chat on WhatsApp",
+          "Call Now",
+          "Visit Centre",
+          "Hello, I want documentation service from StudyNeeds"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Three CTA buttons displayed prominently",
+        "WhatsApp button opens WhatsApp Web with pre-filled message",
+        "Call Now button triggers tel: link (number to be configured)",
+        "Visit Centre button links to contact or location information",
+        "Buttons styled consistently with StudyNeeds theme"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Add floating WhatsApp button to Documentation page (similar to existing WhatsAppButton component) with auto-message 'Hello, I want documentation service from StudyNeeds' and position it to not overlap with existing site-wide WhatsApp button",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Add floating WhatsApp button on page",
+          "Hello, I want documentation service from StudyNeeds"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Floating button visible on Documentation page",
+        "Opens WhatsApp with specified pre-filled message",
+        "Positioned to avoid overlap with existing WhatsApp button",
+        "Button styled consistently with site design"
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Update ServicesSection component at frontend/src/components/ServicesSection.tsx to change Documentation & Cyber Services card from 'Coming Soon' to active state, adding onClick navigation to the new DocumentationPage and updating visual styling to match active services",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Remove the 'Coming Soon' text completely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Coming Soon badge removed from Documentation card",
+        "Card clickable and navigates to /documentation route",
+        "Card styling matches other active service cards",
+        "Description text reads 'Apply for government documents, exam forms, and digital services from home or visit our center for assistance' or similar"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Add route for DocumentationPage at /documentation in frontend/src/App.tsx router configuration",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Route /documentation configured in router",
+        "Route renders DocumentationPage component",
+        "Navigation from services section works correctly"
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Apply StudyNeeds theme styling throughout Documentation page using primary blue (#2563eb), secondary orange (#f97316), and white background, ensuring all components follow modern card design with icons and mobile-responsive layouts",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-request"
+        ],
+        "quotes": [
+          "Primary Blue #2563eb",
+          "Secondary Orange #f97316",
+          "White background",
+          "Modern cards with icons and mobile responsive layout"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Primary blue color used for main CTAs and headers",
+        "Secondary orange used for accents and highlights",
+        "White background maintained throughout",
+        "All sections responsive on mobile devices",
+        "Cards have consistent styling with shadows and borders",
+        "Icons used appropriately throughout"
       ]
     }
   ],
   "constraints": [
-    "Maintain single-actor architecture in backend/main.mo",
-    "Keep all product storage logic in the main actor using Map data structure",
-    "Do not modify authentication or authorization logic",
-    "Preserve existing demo product data during fixes",
-    "Maintain compatibility with existing ProductCard and ProductsManagement components"
+    "Use existing WhatsAppButton component pattern for WhatsApp integrations",
+    "Follow existing admin management patterns from TuitionLeadsManagement and TeacherRegistrationsManagement components",
+    "Use existing authentication and admin check patterns from AdminRoute component",
+    "Store uploaded files as blobs in canister storage following existing blob storage patterns in main.mo",
+    "Do not modify existing WhatsAppButton component; create page-specific WhatsApp functionality separately if needed",
+    "Maintain consistency with existing StudyNeeds color scheme: primary blue #2563eb and secondary orange #f97316"
   ],
   "nonGoals": [
-    "Redesigning the admin panel UI layout",
-    "Adding new product fields beyond what exists",
-    "Implementing product image upload to backend (images remain as URLs)",
-    "Adding bulk product import/export functionality",
-    "Implementing product search or advanced filtering in admin panel"
+    "Implementing actual SMS or email notifications to users or admins",
+    "Integrating with external government databases or APIs",
+    "Payment gateway integration for service charges",
+    "Real-time status updates via WebSockets",
+    "Automated document verification or OCR functionality",
+    "Multi-language support beyond English",
+    "Mobile app development",
+    "Integration with external CRM systems"
   ],
   "imageRequirements": {
     "required": [],

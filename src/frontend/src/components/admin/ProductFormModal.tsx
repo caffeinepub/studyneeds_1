@@ -6,8 +6,8 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { useCreateProduct } from '../../hooks/useQueries';
-import type { Product } from '../../backend';
+import { useCreateProduct, useUpdateProduct } from '../../hooks/useQueries';
+import type { Product, UpdateProductRequest } from '../../backend';
 import { ExternalBlob } from '../../backend';
 import { toast } from 'sonner';
 
@@ -44,6 +44,7 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
   const [existingImages, setExistingImages] = useState<ExternalBlob[]>([]);
 
   const createProductMutation = useCreateProduct();
+  const updateProductMutation = useUpdateProduct();
 
   const isEditing = !!product;
 
@@ -81,13 +82,9 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
     e.preventDefault();
     setErrorMessage('');
 
-    if (isEditing) {
-      toast.info('Edit functionality is not yet available');
-      return;
-    }
-
     console.group('📝 Form Submission Started');
     console.log('Form data:', formData);
+    console.log('Is editing:', isEditing);
     console.log('Image file:', imageFile?.name);
 
     // Validation
@@ -100,7 +97,7 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
       return;
     }
 
-    if (!imageFile && !imagePreview) {
+    if (!isEditing && !imageFile && !imagePreview) {
       const error = 'Please upload a product image';
       setErrorMessage(error);
       toast.error(error);
@@ -110,52 +107,83 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
     }
 
     try {
-      console.log('🔄 Processing image...');
-      let images: ExternalBlob[] = [];
-      
-      if (imageFile) {
-        const arrayBuffer = await imageFile.arrayBuffer();
-        const uint8Array = new Uint8Array(arrayBuffer);
-        const blob = ExternalBlob.fromBytes(uint8Array).withUploadProgress((percentage) => {
-          setUploadProgress(percentage);
-          console.log(`Upload progress: ${percentage}%`);
+      if (isEditing) {
+        // Update existing product
+        console.log('🔄 Updating product...');
+        const updateRequest: UpdateProductRequest = {
+          id: product!.id,
+          name: formData.name.trim(),
+          category: formData.category,
+          description: formData.description.trim(),
+          price: parseFloat(formData.price),
+          discount: BigInt(parseInt(formData.discount) || 0),
+          rating: parseFloat(formData.rating),
+          stockQuantity: BigInt(parseInt(formData.stockQuantity)),
+        };
+
+        console.log('📦 Update request constructed:', {
+          id: updateRequest.id,
+          name: updateRequest.name,
+          category: updateRequest.category,
+          price: updateRequest.price,
+          discount: updateRequest.discount.toString(),
+          stockQuantity: updateRequest.stockQuantity.toString(),
+          rating: updateRequest.rating,
         });
-        images = [blob];
-      } else if (existingImages.length > 0) {
-        images = existingImages;
+
+        console.log('🚀 Calling update mutation...');
+        await updateProductMutation.mutateAsync(updateRequest);
+        
+        console.log('✅ Update successful!');
+        console.groupEnd();
+      } else {
+        // Create new product
+        console.log('🔄 Processing image...');
+        let images: ExternalBlob[] = [];
+        
+        if (imageFile) {
+          const arrayBuffer = await imageFile.arrayBuffer();
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const blob = ExternalBlob.fromBytes(uint8Array).withUploadProgress((percentage) => {
+            setUploadProgress(percentage);
+            console.log(`Upload progress: ${percentage}%`);
+          });
+          images = [blob];
+        } else if (existingImages.length > 0) {
+          images = existingImages;
+        }
+
+        console.log('✅ Image processed, images count:', images.length);
+
+        const productData: Product = {
+          id: `prod_${Date.now()}`,
+          name: formData.name.trim(),
+          category: formData.category,
+          description: formData.description.trim(),
+          price: parseFloat(formData.price),
+          discount: BigInt(parseInt(formData.discount) || 0),
+          rating: parseFloat(formData.rating),
+          stockQuantity: BigInt(parseInt(formData.stockQuantity)),
+          images,
+        };
+
+        console.log('📦 Product object constructed:', {
+          id: productData.id,
+          name: productData.name,
+          category: productData.category,
+          price: productData.price,
+          discount: productData.discount.toString(),
+          stockQuantity: productData.stockQuantity.toString(),
+          rating: productData.rating,
+          imagesCount: productData.images.length,
+        });
+
+        console.log('🚀 Calling create mutation...');
+        await createProductMutation.mutateAsync(productData);
+        
+        console.log('✅ Creation successful!');
+        console.groupEnd();
       }
-
-      console.log('✅ Image processed, images count:', images.length);
-
-      const productData: Product = {
-        id: `prod_${Date.now()}`,
-        name: formData.name.trim(),
-        category: formData.category,
-        description: formData.description.trim(),
-        price: parseFloat(formData.price),
-        discount: BigInt(parseInt(formData.discount) || 0),
-        rating: parseFloat(formData.rating),
-        stockQuantity: BigInt(parseInt(formData.stockQuantity)),
-        images,
-      };
-
-      console.log('📦 Product object constructed:', {
-        id: productData.id,
-        name: productData.name,
-        category: productData.category,
-        price: productData.price,
-        discount: productData.discount.toString(),
-        stockQuantity: productData.stockQuantity.toString(),
-        rating: productData.rating,
-        imagesCount: productData.images.length,
-      });
-
-      console.log('🚀 Calling mutation...');
-      await createProductMutation.mutateAsync(productData);
-      
-      console.log('✅ Mutation successful!');
-      toast.success('Product added successfully');
-      console.groupEnd();
       
       onClose();
     } catch (error: any) {
@@ -164,7 +192,6 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
       console.error('Error stack:', error.stack);
       const errorMsg = error.message || 'Failed to save product. Please try again.';
       setErrorMessage(errorMsg);
-      toast.error(errorMsg);
       console.groupEnd();
     }
   };
@@ -173,7 +200,7 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Edit Product (Not Available)' : 'Add New Product'}</DialogTitle>
+          <DialogTitle>{isEditing ? 'Edit Product' : 'Add New Product'}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -181,12 +208,6 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
           {errorMessage && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
               {errorMessage}
-            </div>
-          )}
-
-          {isEditing && (
-            <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded">
-              Edit functionality is not yet available. Please create a new product instead.
             </div>
           )}
 
@@ -205,6 +226,9 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
                   className="cursor-pointer"
                   disabled={isEditing}
                 />
+                {isEditing && (
+                  <p className="text-sm text-gray-500 mt-1">Image cannot be changed when editing</p>
+                )}
                 {uploadProgress > 0 && uploadProgress < 100 && (
                   <div className="mt-2">
                     <div className="w-full bg-gray-200 rounded-full h-2">
@@ -229,7 +253,6 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Enter product name"
               required
-              disabled={isEditing}
             />
           </div>
 
@@ -239,7 +262,6 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
             <Select 
               value={formData.category} 
               onValueChange={(value) => setFormData({ ...formData, category: value })}
-              disabled={isEditing}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select category" />
@@ -267,7 +289,6 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                 placeholder="0.00"
                 required
-                disabled={isEditing}
               />
             </div>
             <div className="space-y-2">
@@ -280,23 +301,21 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
                 value={formData.discount}
                 onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
                 placeholder="0"
-                disabled={isEditing}
               />
             </div>
           </div>
 
           {/* Stock Quantity */}
           <div className="space-y-2">
-            <Label htmlFor="stock">Stock Quantity *</Label>
+            <Label htmlFor="stockQuantity">Stock Quantity *</Label>
             <Input
-              id="stock"
+              id="stockQuantity"
               type="number"
               min="0"
               value={formData.stockQuantity}
               onChange={(e) => setFormData({ ...formData, stockQuantity: e.target.value })}
               placeholder="0"
               required
-              disabled={isEditing}
             />
           </div>
 
@@ -312,20 +331,12 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
                 max="5"
                 value={formData.rating}
                 onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                placeholder="4.0"
                 className="w-24"
-                disabled={isEditing}
               />
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className={`w-5 h-5 ${
-                      star <= parseFloat(formData.rating || '0')
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
-                    }`}
-                  />
-                ))}
+              <div className="flex items-center text-yellow-500">
+                <Star className="w-5 h-5 fill-current" />
+                <span className="ml-1 text-gray-600">{formData.rating || '0'}</span>
               </div>
             </div>
           </div>
@@ -340,21 +351,22 @@ export default function ProductFormModal({ product, onClose }: ProductFormModalP
               placeholder="Enter product description"
               rows={4}
               required
-              disabled={isEditing}
             />
           </div>
 
           {/* Form Actions */}
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose} disabled={createProductMutation.isPending}>
+            <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
             <Button 
               type="submit" 
-              disabled={createProductMutation.isPending || isEditing} 
               className="bg-blue-600 hover:bg-blue-700"
+              disabled={createProductMutation.isPending || updateProductMutation.isPending}
             >
-              {createProductMutation.isPending ? 'Saving...' : isEditing ? 'Edit Not Available' : 'Add Product'}
+              {createProductMutation.isPending || updateProductMutation.isPending 
+                ? (isEditing ? 'Updating...' : 'Adding...') 
+                : (isEditing ? 'Update Product' : 'Add Product')}
             </Button>
           </DialogFooter>
         </form>

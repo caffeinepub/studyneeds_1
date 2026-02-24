@@ -1,112 +1,340 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix admin panel product management functionality",
+  "title": "Complete Documentation & Cyber Services Page - Frontend Implementation",
   "requirements": [
     {
-      "id": "REQ-71",
-      "summary": "Fix useGetAllProducts hook to properly fetch and display products in admin Products Management table with error handling and loading states",
+      "id": "REQ-1",
+      "summary": "Create DocumentationPage component with hero section, CTAs, and trust badges",
       "acceptanceCriteria": [
-        "useGetAllProducts hook successfully fetches products from backend",
-        "Products display correctly in ProductsManagement component table",
-        "Loading states and error messages are shown appropriately",
-        "Products list automatically refreshes after successful product creation"
+        "Page displays professional hero section with title 'Online Documentation & Cyber Services' and subtitle",
+        "Three CTA buttons present: 'Apply Online', 'Visit Our Centre', 'Chat on WhatsApp'",
+        "Trust badges displayed: Fast Service, Secure Documents, Trusted Support",
+        "All sections render correctly on desktop and mobile"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "create",
+          "description": "Create new DocumentationPage component with hero section displaying title 'Online Documentation & Cyber Services', subtitle 'Apply for government documents, exam forms, and digital services from home or visit our center for assistance', three CTA buttons (Apply Online scrolls to form, Visit Our Centre links to contact, Chat on WhatsApp opens WhatsApp), and trust badges section with icons for Fast Service, Secure Documents, and Trusted Support. Use StudyNeeds primary blue (#2563eb) for headers and CTAs, secondary orange (#f97316) for accents. Ensure responsive layout for mobile devices."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement four service category sections with detailed service cards",
+      "acceptanceCriteria": [
+        "Four distinct service category cards displayed with appropriate icons",
+        "All services listed under correct categories",
+        "Note about Aadhaar biometric requiring centre visit is visible",
+        "Cards are responsive and styled with StudyNeeds theme colors"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add four service category sections to DocumentationPage: 1) Government Certificate Services (Caste Certificate, Income Certificate, Residence Certificate, Birth Certificate, E-Shram Card, Labour Card, Ayushman Card, Ration Card), 2) ID & Personal Document Services (PAN Card, Aadhaar Card, Voter ID, Passport Apply, PVC Card with prominent note 'Aadhaar Biometric Service requires centre visit'), 3) Job, Exam & Education Services (Government Job Forms, Admit Card Download, Result Check, Scholarship Forms, College Admission Forms, Online Counselling), 4) Cyber Cafe & Utility Services (Train/Bus Tickets, Bill Payment, Mobile Recharge, Resume Making, Job Applications, Print/Scan/Lamination, Passport Size Photo). Use card layout with icons, organized in responsive grid using StudyNeeds theme colors."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create Online vs Centre Visit comparison section",
+      "acceptanceCriteria": [
+        "Comparison table or two-column layout clearly shows online vs centre services",
+        "All services listed in correct categories",
+        "Section is visually distinct and easy to understand",
+        "Responsive layout for mobile devices"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add comparison section with two columns to DocumentationPage. Left column 'Services Possible From Home' lists: PAN Card Apply, Certificate Applications, Government Job Forms, Scholarship Forms, Admit Card Download, Result Check, Bill Payment, Resume Making, Ticket Booking. Right column 'Services Requiring Centre Visit' lists: Aadhaar Biometric Update, Passport Size Photo, Document Scanning, PVC Card Printing, Lamination Services. Use table or two-column card layout with checkmark icons for online services and location pin icons for centre services. Ensure mobile-responsive stacked layout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement pricing section with service charges and disclaimer",
+      "acceptanceCriteria": [
+        "All pricing items displayed with correct amounts",
+        "Government fees disclaimer note is prominently visible",
+        "Pricing section uses cards or table format",
+        "Mobile responsive layout"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add pricing section to DocumentationPage displaying service charges in card format: Form Filling (₹50 onwards), Certificate Applications (₹100 onwards), PAN Card Apply (₹150 onwards), Scholarship Forms (₹100 onwards), Resume Making (₹99 onwards), Printing Services (₹5 per page). Include prominent disclaimer box stating 'Government fees are separate and payable as per official rules' styled with orange accent background. Use grid layout for pricing cards with rupee symbol and 'onwards' text. Ensure mobile-responsive design."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create service request form component with all required fields",
+      "acceptanceCriteria": [
+        "All form fields present with correct input types",
+        "Service dropdown populated with relevant service options",
+        "Mode selection allows choosing between online and centre visit",
+        "File upload field accepts multiple document uploads",
+        "Form validates required fields before submission",
+        "Success message displays after submission: 'Our team will contact you shortly'"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/DocumentationServiceForm.tsx",
+          "operation": "create",
+          "description": "Create DocumentationServiceForm component with fields: Full Name (text input, required), Mobile Number (tel input, 10 digits, required), Service Needed (dropdown with options from all service categories listed in REQ-2, required), Mode (radio buttons: 'Online Service' or 'Visit Centre', required), Upload Documents (file input with multiple file support, accept common document formats), Message (textarea, optional). Add Submit Request button. Implement client-side validation for required fields and phone number format. Use Tailwind styling with StudyNeeds colors. Form will be wired to backend mutation in REQ-11."
+        },
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Import and render DocumentationServiceForm component in DocumentationPage within a dedicated 'Request a Service' section. Add section heading and brief instruction text. Position form prominently after service categories and before How It Works section."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Create React Query hooks for documentation request operations",
+      "acceptanceCriteria": [
+        "All four hooks implemented following existing query hook patterns",
+        "Mutation hooks show toast notifications on success/error",
+        "Query invalidation configured for mutations",
+        "Hooks use useActor to get backend actor instance"
       ],
       "file_operations": [
         {
           "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Fix the useGetAllProducts React Query hook to properly call backend getAllProducts function with correct error handling. Ensure the query is properly configured with queryKey ['products'], retry logic, and refetchOnMount settings. Add console logging for debugging fetch errors with detailed error context."
-        },
-        {
-          "path": "frontend/src/components/admin/ProductsManagement.tsx",
-          "operation": "modify",
-          "description": "Update ProductsManagement component to properly display loading states, error messages, and empty states when products fail to load. Ensure the component correctly uses the useGetAllProducts hook and handles all possible states (loading, error, empty, success). Add user-friendly error messages that guide troubleshooting."
+          "description": "Add four React Query hooks to existing useQueries.ts file following the established patterns: 1) useCreateDocumentationRequest mutation hook that calls actor.createDocumentationRequest with parameters (fullName, mobileNumber, serviceNeeded, mode, uploadedDocuments as ExternalBlob array, message), shows success toast 'Request submitted successfully', invalidates 'documentationRequests' query key on success. 2) useGetDocumentationRequests query hook that calls actor.getDocumentationRequests, queryKey 'documentationRequests', enabled when actor exists. 3) useUpdateDocumentationRequestStatus mutation hook that calls actor.updateDocumentationRequestStatus with (requestId, newStatus), shows success toast 'Status updated', invalidates 'documentationRequests'. 4) useGetDocumentationRequestDocuments query hook that calls actor.getDocumentationRequestDocuments with requestId parameter, queryKey includes requestId, enabled when actor exists and requestId provided. Follow existing error handling and toast notification patterns from the file."
         }
       ]
     },
     {
-      "id": "REQ-72",
-      "summary": "Fix useCreateProduct mutation hook to properly submit product data and invalidate query cache for automatic list refresh",
+      "id": "REQ-11",
+      "summary": "Wire service request form to backend mutation with file upload handling",
       "acceptanceCriteria": [
-        "useCreateProduct mutation successfully submits product data to backend createProduct function",
-        "Mutation handles success and error responses correctly",
-        "Query cache is invalidated after successful creation to refresh products list",
-        "Success/error feedback is displayed to user",
-        "Form resets only after successful product creation"
+        "Form submission triggers mutation with all field data",
+        "Files converted to appropriate blob format for backend storage",
+        "Loading state shown during submission",
+        "Success message 'Our team will contact you shortly' displays after successful submission",
+        "Form resets after successful submission",
+        "Error messages shown if submission fails"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useQueries.ts",
+          "path": "frontend/src/components/DocumentationServiceForm.tsx",
           "operation": "modify",
-          "description": "Fix the useCreateProduct mutation hook to properly submit complete Product objects to the backend createProduct function. Ensure all Product fields (id, name, category, price, discount, stockQuantity, description, images as ExternalBlob array) are correctly formatted. Add onSuccess callback that invalidates the 'products' query cache to trigger automatic refresh. Implement comprehensive error handling with detailed console logging for mutation failures, including network errors and validation errors. Add success/error toast notifications or callbacks for UI feedback."
+          "description": "Wire DocumentationServiceForm to backend: Import useCreateDocumentationRequest mutation hook from useQueries. Import ExternalBlob from backend.d.ts. Add form state management using React useState for all fields. Implement file upload handler that converts selected files to ExternalBlob array using ExternalBlob.fromBytes() after reading files with FileReader. Wire form onSubmit to call mutation.mutate with all form data. Show loading spinner on submit button when mutation.isPending. On mutation success, display success modal or toast with message 'Our team will contact you shortly', then reset form fields. On mutation error, display error toast with error message. Add form validation before submission. Use blob-storage component's ExternalBlob class for file handling."
         }
       ]
     },
     {
-      "id": "REQ-73",
-      "summary": "Fix ProductFormModal component to ensure form submission calls useCreateProduct with all required fields and handles loading/error states correctly",
+      "id": "REQ-12",
+      "summary": "Create DocumentationRequestsManagement admin component with table and filters",
       "acceptanceCriteria": [
-        "ProductFormModal correctly collects all form field values (name, category, price, discount, stock, description, images)",
-        "Form submission triggers useCreateProduct mutation with complete product data",
-        "Loading state ('Saving...') displays correctly during submission",
-        "Form only resets after receiving successful response from backend",
-        "Error messages display if submission fails"
+        "Component fetches and displays all documentation requests using useGetDocumentationRequests hook",
+        "Table shows all specified columns with proper formatting",
+        "Search functionality filters requests by name or mobile number",
+        "Status filter dropdown allows filtering by pending/processing/completed",
+        "Loading and error states handled appropriately"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/admin/ProductFormModal.tsx",
-          "operation": "modify",
-          "description": "Fix the ProductFormModal form submission handler to properly collect all form fields and construct a complete Product object with id (generate using crypto.randomUUID() or Date.now().toString()), name, category, price (as number), discount (as bigint), stockQuantity (as bigint), description, rating (default to 0), and images (as ExternalBlob array). Ensure the mutation's isLoading state correctly controls the 'Saving...' button text. Only reset the form after mutation.isSuccess is true, not immediately on submission. Display error messages from mutation.error in the UI. Add console logging for form data validation and submission process."
+          "path": "frontend/src/components/admin/DocumentationRequestsManagement.tsx",
+          "operation": "create",
+          "description": "Create DocumentationRequestsManagement admin component following the pattern of TuitionLeadsManagement. Use useGetDocumentationRequests hook to fetch all requests. Display table with columns: Name (fullName), Mobile (mobileNumber), Service (serviceNeeded), Mode (mode), Status (status with color badges: pending=yellow, processing=blue, completed=green), Date (formatted timestamp), Actions (View Details button). Implement search input that filters by fullName or mobileNumber. Add status filter dropdown with options: All, Pending, Processing, Completed. Include DocumentationRequestDetailModal (from REQ-13) that opens when View Details clicked, passing request data and onClose handler. Handle loading state with skeleton or spinner. Handle error state with message. Use Tailwind styling consistent with other admin management components."
         }
       ]
     },
     {
-      "id": "REQ-74",
-      "summary": "Add comprehensive error logging to frontend useCreateProduct mutation to capture and display exact error messages",
+      "id": "REQ-13",
+      "summary": "Create DocumentationRequestDetailModal showing complete request info with document downloads",
       "acceptanceCriteria": [
-        "Frontend displays user-friendly error messages from backend responses",
-        "Console errors provide clear diagnostic information for debugging",
-        "Network request failures are caught and logged with status codes"
+        "Modal displays all request fields in organized layout",
+        "Uploaded documents shown with download functionality using useGetDocumentationRequestDocuments",
+        "Status dropdown allows admin to update request status",
+        "Status update triggers useUpdateDocumentationRequestStatus mutation",
+        "Modal has close button and proper styling"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Add comprehensive error logging to useCreateProduct mutation's onError callback. Log the complete error object, error message, and mutation variables (product data being submitted). Capture and log network error details including status codes if available. Ensure error messages are user-friendly and actionable (e.g., 'Failed to create product. Please check all fields and try again.'). Add console.group to organize debug output clearly."
-        },
-        {
-          "path": "frontend/src/components/admin/ProductFormModal.tsx",
-          "operation": "modify",
-          "description": "Add detailed console logging throughout the form submission process: log the raw form data collected, the constructed Product object before submission, and any validation errors. Log when the mutation starts, succeeds, or fails with timestamps. Display user-friendly error messages from the mutation in a visible error state within the modal (e.g., error alert or text below the form)."
+          "path": "frontend/src/components/admin/DocumentationRequestDetailModal.tsx",
+          "operation": "create",
+          "description": "Create DocumentationRequestDetailModal component following pattern of StudentLeadDetailModal. Accept props: request (DocumentationRequest object), onClose callback. Display all request fields in sections: Personal Details (fullName, mobileNumber), Service Information (serviceNeeded, mode), Message (message text), Status (current status with badge), Submission Date (formatted timestamp). Add Uploaded Documents section using useGetDocumentationRequestDocuments hook with request.id to fetch documents. Display document list with download buttons that use ExternalBlob.getDirectURL() for each document. Add Status Update dropdown (Pending, Processing, Completed) that calls useUpdateDocumentationRequestStatus mutation when changed. Include Close button. Use modal overlay with card styling, Tailwind classes, StudyNeeds colors. Handle loading state for documents fetch."
         }
       ]
     },
     {
-      "id": "REQ-75",
-      "summary": "Test the complete product management workflow end-to-end to verify demo products display, form submission works, and products persist",
+      "id": "REQ-14",
+      "summary": "Add Documentation Requests tab to AdminDashboardPage",
       "acceptanceCriteria": [
-        "Demo products are visible in Products Management table on page load",
-        "Add Product form successfully submits and creates new product",
-        "New product appears in products table immediately without manual refresh",
-        "Products persist in backend storage and remain visible after page refresh",
-        "No console errors appear during the entire workflow"
+        "New tab 'Documentation Requests' added to admin dashboard tabs",
+        "Tab displays DocumentationRequestsManagement component",
+        "Summary card shows count of total documentation requests",
+        "Tab follows existing admin dashboard styling and layout patterns"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useQueries.ts",
+          "path": "frontend/src/pages/AdminDashboardPage.tsx",
           "operation": "modify",
-          "description": "Ensure useGetAllProducts is configured with staleTime: 0 and refetchOnMount: true to guarantee fresh data on every mount. Verify the query correctly triggers refetch after cache invalidation from useCreateProduct's onSuccess. Add console logging to track query refetch cycles and data updates for debugging the complete workflow."
-        },
+          "description": "Add 'Documentation Requests' tab to AdminDashboardPage following the existing tab pattern. Import DocumentationRequestsManagement component and useGetDocumentationRequests hook. Add tab button to the tab list. In the summary cards section at top, add a new summary card showing total count of documentation requests using documentationRequests?.length from useGetDocumentationRequests hook, with appropriate icon (use frontend/public/assets/generated/admin-orders-icon.dim_128x128.png or similar document icon). When Documentation Requests tab is active, render the DocumentationRequestsManagement component. Ensure tab styling matches existing tabs (Products, Orders, Users, Tuition Leads, Teacher Registrations)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Add How It Works section with three-step process",
+      "acceptanceCriteria": [
+        "Three-step process displayed in order",
+        "Each step has descriptive text matching specifications",
+        "Icons or numbers indicate step sequence",
+        "Section is visually distinct and easy to understand"
+      ],
+      "file_operations": [
         {
-          "path": "frontend/src/components/admin/ProductsManagement.tsx",
+          "path": "frontend/src/pages/DocumentationPage.tsx",
           "operation": "modify",
-          "description": "Verify that ProductsManagement component correctly displays all products from useGetAllProducts including demo products. Ensure the table updates immediately when the query refetches after product creation. Add console logging to track when the products list updates and confirm new products appear. Test that the component handles empty state appropriately when no products exist."
-        },
+          "description": "Add 'How It Works' section to DocumentationPage with three steps displayed in horizontal card layout (or vertical on mobile): Step 1 with icon/number - 'Submit your request online' with description 'Fill the form with your details and upload required documents', Step 2 - 'Our team verifies documents' with description 'We review your submission and confirm requirements', Step 3 - 'Service completed or visit scheduled' with description 'Get your service done online or schedule a centre visit'. Use numbered badges (1, 2, 3) or step icons. Style with card layout, blue accent for step numbers, responsive grid that stacks on mobile. Position section after service categories and before Why Choose section."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Implement Why Choose The Cyber Point section with five features",
+      "acceptanceCriteria": [
+        "All five features displayed with appropriate icons",
+        "Features arranged in grid or card layout",
+        "Text content matches specifications exactly",
+        "Section styled consistently with StudyNeeds theme"
+      ],
+      "file_operations": [
         {
-          "path": "frontend/src/components/admin/ProductFormModal.tsx",
+          "path": "frontend/src/pages/DocumentationPage.tsx",
           "operation": "modify",
-          "description": "Verify the complete form submission flow: form validation, Product object construction with all required fields (ensure images are ExternalBlob instances), mutation call, loading state display, success handling (form reset + modal close), and error handling. Add console logging at each step to verify the workflow. Ensure the 'Saving...' indicator appears during submission and the form only resets after successful backend confirmation."
+          "description": "Add 'Why Choose The Cyber Point' section to DocumentationPage with five feature cards in responsive grid layout: 1) Trusted Local Service - 'Serving the community with reliable documentation services', 2) Affordable Charges - 'Transparent pricing with no hidden costs', 3) Fast Processing - 'Quick turnaround time for all services', 4) Experienced Operators - 'Skilled team with years of experience', 5) Secure Document Handling - 'Your documents are safe and confidential with us'. Use icons for each feature (shield for trusted, rupee for affordable, clock for fast, user for experienced, lock for secure). Style with card layout in 2-3 column grid (single column on mobile), StudyNeeds blue and orange accents. Position before Terms & Conditions section."
+        }
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "summary": "Add Terms & Conditions section with all specified terms",
+      "acceptanceCriteria": [
+        "All six terms listed clearly",
+        "Terms presented in readable format (bullet points or numbered list)",
+        "Section visually separated from other content",
+        "Text matches specifications exactly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add 'Terms & Conditions' section to DocumentationPage displaying six terms in numbered or bulleted list format: 1) 'Service charges are non-refundable after submission to government portals', 2) 'Government fees are separate and payable as per official rules', 3) 'Approval of applications depends on government authority decision', 4) 'User is responsible for providing correct information and documents', 5) 'Processing time may vary based on government portal and authority', 6) 'Aadhaar biometric services require physical presence at our centre'. Use list container with border, light background, readable typography. Position near bottom of page before footer."
+        }
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "summary": "Add Privacy Policy note section",
+      "acceptanceCriteria": [
+        "Privacy note displayed prominently",
+        "Text matches specification exactly",
+        "Positioned appropriately near forms or at page bottom"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add Privacy Policy note section to DocumentationPage displaying text 'User documents are kept confidential and used only for service processing'. Style as info box with lock icon, light blue background, positioned after the service request form and before How It Works section. Use card styling with icon and centered or left-aligned text."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Add Call to Action section with help buttons",
+      "acceptanceCriteria": [
+        "Three CTA buttons displayed prominently",
+        "WhatsApp button opens WhatsApp Web with pre-filled message",
+        "Call Now button triggers tel: link (number to be configured)",
+        "Visit Centre button links to contact or location information",
+        "Buttons styled consistently with StudyNeeds theme"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add 'Need Help?' Call to Action section to DocumentationPage near bottom before footer. Display heading 'Need Help?' with three prominent CTA buttons in horizontal layout (stacked on mobile): 1) 'Chat on WhatsApp' button (green background) - opens WhatsApp Web at https://wa.me/PHONENUMBER?text=Hello,%20I%20want%20documentation%20service%20from%20StudyNeeds (replace PHONENUMBER with configured number, default placeholder +919876543210), 2) 'Call Now' button (blue background) - tel: link (href='tel:+919876543210' as placeholder), 3) 'Visit Centre' button (orange background) - scrolls to contact/location section or opens contact info. Use button styling with icons (WhatsApp, phone, location icons). Center-align buttons with spacing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Add page-specific floating WhatsApp button to Documentation page",
+      "acceptanceCriteria": [
+        "Floating button visible on Documentation page",
+        "Opens WhatsApp with specified pre-filled message",
+        "Positioned to avoid overlap with existing WhatsApp button",
+        "Button styled consistently with site design"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add floating WhatsApp button to DocumentationPage component positioned in bottom-left corner (to avoid overlap with existing site-wide WhatsApp button in bottom-right from WhatsAppButton component). Create button element with WhatsApp icon, green background, fixed position, z-index for visibility. Set href to https://wa.me/PHONENUMBER?text=Hello,%20I%20want%20documentation%20service%20from%20StudyNeeds. Style with circular shape, shadow, hover effects. Position: fixed, bottom: 24px, left: 24px. Include only when viewport width allows both buttons without overlap, or hide on mobile to avoid clutter."
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "Update ServicesSection to activate Documentation & Cyber Services card",
+      "acceptanceCriteria": [
+        "Coming Soon badge removed from Documentation card",
+        "Card clickable and navigates to /documentation route",
+        "Card styling matches other active service cards",
+        "Description text reads 'Apply for government documents, exam forms, and digital services from home or visit our center for assistance' or similar"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Update ServicesSection component to activate the Documentation & Cyber Services card. Remove the 'Coming Soon' badge and disabled state from the Documentation card. Change onClick handler to navigate to '/documentation' route using useNavigate hook. Update card description to 'Apply for government documents, exam forms, and digital services from home or visit our center for assistance'. Ensure card styling matches other active service cards (E-Commerce, Home Tuition) with hover effects, cursor pointer, and full opacity. Keep the existing icon and maintain card layout consistency."
+        }
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "summary": "Add /documentation route to App router",
+      "acceptanceCriteria": [
+        "Route /documentation configured in router",
+        "Route renders DocumentationPage component",
+        "Navigation from services section works correctly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for DocumentationPage to App.tsx router configuration. Import DocumentationPage component. Add new Route element with path='/documentation' and element={<DocumentationPage />}. Position route in the Routes list with other public pages (after tuition, before admin). Ensure route is not wrapped in AdminRoute since it's a public page. Test navigation from ServicesSection card works correctly."
+        }
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "summary": "Apply StudyNeeds theme styling throughout Documentation page",
+      "acceptanceCriteria": [
+        "Primary blue color used for main CTAs and headers",
+        "Secondary orange used for accents and highlights",
+        "White background maintained throughout",
+        "All sections responsive on mobile devices",
+        "Cards have consistent styling with shadows and borders",
+        "Icons used appropriately throughout"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Ensure all sections in DocumentationPage use StudyNeeds theme colors consistently: primary blue (#2563eb or bg-blue-600) for main headings, CTA buttons, section headers; secondary orange (#f97316 or bg-orange-500) for accent elements, badges, hover states, highlights; white background (bg-white) for cards and page background. Apply consistent card styling: rounded corners (rounded-lg), shadows (shadow-md on cards, shadow-lg on modals), borders (border border-gray-200). Use Tailwind responsive classes (sm:, md:, lg:) for mobile-first responsive layouts: stack cards on mobile, grid on desktop; adjust padding and font sizes for mobile. Add appropriate icons throughout using Lucide React or similar icon library (form icons, service category icons, trust badge icons, feature icons). Ensure hover effects on interactive elements. Review entire component for visual consistency with existing StudyNeeds pages (HomePage, ShopPage, TuitionPage)."
         }
       ]
     }

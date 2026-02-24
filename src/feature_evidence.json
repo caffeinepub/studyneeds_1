@@ -2,10 +2,110 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-fix-the-frontend-usegetallproducts-react-query-hook-in-frontend-src-hooks-usequeries-ts-to-properly-fetch-and-display-products-in-the-admin-products-management-table-ensure-error-handling-displays-meaningful-messages-and-loading-states-work-correctly",
-      "featureTitle": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
+      "featureId": "feature-create-a-new-documentationpage-component-at-frontend-src-pages-documentationpage-tsx-with-complete-page-structure-including-hero-section-service-categories-pricing-forms-and-all-sections-as-specified",
+      "featureTitle": "Create a new DocumentationPage component at frontend/src/pages/DocumentationPage.tsx with complete page structure including hero section, service categories, pricing, forms, and all sections as specified",
       "files": [
-        "frontend/src/components/admin/ProductsManagement.tsx",
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-four-service-category-sections-with-cards-and-icons-1-government-certificate-services-caste-income-residence-birth-e-shram-labour-ayushman-ration-card-2-id-personal-document-services-pan-aadhaar-voter-id-passport-pvc-card-with-note-about-biometric-requiring-centre-visit-3-job-exam-education-services-government-job-forms-admit-card-result-scholarship-college-admission-online-counselling-4-cyber-cafe-utility-services-tickets-bill-payment-mobile-recharge-resume-applications-print-scan-lamination-passport-photo",
+      "featureTitle": "Implement four service category sections with cards and icons: 1) Government Certificate Services (Caste, Income, Residence, Birth, E-Shram, Labour, Ayushman, Ration Card), 2) ID & Personal Document Services (PAN, Aadhaar, Voter ID, Passport, PVC Card with note about biometric requiring centre visit), 3) Job, Exam & Education Services (Government Job Forms, Admit Card, Result, Scholarship, College Admission, Online Counselling), 4) Cyber Cafe & Utility Services (Tickets, Bill Payment, Mobile Recharge, Resume, Applications, Print/Scan/Lamination, Passport Photo)",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-online-vs-centre-visit-comparison-section-displaying-two-columns-services-possible-from-home-pan-apply-certificates-apply-job-forms-scholarship-admit-card-result-bill-payment-resume-ticket-booking-and-services-requiring-centre-visit-aadhaar-biometric-photo-capture-document-scan-pvc-printing-lamination",
+      "featureTitle": "Create Online vs Centre Visit comparison section displaying two columns: 'Services Possible From Home' (PAN Apply, Certificates Apply, Job Forms, Scholarship, Admit Card, Result, Bill Payment, Resume, Ticket Booking) and 'Services Requiring Centre Visit' (Aadhaar Biometric, Photo Capture, Document Scan, PVC Printing, Lamination)",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-pricing-section-displaying-starting-service-charges-form-filling-50-onwards-certificates-100-onwards-pan-apply-150-onwards-scholarship-forms-100-onwards-resume-99-onwards-printing-5-per-page-with-note-government-fees-are-separate-and-payable-as-per-official-rules",
+      "featureTitle": "Implement pricing section displaying starting service charges: Form Filling (₹50 onwards), Certificates (₹100 onwards), PAN Apply (₹150 onwards), Scholarship Forms (₹100 onwards), Resume (₹99 onwards), Printing (₹5 per page), with note 'Government fees are separate and payable as per official rules'",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-service-request-form-component-with-fields-full-name-mobile-number-service-needed-dropdown-with-all-service-options-mode-radio-buttons-for-online-service-or-visit-centre-upload-documents-file-input-accepting-multiple-files-message-textarea-and-submit-request-button",
+      "featureTitle": "Create service request form component with fields: Full Name, Mobile Number, Service Needed (dropdown with all service options), Mode (radio buttons for 'Online Service' or 'Visit Centre'), Upload Documents (file input accepting multiple files), Message (textarea), and Submit Request button",
+      "files": [
+        "frontend/src/components/DocumentationServiceForm.tsx",
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-react-query-hooks-in-frontend-src-hooks-usequeries-ts-for-documentation-requests-usecreatedocumentationrequest-mutation-usegetdocumentationrequests-query-useupdatedocumentationrequeststatus-mutation-and-usegetdocumentationrequestdocuments-query",
+      "featureTitle": "Create React Query hooks in frontend/src/hooks/useQueries.ts for documentation requests: useCreateDocumentationRequest mutation, useGetDocumentationRequests query, useUpdateDocumentationRequestStatus mutation, and useGetDocumentationRequestDocuments query",
+      "files": [
         "frontend/src/hooks/useQueries.ts"
       ],
       "components": [
@@ -18,15 +118,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-71"
+        "REQ-10"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-fix-the-frontend-usecreateproduct-mutation-hook-in-frontend-src-hooks-usequeries-ts-to-properly-submit-new-product-data-to-the-backend-and-handle-the-response-ensure-the-mutation-invalidates-the-products-query-cache-to-trigger-automatic-list-refresh-after-successful-creation",
-      "featureTitle": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+      "featureId": "feature-wire-service-request-form-to-use-usecreatedocumentationrequest-mutation-hook-handling-file-uploads-by-converting-files-to-blob-format-before-submission-and-displaying-success-message-modal-or-toast-after-successful-submission",
+      "featureTitle": "Wire service request form to use useCreateDocumentationRequest mutation hook, handling file uploads by converting files to blob format before submission, and displaying success message modal or toast after successful submission",
       "files": [
-        "frontend/src/hooks/useQueries.ts"
+        "frontend/src/components/DocumentationServiceForm.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -38,15 +138,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-72"
+        "REQ-11"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-verify-and-fix-the-productformmodal-component-in-frontend-src-components-admin-productformmodal-tsx-to-ensure-form-submission-properly-calls-the-usecreateproduct-mutation-with-all-required-fields-and-handles-loading-error-states-correctly",
-      "featureTitle": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+      "featureId": "feature-create-documentationrequestsmanagement-admin-component-at-frontend-src-components-admin-documentationrequestsmanagement-tsx-displaying-table-of-all-documentation-requests-with-columns-name-mobile-service-mode-status-date-and-actions-view-details-update-status",
+      "featureTitle": "Create DocumentationRequestsManagement admin component at frontend/src/components/admin/DocumentationRequestsManagement.tsx displaying table of all documentation requests with columns: Name, Mobile, Service, Mode, Status, Date, and Actions (View Details, Update Status)",
       "files": [
-        "frontend/src/components/admin/ProductFormModal.tsx"
+        "frontend/src/components/admin/DocumentationRequestsManagement.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -58,16 +158,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-73"
+        "REQ-12"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-comprehensive-error-logging-to-both-backend-createproduct-function-and-frontend-usecreateproduct-mutation-to-capture-and-display-exact-error-messages-when-product-creation-fails-log-validation-errors-storage-errors-and-network-errors-with-detailed-context",
-      "featureTitle": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
+      "featureId": "feature-create-documentationrequestdetailmodal-component-showing-complete-request-information-including-personal-details-service-requested-mode-uploaded-documents-list-with-download-buttons-message-status-and-status-update-dropdown-for-admin",
+      "featureTitle": "Create DocumentationRequestDetailModal component showing complete request information including personal details, service requested, mode, uploaded documents list with download buttons, message, status, and status update dropdown for admin",
       "files": [
-        "frontend/src/components/admin/ProductFormModal.tsx",
-        "frontend/src/hooks/useQueries.ts"
+        "frontend/src/components/admin/DocumentationRequestDetailModal.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -79,17 +178,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-74"
+        "REQ-13"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-test-the-complete-product-management-workflow-end-to-end-after-fixes-navigate-to-admin-products-tab-verify-demo-products-display-in-the-table-fill-out-add-product-form-with-test-data-submit-the-form-verify-saving-indicator-appears-briefly-confirm-new-product-appears-in-the-products-table-immediately-after-submission-and-verify-the-product-persists-after-page-refresh",
-      "featureTitle": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+      "featureId": "feature-add-documentation-requests-tab-to-admindashboardpage-component-at-frontend-src-pages-admindashboardpage-tsx-displaying-documentationrequestsmanagement-component-and-adding-a-summary-card-showing-total-documentation-requests-count",
+      "featureTitle": "Add Documentation Requests tab to AdminDashboardPage component at frontend/src/pages/AdminDashboardPage.tsx, displaying DocumentationRequestsManagement component and adding a summary card showing total documentation requests count",
       "files": [
-        "frontend/src/components/admin/ProductFormModal.tsx",
-        "frontend/src/components/admin/ProductsManagement.tsx",
-        "frontend/src/hooks/useQueries.ts"
+        "frontend/src/pages/AdminDashboardPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -101,7 +198,187 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-75"
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-how-it-works-section-with-three-steps-step-1-submit-your-request-online-step-2-our-team-verifies-documents-step-3-service-completed-or-visit-scheduled-displayed-with-icons-and-step-numbers",
+      "featureTitle": "Add How It Works section with three steps: Step 1 'Submit your request online', Step 2 'Our team verifies documents', Step 3 'Service completed or visit scheduled', displayed with icons and step numbers",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-why-choose-the-cyber-point-section-displaying-five-features-trusted-local-service-affordable-charges-fast-processing-experienced-operators-secure-document-handling-each-with-icons-and-brief-descriptions",
+      "featureTitle": "Implement Why Choose The Cyber Point section displaying five features: Trusted Local Service, Affordable Charges, Fast Processing, Experienced Operators, Secure Document Handling, each with icons and brief descriptions",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-terms-conditions-section-displaying-all-specified-terms-service-charges-non-refundable-after-submission-government-fees-separate-approval-depends-on-authority-incorrect-information-user-responsibility-processing-time-may-vary-aadhaar-services-require-physical-presence",
+      "featureTitle": "Add Terms & Conditions section displaying all specified terms: service charges non-refundable after submission, government fees separate, approval depends on authority, incorrect information user responsibility, processing time may vary, Aadhaar services require physical presence",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-privacy-policy-note-section-stating-user-documents-are-kept-confidential-and-used-only-for-service-processing",
+      "featureTitle": "Add Privacy Policy note section stating 'User documents are kept confidential and used only for service processing'",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-call-to-action-section-with-heading-need-help-and-three-buttons-chat-on-whatsapp-call-now-visit-centre-with-whatsapp-button-opening-whatsapp-web-with-pre-filled-message-hello-i-want-documentation-service-from-studyneeds",
+      "featureTitle": "Add Call to Action section with heading 'Need Help?' and three buttons: 'Chat on WhatsApp', 'Call Now', 'Visit Centre', with WhatsApp button opening WhatsApp Web with pre-filled message 'Hello, I want documentation service from StudyNeeds'",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-floating-whatsapp-button-to-documentation-page-similar-to-existing-whatsappbutton-component-with-auto-message-hello-i-want-documentation-service-from-studyneeds-and-position-it-to-not-overlap-with-existing-site-wide-whatsapp-button",
+      "featureTitle": "Add floating WhatsApp button to Documentation page (similar to existing WhatsAppButton component) with auto-message 'Hello, I want documentation service from StudyNeeds' and position it to not overlap with existing site-wide WhatsApp button",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-servicessection-component-at-frontend-src-components-servicessection-tsx-to-change-documentation-cyber-services-card-from-coming-soon-to-active-state-adding-onclick-navigation-to-the-new-documentationpage-and-updating-visual-styling-to-match-active-services",
+      "featureTitle": "Update ServicesSection component at frontend/src/components/ServicesSection.tsx to change Documentation & Cyber Services card from 'Coming Soon' to active state, adding onClick navigation to the new DocumentationPage and updating visual styling to match active services",
+      "files": [
+        "frontend/src/components/ServicesSection.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-21"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-route-for-documentationpage-at-documentation-in-frontend-src-app-tsx-router-configuration",
+      "featureTitle": "Add route for DocumentationPage at /documentation in frontend/src/App.tsx router configuration",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-studyneeds-theme-styling-throughout-documentation-page-using-primary-blue-2563eb-secondary-orange-f97316-and-white-background-ensuring-all-components-follow-modern-card-design-with-icons-and-mobile-responsive-layouts",
+      "featureTitle": "Apply StudyNeeds theme styling throughout Documentation page using primary blue (#2563eb), secondary orange (#f97316), and white background, ensuring all components follow modern card design with icons and mobile-responsive layouts",
+      "files": [
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-23"
       ],
       "confidence": "high"
     }

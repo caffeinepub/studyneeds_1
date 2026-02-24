@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+ * Deep Navy Blue Color from StudyNeeds Logo
+ * Extracted color: #001f3f (Deep Navy Blue)
+ * OKLCH equivalent: oklch(0.22 0.10 260)
+ * This color replaces all instances of the previous blue (#2563eb / oklch(0.545 0.224 264.052))
+ */
+
 @layer base {
     :root {
         --radius: 0.5rem;
@@ -13,7 +20,7 @@
         --card-foreground: 0.145 0 0;
         --popover: 1 0 0;
         --popover-foreground: 0.145 0 0;
-        --primary: 0.545 0.224 264.052;
+        --primary: 0.22 0.10 260;
         --primary-foreground: 0.985 0 0;
         --secondary: 0.97 0 0;
         --secondary-foreground: 0.205 0 0;
@@ -25,7 +32,7 @@
         --destructive-foreground: 0.985 0 0;
         --border: 0.922 0 0;
         --input: 0.922 0 0;
-        --ring: 0.545 0.224 264.052;
+        --ring: 0.22 0.10 260;
         --chart-1: 0.646 0.222 41.116;
         --chart-2: 0.6 0.118 184.704;
         --chart-3: 0.398 0.07 227.392;
@@ -33,7 +40,7 @@
         --chart-5: 0.769 0.188 70.08;
         --sidebar: 0.985 0 0;
         --sidebar-foreground: 0.145 0 0;
-        --sidebar-primary: 0.545 0.224 264.052;
+        --sidebar-primary: 0.22 0.10 260;
         --sidebar-primary-foreground: 0.985 0 0;
         --sidebar-accent: 0.97 0 0;
         --sidebar-accent-foreground: 0.205 0 0;
@@ -41,7 +48,7 @@
         --sidebar-ring: 0.708 0 0;
         
         /* Custom StudyNeeds colors */
-        --blue-primary: 0.545 0.224 264.052;
+        --navy-primary: 0.22 0.10 260;
         --orange-accent: 0.678 0.197 37.842;
     }
 
@@ -52,7 +59,7 @@
         --card-foreground: 0.985 0 0;
         --popover: 0.269 0 0;
         --popover-foreground: 0.985 0 0;
-        --primary: 0.545 0.224 264.052;
+        --primary: 0.28 0.12 260;
         --primary-foreground: 0.985 0 0;
         --secondary: 0.269 0 0;
         --secondary-foreground: 0.985 0 0;
@@ -72,7 +79,7 @@
         --chart-5: 0.645 0.246 16.439;
         --sidebar: 0.205 0 0;
         --sidebar-foreground: 0.985 0 0;
-        --sidebar-primary: 0.488 0.243 264.376;
+        --sidebar-primary: 0.28 0.12 260;
         --sidebar-primary-foreground: 0.985 0 0;
         --sidebar-accent: 0.269 0 0;
         --sidebar-accent-foreground: 0.985 0 0;

@@ -1,45 +1,29 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-22T13:03:20.520Z",
+  "generatedAt": "2026-02-24T05:39:23.551Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 7,
-    "implemented": 5,
+    "total": 23,
+    "implemented": 19,
     "items": [
       {
-        "id": "REQ-69",
-        "summary": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-70",
-        "summary": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-71",
-        "summary": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
+        "id": "REQ-1",
+        "summary": "Create a new DocumentationPage component at frontend/src/pages/DocumentationPage.tsx with complete page structure including hero section, service categories, pricing, forms, and all sections as specified",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductsManagement.tsx"
+          "frontend/src/pages/DocumentationPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductsManagement.tsx"
+          "frontend/src/pages/DocumentationPage.tsx"
         ]
       },
       {
-        "id": "REQ-72",
-        "summary": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
+        "id": "REQ-10",
+        "summary": "Create React Query hooks in frontend/src/hooks/useQueries.ts for documentation requests: useCreateDocumentationRequest mutation, useGetDocumentationRequests query, useUpdateDocumentationRequestStatus mutation, and useGetDocumentationRequestDocuments query",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/hooks/useQueries.ts"
@@ -49,43 +33,221 @@
         ]
       },
       {
-        "id": "REQ-73",
-        "summary": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
+        "id": "REQ-11",
+        "summary": "Wire service request form to use useCreateDocumentationRequest mutation hook, handling file uploads by converting files to blob format before submission, and displaying success message modal or toast after successful submission",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/DocumentationServiceForm.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/DocumentationServiceForm.tsx"
         ]
       },
       {
-        "id": "REQ-74",
-        "summary": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
+        "id": "REQ-12",
+        "summary": "Create DocumentationRequestsManagement admin component at frontend/src/components/admin/DocumentationRequestsManagement.tsx displaying table of all documentation requests with columns: Name, Mobile, Service, Mode, Status, Date, and Actions (View Details, Update Status)",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/admin/DocumentationRequestsManagement.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/admin/DocumentationRequestsManagement.tsx"
         ]
       },
       {
-        "id": "REQ-75",
-        "summary": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
+        "id": "REQ-13",
+        "summary": "Create DocumentationRequestDetailModal component showing complete request information including personal details, service requested, mode, uploaded documents list with download buttons, message, status, and status update dropdown for admin",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductsManagement.tsx",
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/admin/DocumentationRequestDetailModal.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/admin/ProductsManagement.tsx",
-          "frontend/src/components/admin/ProductFormModal.tsx"
+          "frontend/src/components/admin/DocumentationRequestDetailModal.tsx"
         ]
+      },
+      {
+        "id": "REQ-14",
+        "summary": "Add Documentation Requests tab to AdminDashboardPage component at frontend/src/pages/AdminDashboardPage.tsx, displaying DocumentationRequestsManagement component and adding a summary card showing total documentation requests count",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AdminDashboardPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AdminDashboardPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Add How It Works section with three steps: Step 1 'Submit your request online', Step 2 'Our team verifies documents', Step 3 'Service completed or visit scheduled', displayed with icons and step numbers",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Implement Why Choose The Cyber Point section displaying five features: Trusted Local Service, Affordable Charges, Fast Processing, Experienced Operators, Secure Document Handling, each with icons and brief descriptions",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Add Terms & Conditions section displaying all specified terms: service charges non-refundable after submission, government fees separate, approval depends on authority, incorrect information user responsibility, processing time may vary, Aadhaar services require physical presence",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Add Privacy Policy note section stating 'User documents are kept confidential and used only for service processing'",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Add Call to Action section with heading 'Need Help?' and three buttons: 'Chat on WhatsApp', 'Call Now', 'Visit Centre', with WhatsApp button opening WhatsApp Web with pre-filled message 'Hello, I want documentation service from StudyNeeds'",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Implement four service category sections with cards and icons: 1) Government Certificate Services (Caste, Income, Residence, Birth, E-Shram, Labour, Ayushman, Ration Card), 2) ID & Personal Document Services (PAN, Aadhaar, Voter ID, Passport, PVC Card with note about biometric requiring centre visit), 3) Job, Exam & Education Services (Government Job Forms, Admit Card, Result, Scholarship, College Admission, Online Counselling), 4) Cyber Cafe & Utility Services (Tickets, Bill Payment, Mobile Recharge, Resume, Applications, Print/Scan/Lamination, Passport Photo)",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Add floating WhatsApp button to Documentation page (similar to existing WhatsAppButton component) with auto-message 'Hello, I want documentation service from StudyNeeds' and position it to not overlap with existing site-wide WhatsApp button",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-21",
+        "summary": "Update ServicesSection component at frontend/src/components/ServicesSection.tsx to change Documentation & Cyber Services card from 'Coming Soon' to active state, adding onClick navigation to the new DocumentationPage and updating visual styling to match active services",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ServicesSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ServicesSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Add route for DocumentationPage at /documentation in frontend/src/App.tsx router configuration",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-23",
+        "summary": "Apply StudyNeeds theme styling throughout Documentation page using primary blue (#2563eb), secondary orange (#f97316), and white background, ensuring all components follow modern card design with icons and mobile-responsive layouts",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Create Online vs Centre Visit comparison section displaying two columns: 'Services Possible From Home' (PAN Apply, Certificates Apply, Job Forms, Scholarship, Admit Card, Result, Bill Payment, Resume, Ticket Booking) and 'Services Requiring Centre Visit' (Aadhaar Biometric, Photo Capture, Document Scan, PVC Printing, Lamination)",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Implement pricing section displaying starting service charges: Form Filling (₹50 onwards), Certificates (₹100 onwards), PAN Apply (₹150 onwards), Scholarship Forms (₹100 onwards), Resume (₹99 onwards), Printing (₹5 per page), with note 'Government fees are separate and payable as per official rules'",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Create service request form component with fields: Full Name, Mobile Number, Service Needed (dropdown with all service options), Mode (radio buttons for 'Online Service' or 'Visit Centre'), Upload Documents (file input accepting multiple files), Message (textarea), and Submit Request button",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/DocumentationServiceForm.tsx",
+          "frontend/src/pages/DocumentationPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/DocumentationServiceForm.tsx",
+          "frontend/src/pages/DocumentationPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Add backend data model for DocumentationRequest with fields: id, fullName, mobileNumber, serviceNeeded, mode (online/centre), uploadedDocuments (array of blob data), message, timestamp, status (pending/processing/completed), and implement createDocumentationRequest function in main.mo to store requests with uploaded file blobs",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Implement getDocumentationRequests backend function that returns all documentation requests with admin-only access control using existing isAdmin check pattern",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add updateDocumentationRequestStatus backend function allowing admin to change request status to pending, processing, or completed",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Implement getDocumentationRequestDocuments backend function that returns uploaded file blobs for a specific request, accessible to admin users",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
@@ -95,19 +257,18 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
     "frontend/src/backend.d.ts",
     "frontend/src/backend.ts",
-    "frontend/src/components/admin/OrderDetailModal.tsx",
-    "frontend/src/components/admin/OrdersManagement.tsx",
-    "frontend/src/components/admin/ProductFormModal.tsx",
-    "frontend/src/components/admin/ProductsManagement.tsx",
-    "frontend/src/components/admin/UserDetailModal.tsx",
-    "frontend/src/components/admin/UsersManagement.tsx",
+    "frontend/src/components/DocumentationServiceForm.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/components/admin/DocumentationRequestDetailModal.tsx",
+    "frontend/src/components/admin/DocumentationRequestsManagement.tsx",
     "frontend/src/declarations/backend.did.d.ts",
     "frontend/src/declarations/backend.did.js",
     "frontend/src/hooks/useQueries.ts",
     "frontend/src/pages/AdminDashboardPage.tsx",
-    "frontend/src/pages/CheckoutPage.tsx",
+    "frontend/src/pages/DocumentationPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

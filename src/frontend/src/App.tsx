@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import TuitionPage from './pages/TuitionPage';
+import DocumentationPage from './pages/DocumentationPage';
 import WhatsAppButton from './components/WhatsAppButton';
 import ProfileSetupModal from './components/ProfileSetupModal';
 import { useInternetIdentity } from './hooks/useInternetIdentity';
@@ -80,6 +82,18 @@ const adminRoute = createRoute({
   component: AdminDashboardPage,
 });
 
+const tuitionRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/tuition',
+  component: TuitionPage,
+});
+
+const documentationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/documentation',
+  component: DocumentationPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   shopRoute,
@@ -89,6 +103,8 @@ const routeTree = rootRoute.addChildren([
   checkoutRoute,
   orderConfirmationRoute,
   adminRoute,
+  tuitionRoute,
+  documentationRoute,
 ]);
 
 const router = createRouter({ 

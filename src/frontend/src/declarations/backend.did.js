@@ -36,11 +36,68 @@ export const Product = IDL.Record({
   'price' : IDL.Float64,
   'images' : IDL.Vec(ExternalBlob),
 });
+export const StudentLead = IDL.Record({
+  'id' : IDL.Text,
+  'status' : IDL.Text,
+  'additionalNotes' : IDL.Text,
+  'studentName' : IDL.Text,
+  'subjectsRequired' : IDL.Text,
+  'mode' : IDL.Text,
+  'submittedAt' : IDL.Int,
+  'preferredTime' : IDL.Text,
+  'contactNumber' : IDL.Text,
+  'budget' : IDL.Nat,
+  'classOrCourse' : IDL.Text,
+  'location' : IDL.Text,
+});
+export const TeacherRegistration = IDL.Record({
+  'id' : IDL.Text,
+  'status' : IDL.Text,
+  'classesTeach' : IDL.Text,
+  'subjectsTeach' : IDL.Text,
+  'idProofUrl' : IDL.Text,
+  'mode' : IDL.Text,
+  'fullName' : IDL.Text,
+  'submittedAt' : IDL.Int,
+  'mobileNumber' : IDL.Text,
+  'photoUrl' : IDL.Text,
+  'email' : IDL.Text,
+  'experienceYears' : IDL.Nat,
+  'expectedFees' : IDL.Nat,
+  'qualification' : IDL.Text,
+  'location' : IDL.Text,
+});
 export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
   'address' : IDL.Text,
   'phone' : IDL.Text,
+});
+export const DocumentationRequestStatus = IDL.Variant({
+  'pending' : IDL.Null,
+  'completed' : IDL.Null,
+  'processing' : IDL.Null,
+});
+export const DocumentationRequest = IDL.Record({
+  'id' : IDL.Text,
+  'status' : DocumentationRequestStatus,
+  'uploadedDocuments' : IDL.Vec(ExternalBlob),
+  'mode' : IDL.Text,
+  'fullName' : IDL.Text,
+  'mobileNumber' : IDL.Text,
+  'message' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'serviceNeeded' : IDL.Text,
+});
+export const UpdateProductRequest = IDL.Record({
+  'id' : IDL.Text,
+  'stockQuantity' : IDL.Nat,
+  'name' : IDL.Text,
+  'description' : IDL.Text,
+  'discount' : IDL.Nat,
+  'category' : IDL.Text,
+  'rating' : IDL.Float64,
+  'price' : IDL.Float64,
 });
 
 export const idlService = IDL.Service({
@@ -72,11 +129,33 @@ export const idlService = IDL.Service({
   '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-  'createProduct' : IDL.Func([Product], [IDL.Bool], []),
+  'createDocumentationRequest' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Vec(ExternalBlob), IDL.Text],
+      [],
+      [],
+    ),
+  'createProduct' : IDL.Func([Product], [], []),
   'customQueryExample' : IDL.Func([IDL.Nat], [IDL.Nat], ['query']),
+  'deleteProduct' : IDL.Func([IDL.Text], [], []),
   'getAllProducts' : IDL.Func([], [IDL.Vec(Product)], ['query']),
+  'getAllStudentLeads' : IDL.Func([], [IDL.Vec(StudentLead)], ['query']),
+  'getAllTeacherRegistrations' : IDL.Func(
+      [],
+      [IDL.Vec(TeacherRegistration)],
+      ['query'],
+    ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getDocumentationRequestDocuments' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(ExternalBlob)],
+      ['query'],
+    ),
+  'getDocumentationRequests' : IDL.Func(
+      [],
+      [IDL.Vec(DocumentationRequest)],
+      ['query'],
+    ),
   'getProduct' : IDL.Func([IDL.Text], [Product], ['query']),
   'getProductsByCategory' : IDL.Func([IDL.Text], [IDL.Vec(Product)], ['query']),
   'getUserProfile' : IDL.Func(
@@ -86,6 +165,14 @@ export const idlService = IDL.Service({
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'submitStudentLead' : IDL.Func([StudentLead], [IDL.Text], []),
+  'submitTeacherRegistration' : IDL.Func([TeacherRegistration], [IDL.Text], []),
+  'updateDocumentationRequestStatus' : IDL.Func(
+      [IDL.Text, DocumentationRequestStatus],
+      [],
+      [],
+    ),
+  'updateProduct' : IDL.Func([UpdateProductRequest], [], []),
 });
 
 export const idlInitArgs = [];
@@ -119,11 +206,68 @@ export const idlFactory = ({ IDL }) => {
     'price' : IDL.Float64,
     'images' : IDL.Vec(ExternalBlob),
   });
+  const StudentLead = IDL.Record({
+    'id' : IDL.Text,
+    'status' : IDL.Text,
+    'additionalNotes' : IDL.Text,
+    'studentName' : IDL.Text,
+    'subjectsRequired' : IDL.Text,
+    'mode' : IDL.Text,
+    'submittedAt' : IDL.Int,
+    'preferredTime' : IDL.Text,
+    'contactNumber' : IDL.Text,
+    'budget' : IDL.Nat,
+    'classOrCourse' : IDL.Text,
+    'location' : IDL.Text,
+  });
+  const TeacherRegistration = IDL.Record({
+    'id' : IDL.Text,
+    'status' : IDL.Text,
+    'classesTeach' : IDL.Text,
+    'subjectsTeach' : IDL.Text,
+    'idProofUrl' : IDL.Text,
+    'mode' : IDL.Text,
+    'fullName' : IDL.Text,
+    'submittedAt' : IDL.Int,
+    'mobileNumber' : IDL.Text,
+    'photoUrl' : IDL.Text,
+    'email' : IDL.Text,
+    'experienceYears' : IDL.Nat,
+    'expectedFees' : IDL.Nat,
+    'qualification' : IDL.Text,
+    'location' : IDL.Text,
+  });
   const UserProfile = IDL.Record({
     'name' : IDL.Text,
     'email' : IDL.Text,
     'address' : IDL.Text,
     'phone' : IDL.Text,
+  });
+  const DocumentationRequestStatus = IDL.Variant({
+    'pending' : IDL.Null,
+    'completed' : IDL.Null,
+    'processing' : IDL.Null,
+  });
+  const DocumentationRequest = IDL.Record({
+    'id' : IDL.Text,
+    'status' : DocumentationRequestStatus,
+    'uploadedDocuments' : IDL.Vec(ExternalBlob),
+    'mode' : IDL.Text,
+    'fullName' : IDL.Text,
+    'mobileNumber' : IDL.Text,
+    'message' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'serviceNeeded' : IDL.Text,
+  });
+  const UpdateProductRequest = IDL.Record({
+    'id' : IDL.Text,
+    'stockQuantity' : IDL.Nat,
+    'name' : IDL.Text,
+    'description' : IDL.Text,
+    'discount' : IDL.Nat,
+    'category' : IDL.Text,
+    'rating' : IDL.Float64,
+    'price' : IDL.Float64,
   });
   
   return IDL.Service({
@@ -155,11 +299,40 @@ export const idlFactory = ({ IDL }) => {
     '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-    'createProduct' : IDL.Func([Product], [IDL.Bool], []),
+    'createDocumentationRequest' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Vec(ExternalBlob),
+          IDL.Text,
+        ],
+        [],
+        [],
+      ),
+    'createProduct' : IDL.Func([Product], [], []),
     'customQueryExample' : IDL.Func([IDL.Nat], [IDL.Nat], ['query']),
+    'deleteProduct' : IDL.Func([IDL.Text], [], []),
     'getAllProducts' : IDL.Func([], [IDL.Vec(Product)], ['query']),
+    'getAllStudentLeads' : IDL.Func([], [IDL.Vec(StudentLead)], ['query']),
+    'getAllTeacherRegistrations' : IDL.Func(
+        [],
+        [IDL.Vec(TeacherRegistration)],
+        ['query'],
+      ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getDocumentationRequestDocuments' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(ExternalBlob)],
+        ['query'],
+      ),
+    'getDocumentationRequests' : IDL.Func(
+        [],
+        [IDL.Vec(DocumentationRequest)],
+        ['query'],
+      ),
     'getProduct' : IDL.Func([IDL.Text], [Product], ['query']),
     'getProductsByCategory' : IDL.Func(
         [IDL.Text],
@@ -173,6 +346,18 @@ export const idlFactory = ({ IDL }) => {
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'submitStudentLead' : IDL.Func([StudentLead], [IDL.Text], []),
+    'submitTeacherRegistration' : IDL.Func(
+        [TeacherRegistration],
+        [IDL.Text],
+        [],
+      ),
+    'updateDocumentationRequestStatus' : IDL.Func(
+        [IDL.Text, DocumentationRequestStatus],
+        [],
+        [],
+      ),
+    'updateProduct' : IDL.Func([UpdateProductRequest], [], []),
   });
 };
 

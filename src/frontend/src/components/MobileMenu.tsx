@@ -60,7 +60,7 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               <Link
                 to="/"
                 onClick={onClose}
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-[oklch(0.22_0.10_260)]/10 hover:text-[oklch(0.22_0.10_260)] rounded-lg transition-colors"
               >
                 <Home className="w-5 h-5" />
                 <span className="font-medium">Home</span>
@@ -69,7 +69,7 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               <Link
                 to="/shop"
                 onClick={onClose}
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-[oklch(0.22_0.10_260)]/10 hover:text-[oklch(0.22_0.10_260)] rounded-lg transition-colors"
               >
                 <ShoppingBag className="w-5 h-5" />
                 <span className="font-medium">Shop</span>
@@ -79,7 +79,7 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               <Link
                 to="/admin"
                 onClick={onClose}
-                className="flex items-center gap-3 px-4 py-3 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors"
+                className="flex items-center gap-3 px-4 py-3 bg-[oklch(0.22_0.10_260)] text-white hover:bg-[oklch(0.18_0.08_260)] rounded-lg transition-colors"
               >
                 <Shield className="w-5 h-5" />
                 <span className="font-medium">Admin Panel</span>

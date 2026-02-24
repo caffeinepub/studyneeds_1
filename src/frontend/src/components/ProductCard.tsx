@@ -70,7 +70,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </button>
       </div>
       <div className="p-4">
-        <h3 className="font-medium text-gray-800 line-clamp-2 mb-2 group-hover:text-blue-600">
+        <h3 className="font-medium text-gray-800 line-clamp-2 mb-2 group-hover:text-[oklch(0.22_0.10_260)]">
           {product.name}
         </h3>
         <div className="flex items-center gap-1 mb-2">
@@ -90,7 +90,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             onClick={handleAddToCart}
             variant="outline"
             size="sm"
-            className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50"
+            className="flex-1 border-[oklch(0.22_0.10_260)] text-[oklch(0.22_0.10_260)] hover:bg-[oklch(0.22_0.10_260)]/10"
           >
             <ShoppingCart className="w-4 h-4 mr-1" />
             Add
@@ -98,7 +98,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <Button
             onClick={handleBuyNow}
             size="sm"
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
+            className="flex-1 bg-[oklch(0.22_0.10_260)] hover:bg-[oklch(0.18_0.08_260)] text-white"
           >
             Buy Now
           </Button>

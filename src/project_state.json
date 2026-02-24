@@ -1,399 +1,166 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 31,
-  "summary": "StudyNeeds - A comprehensive multi-service platform for students combining e-commerce (books, stationery, furniture), home tuition marketplace, documentation services, and career counseling. Building in phases starting with core e-commerce store.",
+  "projectStateVersion": 3,
+  "summary": "StudyNeeds website - online tuition platform with home tuition page and documentation & cyber services page (powered by The Cyber Point)",
   "architectural_notes": [
-    "Mobile-responsive design with Poppins/Roboto font",
-    "Blue (#2563eb) and Orange (#f97316) color theme",
-    "Flipkart/Amazon-style e-commerce UI design",
-    "WhatsApp chat button integration",
-    "Online payments + Cash on Delivery support",
-    "Login with OTP authentication",
-    "Multi-vendor marketplace ready architecture",
-    "Referral and wallet system support",
-    "Teacher rating and AI recommendation placeholders",
-    "SEO-friendly with fast loading and modern animations"
+    "Documentation page includes 4 service categories: Government Certificates, ID Documents, Job/Exam Services, Cyber Services",
+    "Service request form stores uploaded documents in Internet Computer canister storage",
+    "Admin panel uses Internet Identity authentication to manage service requests",
+    "WhatsApp integration via wa.me links with pre-filled messages",
+    "Pricing model: Form filling ₹50+, Certificates ₹100+, PAN ₹150+, Scholarship ₹100+, Resume ₹99+, Printing ₹5/page"
   ],
-  "known_issues": [
-    "Admin panel product add functionality not working - products not saving to backend and not displaying in list after form submission",
-    "Demo products not displaying in Products tab - backend product query may be failing",
-    "Console showing 8 issues that may be related to backend-frontend API connection problems"
-  ],
-  "isFixRequest": true,
+  "known_issues": [],
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-create-a-homepage-that-serves-as-the-default-e-commerce-store-with-a-header-containing-studyneeds-logo-left-search-bar-center-location-selector-login-register-buttons-cart-icon-and-menu-categories-dropdown",
-      "title": "Create a homepage that serves as the default e-commerce store with a header containing StudyNeeds logo (left), search bar (center), location selector, Login/Register buttons, cart icon, and menu categories dropdown",
+      "id": "feature-create-a-new-documentationpage-component-at-frontend-src-pages-documentationpage-tsx-with-complete-page-structure-including-hero-section-service-categories-pricing-forms-and-all-sections-as-specified",
+      "title": "Create a new DocumentationPage component at frontend/src/pages/DocumentationPage.tsx with complete page structure including hero section, service categories, pricing, forms, and all sections as specified",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-a-promotional-banner-slider-on-the-homepage-showing-5-banners-back-to-school-sale-competitive-exam-books-study-furniture-deals-tuition-services-promotion-and-documentation-services-promotion",
-      "title": "Implement a promotional banner slider on the homepage showing 5 banners: Back to School Sale, Competitive Exam Books, Study Furniture Deals, Tuition Services Promotion, and Documentation Services Promotion",
+      "id": "feature-implement-four-service-category-sections-with-cards-and-icons-1-government-certificate-services-caste-income-residence-birth-e-shram-labour-ayushman-ration-card-2-id-personal-document-services-pan-aadhaar-voter-id-passport-pvc-card-with-note-about-biometric-requiring-centre-visit-3-job-exam-education-services-government-job-forms-admit-card-result-scholarship-college-admission-online-counselling-4-cyber-cafe-utility-services-tickets-bill-payment-mobile-recharge-resume-applications-print-scan-lamination-passport-photo",
+      "title": "Implement four service category sections with cards and icons: 1) Government Certificate Services (Caste, Income, Residence, Birth, E-Shram, Labour, Ayushman, Ration Card), 2) ID & Personal Document Services (PAN, Aadhaar, Voter ID, Passport, PVC Card with note about biometric requiring centre visit), 3) Job, Exam & Education Services (Government Job Forms, Admit Card, Result, Scholarship, College Admission, Online Counselling), 4) Cyber Cafe & Utility Services (Tickets, Bill Payment, Mobile Recharge, Resume, Applications, Print/Scan/Lamination, Passport Photo)",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-categories-section-with-icons-for-books-stationery-school-bags-school-dress-geometry-items-study-tables-furniture-notes-pdfs-and-digital-courses",
-      "title": "Create a categories section with icons for: Books, Stationery, School Bags, School Dress, Geometry Items, Study Tables & Furniture, Notes & PDFs, and Digital Courses",
+      "id": "feature-create-online-vs-centre-visit-comparison-section-displaying-two-columns-services-possible-from-home-pan-apply-certificates-apply-job-forms-scholarship-admit-card-result-bill-payment-resume-ticket-booking-and-services-requiring-centre-visit-aadhaar-biometric-photo-capture-document-scan-pvc-printing-lamination",
+      "title": "Create Online vs Centre Visit comparison section displaying two columns: 'Services Possible From Home' (PAN Apply, Certificates Apply, Job Forms, Scholarship, Admit Card, Result, Bill Payment, Resume, Ticket Booking) and 'Services Requiring Centre Visit' (Aadhaar Biometric, Photo Capture, Document Scan, PVC Printing, Lamination)",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-display-product-sections-on-homepage-trending-products-school-essentials-competitive-exam-books-budget-deals-under-199-combo-offers-and-study-furniture-each-product-card-must-show-product-image-title-price-discount-percentage-rating-add-to-cart-button-and-buy-now-button",
-      "title": "Display product sections on homepage: Trending Products, School Essentials, Competitive Exam Books, Budget Deals Under ₹199, Combo Offers, and Study Furniture. Each product card must show product image, title, price, discount percentage, rating, Add to Cart button, and Buy Now button",
+      "id": "feature-implement-pricing-section-displaying-starting-service-charges-form-filling-50-onwards-certificates-100-onwards-pan-apply-150-onwards-scholarship-forms-100-onwards-resume-99-onwards-printing-5-per-page-with-note-government-fees-are-separate-and-payable-as-per-official-rules",
+      "title": "Implement pricing section displaying starting service charges: Form Filling (₹50 onwards), Certificates (₹100 onwards), PAN Apply (₹150 onwards), Scholarship Forms (₹100 onwards), Resume (₹99 onwards), Printing (₹5 per page), with note 'Government fees are separate and payable as per official rules'",
       "reqIds": [
         "REQ-4"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-services-section-with-4-cards-e-commerce-store-home-tuition-consultancy-documentation-services-and-career-counselling-marked-as-coming-soon-each-card-includes-an-icon-short-description-and-action-button",
-      "title": "Create a services section with 4 cards: E-Commerce Store, Home Tuition Consultancy, Documentation Services, and Career Counselling (marked as Coming Soon). Each card includes an icon, short description, and action button",
+      "id": "feature-create-service-request-form-component-with-fields-full-name-mobile-number-service-needed-dropdown-with-all-service-options-mode-radio-buttons-for-online-service-or-visit-centre-upload-documents-file-input-accepting-multiple-files-message-textarea-and-submit-request-button",
+      "title": "Create service request form component with fields: Full Name, Mobile Number, Service Needed (dropdown with all service options), Mode (radio buttons for 'Online Service' or 'Visit Centre'), Upload Documents (file input accepting multiple files), Message (textarea), and Submit Request button",
       "reqIds": [
         "REQ-5"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-a-why-choose-studyneeds-section-highlighting-trusted-platform-affordable-pricing-local-support-verified-teachers-and-fast-delivery",
-      "title": "Add a 'Why Choose StudyNeeds' section highlighting: Trusted Platform, Affordable Pricing, Local Support, Verified Teachers, and Fast Delivery",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-a-testimonials-section-displaying-student-and-parent-reviews",
-      "title": "Implement a testimonials section displaying student and parent reviews",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-a-footer-with-sections-for-about-contact-policies-careers-seller-registration-social-media-links-address-and-newsletter-signup-form",
-      "title": "Create a footer with sections for: About, Contact, Policies, Careers, Seller Registration, Social Media links, Address, and Newsletter Signup form",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-a-shop-categories-page-showing-filterable-product-listings-by-category",
-      "title": "Create a Shop/Categories page showing filterable product listings by category",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-build-a-product-details-page-showing-full-product-information-image-gallery-price-discount-rating-reviews-quantity-selector-add-to-cart-and-buy-now-buttons",
-      "title": "Build a Product Details page showing full product information, image gallery, price, discount, rating, reviews, quantity selector, Add to Cart, and Buy Now buttons",
+      "id": "feature-create-react-query-hooks-in-frontend-src-hooks-usequeries-ts-for-documentation-requests-usecreatedocumentationrequest-mutation-usegetdocumentationrequests-query-useupdatedocumentationrequeststatus-mutation-and-usegetdocumentationrequestdocuments-query",
+      "title": "Create React Query hooks in frontend/src/hooks/useQueries.ts for documentation requests: useCreateDocumentationRequest mutation, useGetDocumentationRequests query, useUpdateDocumentationRequestStatus mutation, and useGetDocumentationRequestDocuments query",
       "reqIds": [
         "REQ-10"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-shopping-cart-functionality-with-item-list-quantity-adjustment-price-calculation-and-proceed-to-checkout-button",
-      "title": "Implement shopping cart functionality with item list, quantity adjustment, price calculation, and proceed to checkout button",
+      "id": "feature-wire-service-request-form-to-use-usecreatedocumentationrequest-mutation-hook-handling-file-uploads-by-converting-files-to-blob-format-before-submission-and-displaying-success-message-modal-or-toast-after-successful-submission",
+      "title": "Wire service request form to use useCreateDocumentationRequest mutation hook, handling file uploads by converting files to blob format before submission, and displaying success message modal or toast after successful submission",
       "reqIds": [
         "REQ-11"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-checkout-page-with-order-summary-delivery-address-form-payment-method-selection-online-payment-and-cash-on-delivery-and-place-order-button",
-      "title": "Create a checkout page with order summary, delivery address form, payment method selection (online payment and cash on delivery), and place order button",
+      "id": "feature-create-documentationrequestsmanagement-admin-component-at-frontend-src-components-admin-documentationrequestsmanagement-tsx-displaying-table-of-all-documentation-requests-with-columns-name-mobile-service-mode-status-date-and-actions-view-details-update-status",
+      "title": "Create DocumentationRequestsManagement admin component at frontend/src/components/admin/DocumentationRequestsManagement.tsx displaying table of all documentation requests with columns: Name, Mobile, Service, Mode, Status, Date, and Actions (View Details, Update Status)",
       "reqIds": [
         "REQ-12"
       ],
       "version": 1
     },
     {
-      "id": "feature-use-blue-2563eb-and-orange-f97316-as-primary-color-theme-with-white-background-throughout-the-application",
-      "title": "Use blue (#2563eb) and orange (#f97316) as primary color theme with white background throughout the application",
+      "id": "feature-create-documentationrequestdetailmodal-component-showing-complete-request-information-including-personal-details-service-requested-mode-uploaded-documents-list-with-download-buttons-message-status-and-status-update-dropdown-for-admin",
+      "title": "Create DocumentationRequestDetailModal component showing complete request information including personal details, service requested, mode, uploaded documents list with download buttons, message, status, and status update dropdown for admin",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-documentation-requests-tab-to-admindashboardpage-component-at-frontend-src-pages-admindashboardpage-tsx-displaying-documentationrequestsmanagement-component-and-adding-a-summary-card-showing-total-documentation-requests-count",
+      "title": "Add Documentation Requests tab to AdminDashboardPage component at frontend/src/pages/AdminDashboardPage.tsx, displaying DocumentationRequestsManagement component and adding a summary card showing total documentation requests count",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-how-it-works-section-with-three-steps-step-1-submit-your-request-online-step-2-our-team-verifies-documents-step-3-service-completed-or-visit-scheduled-displayed-with-icons-and-step-numbers",
+      "title": "Add How It Works section with three steps: Step 1 'Submit your request online', Step 2 'Our team verifies documents', Step 3 'Service completed or visit scheduled', displayed with icons and step numbers",
       "reqIds": [
         "REQ-15"
       ],
       "version": 1
     },
     {
-      "id": "feature-apply-poppins-or-roboto-font-family-throughout-the-application-for-all-text-elements",
-      "title": "Apply Poppins or Roboto font family throughout the application for all text elements",
+      "id": "feature-implement-why-choose-the-cyber-point-section-displaying-five-features-trusted-local-service-affordable-charges-fast-processing-experienced-operators-secure-document-handling-each-with-icons-and-brief-descriptions",
+      "title": "Implement Why Choose The Cyber Point section displaying five features: Trusted Local Service, Affordable Charges, Fast Processing, Experienced Operators, Secure Document Handling, each with icons and brief descriptions",
       "reqIds": [
         "REQ-16"
       ],
       "version": 1
     },
     {
-      "id": "feature-ensure-entire-application-is-fully-mobile-responsive-with-optimized-layouts-for-mobile-tablet-and-desktop-viewports",
-      "title": "Ensure entire application is fully mobile-responsive with optimized layouts for mobile, tablet, and desktop viewports",
+      "id": "feature-add-terms-conditions-section-displaying-all-specified-terms-service-charges-non-refundable-after-submission-government-fees-separate-approval-depends-on-authority-incorrect-information-user-responsibility-processing-time-may-vary-aadhaar-services-require-physical-presence",
+      "title": "Add Terms & Conditions section displaying all specified terms: service charges non-refundable after submission, government fees separate, approval depends on authority, incorrect information user responsibility, processing time may vary, Aadhaar services require physical presence",
       "reqIds": [
         "REQ-17"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-a-floating-whatsapp-chat-button-visible-on-all-pages-for-customer-support",
-      "title": "Add a floating WhatsApp chat button visible on all pages for customer support",
+      "id": "feature-add-privacy-policy-note-section-stating-user-documents-are-kept-confidential-and-used-only-for-service-processing",
+      "title": "Add Privacy Policy note section stating 'User documents are kept confidential and used only for service processing'",
       "reqIds": [
         "REQ-18"
       ],
       "version": 1
     },
     {
-      "id": "feature-deploy-the-complete-studyneeds-application-frontend-and-backend-to-the-internet-computer-network-for-production-access",
-      "title": "Deploy the complete StudyNeeds application (frontend and backend) to the Internet Computer network for production access",
+      "id": "feature-add-call-to-action-section-with-heading-need-help-and-three-buttons-chat-on-whatsapp-call-now-visit-centre-with-whatsapp-button-opening-whatsapp-web-with-pre-filled-message-hello-i-want-documentation-service-from-studyneeds",
+      "title": "Add Call to Action section with heading 'Need Help?' and three buttons: 'Chat on WhatsApp', 'Call Now', 'Visit Centre', with WhatsApp button opening WhatsApp Web with pre-filled message 'Hello, I want documentation service from StudyNeeds'",
       "reqIds": [
         "REQ-19"
       ],
       "version": 1
     },
     {
-      "id": "feature-replace-the-existing-logo-in-the-header-component-with-the-uploaded-studyneeds-logo-image-logo-908978-removebg-preview-png-maintaining-the-same-layout-and-positioning-in-the-header-s-left-section",
-      "title": "Replace the existing logo in the Header component with the uploaded StudyNeeds logo image (logo_908978-removebg-preview.png) maintaining the same layout and positioning in the header's left section",
+      "id": "feature-add-floating-whatsapp-button-to-documentation-page-similar-to-existing-whatsappbutton-component-with-auto-message-hello-i-want-documentation-service-from-studyneeds-and-position-it-to-not-overlap-with-existing-site-wide-whatsapp-button",
+      "title": "Add floating WhatsApp button to Documentation page (similar to existing WhatsAppButton component) with auto-message 'Hello, I want documentation service from StudyNeeds' and position it to not overlap with existing site-wide WhatsApp button",
       "reqIds": [
         "REQ-20"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-an-admin-dashboard-page-accessible-from-the-frontend-with-sections-for-products-management-orders-management-and-users-management-the-dashboard-must-display-summary-statistics-including-total-products-total-orders-pending-orders-and-total-registered-users",
-      "title": "Create an Admin Dashboard page accessible from the frontend with sections for Products Management, Orders Management, and Users Management. The dashboard must display summary statistics including total products, total orders, pending orders, and total registered users.",
+      "id": "feature-update-servicessection-component-at-frontend-src-components-servicessection-tsx-to-change-documentation-cyber-services-card-from-coming-soon-to-active-state-adding-onclick-navigation-to-the-new-documentationpage-and-updating-visual-styling-to-match-active-services",
+      "title": "Update ServicesSection component at frontend/src/components/ServicesSection.tsx to change Documentation & Cyber Services card from 'Coming Soon' to active state, adding onClick navigation to the new DocumentationPage and updating visual styling to match active services",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-route-for-documentationpage-at-documentation-in-frontend-src-app-tsx-router-configuration",
+      "title": "Add route for DocumentationPage at /documentation in frontend/src/App.tsx router configuration",
       "reqIds": [
         "REQ-22"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-admin-products-management-interface-allowing-admins-to-view-all-products-in-a-table-grid-add-new-products-with-form-inputs-for-name-category-description-price-discount-rating-stock-and-image-edit-existing-products-delete-products-and-filter-search-products-by-category-or-name",
-      "title": "Implement admin Products Management interface allowing admins to view all products in a table/grid, add new products with form inputs for name, category, description, price, discount, rating, stock, and image, edit existing products, delete products, and filter/search products by category or name.",
+      "id": "feature-apply-studyneeds-theme-styling-throughout-documentation-page-using-primary-blue-2563eb-secondary-orange-f97316-and-white-background-ensuring-all-components-follow-modern-card-design-with-icons-and-mobile-responsive-layouts",
+      "title": "Apply StudyNeeds theme styling throughout Documentation page using primary blue (#2563eb), secondary orange (#f97316), and white background, ensuring all components follow modern card design with icons and mobile-responsive layouts",
       "reqIds": [
         "REQ-23"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-admin-orders-management-interface-displaying-all-customer-orders-in-a-table-with-columns-for-order-id-customer-name-order-date-total-amount-payment-method-order-status-and-actions-admins-must-be-able-to-view-order-details-update-order-status-pending-processing-shipped-delivered-cancelled-and-filter-orders-by-status-or-date-range",
-      "title": "Implement admin Orders Management interface displaying all customer orders in a table with columns for order ID, customer name, order date, total amount, payment method, order status, and actions. Admins must be able to view order details, update order status (Pending, Processing, Shipped, Delivered, Cancelled), and filter orders by status or date range.",
-      "reqIds": [
-        "REQ-24"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-admin-users-management-interface-displaying-all-registered-users-with-their-profile-information-including-name-email-phone-registration-date-and-order-count-admins-must-be-able-to-view-user-details-see-user-order-history-and-filter-users-by-registration-date-or-search-by-name-email",
-      "title": "Implement admin Users Management interface displaying all registered users with their profile information including name, email, phone, registration date, and order count. Admins must be able to view user details, see user order history, and filter users by registration date or search by name/email.",
-      "reqIds": [
-        "REQ-25"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-protect-the-admin-dashboard-frontend-routes-with-authentication-and-authorization-checks-only-users-with-admin-role-should-be-able-to-access-the-admin-routes-display-an-unauthorized-access-message-and-redirect-non-admin-users-attempting-to-access-admin-pages",
-      "title": "Protect the Admin Dashboard frontend routes with authentication and authorization checks. Only users with Admin role should be able to access the /admin routes. Display an unauthorized access message and redirect non-admin users attempting to access admin pages.",
-      "reqIds": [
-        "REQ-28"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-display-the-newly-created-demo-products-in-the-homepage-product-sections-populate-trending-products-section-with-a-mix-of-high-rated-products-from-all-categories-populate-school-essentials-section-with-products-from-stationery-and-school-bags-categories-populate-budget-deals-section-with-products-that-have-prices-under-199-and-populate-furniture-section-with-products-from-study-furniture-category",
-      "title": "Display the newly created demo products in the homepage product sections: populate Trending Products section with a mix of high-rated products from all categories, populate School Essentials section with products from Stationery and School Bags categories, populate Budget Deals section with products that have prices under ₹199, and populate Furniture section with products from Study Furniture category",
-      "reqIds": [
-        "REQ-34"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-wishlist-icon-button-to-each-productcard-component-that-allows-users-to-toggle-wishlist-status-for-that-product-with-visual-feedback-filled-heart-when-wishlisted-outline-heart-when-not-wishlisted",
-      "title": "Add a Wishlist icon button to each ProductCard component that allows users to toggle wishlist status for that product with visual feedback (filled heart when wishlisted, outline heart when not wishlisted)",
-      "reqIds": [
-        "REQ-35"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-productcard-component-prominently-displays-a-discount-badge-showing-the-discount-percentage-when-a-product-has-a-discount-greater-than-0",
-      "title": "Ensure ProductCard component prominently displays a discount badge showing the discount percentage when a product has a discount greater than 0%",
-      "reqIds": [
-        "REQ-36"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-verify-adminroute-protection-component-is-correctly-wrapping-the-admin-dashboard-route-and-properly-checking-authentication-and-admin-authorization-before-allowing-access",
-      "title": "Verify AdminRoute protection component is correctly wrapping the admin dashboard route and properly checking authentication and admin authorization before allowing access",
-      "reqIds": [
-        "REQ-38"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-visible-navigation-link-or-button-in-the-header-component-that-allows-authenticated-admin-users-to-easily-access-the-admin-panel-at-admin-without-manually-typing-the-url",
-      "title": "Add a visible navigation link or button in the Header component that allows authenticated admin users to easily access the admin panel at /admin without manually typing the URL",
-      "reqIds": [
-        "REQ-39"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-test-the-complete-admin-panel-workflow-end-to-end-including-accessing-admin-viewing-products-orders-users-tabs-adding-a-new-product-editing-an-existing-product-and-updating-an-order-status-to-ensure-all-functionality-works-correctly",
-      "title": "Test the complete admin panel workflow end-to-end including accessing /admin, viewing products/orders/users tabs, adding a new product, editing an existing product, and updating an order status to ensure all functionality works correctly",
-      "reqIds": [
-        "REQ-40"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-investigate-and-fix-the-routing-issue-preventing-the-admin-panel-from-displaying-when-users-navigate-to-admin-verify-that-the-route-definition-in-app-tsx-correctly-maps-to-admindashboardpage-ensure-adminroute-protection-component-is-properly-wrapping-the-route-and-confirm-that-authenticated-admin-users-can-successfully-load-the-admin-dashboard-interface",
-      "title": "Investigate and fix the routing issue preventing the admin panel from displaying when users navigate to /admin - verify that the route definition in App.tsx correctly maps to AdminDashboardPage, ensure AdminRoute protection component is properly wrapping the route, and confirm that authenticated admin users can successfully load the admin dashboard interface",
-      "reqIds": [
-        "REQ-41"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-check-that-the-adminroute-protection-component-is-correctly-checking-authentication-status-and-admin-role-before-allowing-access-and-verify-it-properly-renders-the-admindashboardpage-when-authorization-succeeds",
-      "title": "Check that the AdminRoute protection component is correctly checking authentication status and admin role before allowing access, and verify it properly renders the AdminDashboardPage when authorization succeeds",
-      "reqIds": [
-        "REQ-43"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-diagnose-and-fix-the-tanstack-router-configuration-issue-causing-the-search-does-not-match-any-page-error-when-navigating-to-admin-verify-that-the-admin-route-is-properly-registered-in-the-router-configuration-and-that-path-matching-works-correctly-for-the-admin-path",
-      "title": "Diagnose and fix the TanStack Router configuration issue causing the 'search does not match any page' error when navigating to /admin. Verify that the admin route is properly registered in the router configuration and that path matching works correctly for the /admin path.",
-      "reqIds": [
-        "REQ-45"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-test-the-complete-admin-panel-access-flow-end-to-end-log-in-as-an-admin-user-navigate-to-admin-via-the-header-link-verify-the-page-loads-without-routing-errors-and-confirm-all-admin-dashboard-sections-products-orders-users-are-accessible",
-      "title": "Test the complete admin panel access flow end-to-end: log in as an admin user, navigate to /admin via the header link, verify the page loads without routing errors, and confirm all admin dashboard sections (Products, Orders, Users) are accessible.",
-      "reqIds": [
-        "REQ-47"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-properly-matches-when-users-navigate-to-the-url-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-the-route-must-handle-the-hash-based-routing-with-the-caffeineadmintoken-query-parameter-and-correctly-load-the-admindashboardpage-without-showing-your-search-did-not-match-any-documents-error",
-      "title": "Fix the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route properly matches when users navigate to the URL https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin - the route must handle the hash-based routing with the caffeineAdminToken query parameter and correctly load the AdminDashboardPage without showing 'your search did not match any documents' error",
-      "reqIds": [
-        "REQ-48"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-properly-handle-the-admin-route-with-hash-based-routing-containing-caffeineadmintoken-query-parameter-ensure-the-route-matches-correctly-when-navigating-to-urls-like-https-studyneeds-c05-caffeine-xyz-caffeineadmintoken-ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c-admin-without-showing-search-did-not-match-any-documents-error",
-      "title": "Fix the TanStack Router configuration in frontend/src/App.tsx to properly handle the /admin route with hash-based routing containing caffeineAdminToken query parameter - ensure the route matches correctly when navigating to URLs like https://studyneeds-c05.caffeine.xyz/#caffeineAdminToken=ce5861fcab1733db191f53acf1238a5fd5d097aabfd6c254c5de695de99ec00c/admin without showing 'search did not match any documents' error",
-      "reqIds": [
-        "REQ-52"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-admin-panel-navigation-link-in-the-header-component-is-consistently-visible-and-functional-for-authenticated-admin-users-in-both-draft-and-production-deployments-the-link-must-appear-in-the-header-navigation-and-be-clickable",
-      "title": "Ensure the Admin Panel navigation link in the Header component is consistently visible and functional for authenticated admin users in both draft and production deployments - the link must appear in the header navigation and be clickable",
-      "reqIds": [
-        "REQ-53"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-verify-the-adminroute-protection-component-does-not-interfere-with-tanstack-router-path-matching-while-still-enforcing-authentication-and-authorization-checks-ensure-it-renders-admindashboardpage-when-authorization-succeeds",
-      "title": "Verify the AdminRoute protection component does not interfere with TanStack Router path matching while still enforcing authentication and authorization checks - ensure it renders AdminDashboardPage when authorization succeeds",
-      "reqIds": [
-        "REQ-54"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-all-authentication-and-authorization-checks-from-the-admin-panel-navigation-link-in-the-header-component-frontend-src-components-header-tsx-so-the-admin-panel-link-is-always-visible-to-all-users-regardless-of-authentication-status",
-      "title": "Remove all authentication and authorization checks from the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) so the Admin Panel link is always visible to all users regardless of authentication status",
-      "reqIds": [
-        "REQ-60"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-all-authentication-and-authorization-checks-from-the-admin-panel-navigation-link-in-the-mobilemenu-component-frontend-src-components-mobilemenu-tsx-so-the-admin-panel-link-is-always-visible-in-the-mobile-menu-to-all-users-regardless-of-authentication-status",
-      "title": "Remove all authentication and authorization checks from the Admin Panel navigation link in the MobileMenu component (frontend/src/components/MobileMenu.tsx) so the Admin Panel link is always visible in the mobile menu to all users regardless of authentication status",
-      "reqIds": [
-        "REQ-61"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-simplify-the-tanstack-router-configuration-in-frontend-src-app-tsx-to-ensure-the-admin-route-matches-correctly-for-hash-based-routing-with-caffeineadmintoken-query-parameter-verify-the-route-definition-uses-proper-path-matching-without-complex-search-validation",
-      "title": "Simplify the TanStack Router configuration in frontend/src/App.tsx to ensure the /admin route matches correctly for hash-based routing with caffeineAdminToken query parameter - verify the route definition uses proper path matching without complex search validation",
-      "reqIds": [
-        "REQ-62"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-adminroute-protection-component-wrapper-from-the-admin-route-definition-in-frontend-src-app-tsx-render-admindashboardpage-directly-without-any-authentication-or-authorization-checks",
-      "title": "Remove the AdminRoute protection component wrapper from the /admin route definition in frontend/src/App.tsx - render AdminDashboardPage directly without any authentication or authorization checks",
-      "reqIds": [
-        "REQ-64"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-simplify-the-admin-route-configuration-in-frontend-src-app-tsx-to-use-basic-path-matching-without-search-validation-remove-all-validatesearch-search-schema-and-complex-routing-parameters",
-      "title": "Simplify the /admin route configuration in frontend/src/App.tsx to use basic path matching without search validation - remove all validateSearch, search schema, and complex routing parameters",
-      "reqIds": [
-        "REQ-65"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-frontend-usegetallproducts-react-query-hook-in-frontend-src-hooks-usequeries-ts-to-properly-fetch-and-display-products-in-the-admin-products-management-table-ensure-error-handling-displays-meaningful-messages-and-loading-states-work-correctly",
-      "title": "Fix the frontend useGetAllProducts React Query hook in frontend/src/hooks/useQueries.ts to properly fetch and display products in the admin Products Management table - ensure error handling displays meaningful messages and loading states work correctly",
-      "reqIds": [
-        "REQ-71"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-frontend-usecreateproduct-mutation-hook-in-frontend-src-hooks-usequeries-ts-to-properly-submit-new-product-data-to-the-backend-and-handle-the-response-ensure-the-mutation-invalidates-the-products-query-cache-to-trigger-automatic-list-refresh-after-successful-creation",
-      "title": "Fix the frontend useCreateProduct mutation hook in frontend/src/hooks/useQueries.ts to properly submit new product data to the backend and handle the response - ensure the mutation invalidates the products query cache to trigger automatic list refresh after successful creation",
-      "reqIds": [
-        "REQ-72"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-verify-and-fix-the-productformmodal-component-in-frontend-src-components-admin-productformmodal-tsx-to-ensure-form-submission-properly-calls-the-usecreateproduct-mutation-with-all-required-fields-and-handles-loading-error-states-correctly",
-      "title": "Verify and fix the ProductFormModal component in frontend/src/components/admin/ProductFormModal.tsx to ensure form submission properly calls the useCreateProduct mutation with all required fields and handles loading/error states correctly",
-      "reqIds": [
-        "REQ-73"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-comprehensive-error-logging-to-both-backend-createproduct-function-and-frontend-usecreateproduct-mutation-to-capture-and-display-exact-error-messages-when-product-creation-fails-log-validation-errors-storage-errors-and-network-errors-with-detailed-context",
-      "title": "Add comprehensive error logging to both backend createProduct function and frontend useCreateProduct mutation to capture and display exact error messages when product creation fails - log validation errors, storage errors, and network errors with detailed context",
-      "reqIds": [
-        "REQ-74"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-test-the-complete-product-management-workflow-end-to-end-after-fixes-navigate-to-admin-products-tab-verify-demo-products-display-in-the-table-fill-out-add-product-form-with-test-data-submit-the-form-verify-saving-indicator-appears-briefly-confirm-new-product-appears-in-the-products-table-immediately-after-submission-and-verify-the-product-persists-after-page-refresh",
-      "title": "Test the complete product management workflow end-to-end after fixes: navigate to admin Products tab, verify demo products display in the table, fill out Add Product form with test data, submit the form, verify 'Saving...' indicator appears briefly, confirm new product appears in the products table immediately after submission, and verify the product persists after page refresh",
-      "reqIds": [
-        "REQ-75"
       ],
       "version": 1
     }
@@ -401,284 +168,43 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Core e-commerce homepage with product listings, search, cart, and categories",
+      "summary": "Complete Documentation & Cyber Services page with service categories, pricing, request form with file uploads, admin panel, and WhatsApp integration",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Shop/Categories and Product Details pages",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Shopping cart and checkout functionality",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Home Tuition Consultancy page with teacher/student forms and listings",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Documentation Services page with service categories and request form",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Career Counselling coming soon page",
-      "reqIds": [],
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "id": "AR-7",
-      "summary": "User Dashboard (student view with orders, requests, profile)",
-      "reqIds": [],
+      "summary": "Add backend data model for DocumentationRequest with fields: id, fullName, mobileNumber, serviceNeeded, mode (online/centre), uploadedDocuments (array of blob data), message, timestamp, status (pending/processing/completed), and implement createDocumentationRequest function in main.mo to store requests with uploaded file blobs",
+      "reqIds": [
+        "REQ-6"
+      ],
       "status": "pending"
     },
     {
       "id": "AR-8",
-      "summary": "Teacher Dashboard (leads, profile, earnings, reviews)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-22",
-      "summary": "Store and manage product catalog in backend including product name, category, price, discount, rating, images, and stock quantity",
+      "summary": "Implement getDocumentationRequests backend function that returns all documentation requests with admin-only access control using existing isAdmin check pattern",
       "reqIds": [
-        "REQ-13"
+        "REQ-7"
       ],
       "status": "pending"
     },
     {
-      "id": "AR-23",
-      "summary": "Implement backend order management system storing customer orders with items, quantities, delivery address, payment method, order status, and timestamps",
+      "id": "AR-9",
+      "summary": "Add updateDocumentationRequestStatus backend function allowing admin to change request status to pending, processing, or completed",
       "reqIds": [
-        "REQ-14"
+        "REQ-8"
       ],
       "status": "pending"
     },
     {
-      "id": "AR-24",
-      "summary": "Add demo product data across categories: Stationery, Books, School Bags, Pens & Geometry",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-26",
-      "summary": "Populate the backend with comprehensive demo product data across multiple categories: Stationery (notebooks, pens, pencils, erasers, sharpeners, rulers, staplers, glue sticks), Books (textbooks for classes 1-12, competitive exam books for JEE/NEET/UPSC, reference books, story books), School Bags (backpacks, trolley bags, lunch bags, pencil cases), and Pens & Geometry (gel pens, ballpoint pens, fountain pens, compass sets, protractors, geometry boxes, dividers). Each product must include name, category, description, price, discount percentage, rating (1-5 stars), stock quantity, and at least one product image reference.",
+      "id": "AR-10",
+      "summary": "Implement getDocumentationRequestDocuments backend function that returns uploaded file blobs for a specific request, accessible to admin users",
       "reqIds": [
-        "REQ-21"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-31",
-      "summary": "Add backend functions to support admin operations including getAllOrders to fetch all orders with customer details, updateOrderStatus to change order status by order ID, getAllUsers to retrieve all registered user profiles with order counts, deleteProduct to remove a product by ID, and updateProduct to modify existing product details.",
-      "reqIds": [
-        "REQ-26"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-32",
-      "summary": "Implement role-based access control in the backend by adding an Admin role to the AccessControl system. Restrict all admin management functions (getAllOrders, updateOrderStatus, getAllUsers, deleteProduct, updateProduct) to users with Admin role only. Create a mechanism to assign Admin role to specific Internet Identity principals.",
-      "reqIds": [
-        "REQ-27"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-33",
-      "summary": "Create at least 8 demo Stationery products in the backend with complete details including product name, category (Stationery), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
-      "reqIds": [
-        "REQ-29"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-34",
-      "summary": "Create at least 8 demo Books products in the backend with complete details including product name, category (Books), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
-      "reqIds": [
-        "REQ-30"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-35",
-      "summary": "Create at least 6 demo School Bags products in the backend with complete details including product name, category (School Bags), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
-      "reqIds": [
-        "REQ-31"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-36",
-      "summary": "Create at least 6 demo Pens & Geometry products in the backend with complete details including product name, category (Pens & Geometry), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
-      "reqIds": [
-        "REQ-32"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-37",
-      "summary": "Create at least 6 demo Study Furniture products in the backend with complete details including product name, category (Study Furniture), price, discount percentage, final calculated price, detailed description, 3-5 high-quality royalty-free product image URLs, demo rating (1-5 stars), stock quantity, and unique SKU code for each product",
-      "reqIds": [
-        "REQ-33"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-38",
-      "summary": "Debug and fix the /admin route so that it properly loads the AdminDashboardPage component when users navigate to /admin or the full URL with /admin path",
-      "reqIds": [
-        "REQ-37"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-40",
-      "summary": "Verify that the TanStack Router configuration in App.tsx includes the /admin route with proper lazy loading or direct component import, and ensure there are no conflicting route patterns that might prevent the admin route from matching",
-      "reqIds": [
-        "REQ-42"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-42",
-      "summary": "Test the complete navigation flow from clicking the Admin Panel link in the Header component through to successfully viewing the admin dashboard, ensuring the link correctly navigates to /admin and the page loads without errors",
-      "reqIds": [
-        "REQ-44"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-44",
-      "summary": "Verify that the AdminRoute protection wrapper is not interfering with route matching and that it properly renders the AdminDashboardPage when authentication and authorization succeed.",
-      "reqIds": [
-        "REQ-46"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-46",
-      "summary": "Ensure the Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) is visible for authenticated admin users in both draft and production deployments - the link should appear in the header navigation area and be clickable",
-      "reqIds": [
-        "REQ-49"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-47",
-      "summary": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) correctly handles authentication and authorization checks while allowing the route to match properly - ensure it does not interfere with TanStack Router's path matching logic",
-      "reqIds": [
-        "REQ-50"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-48",
-      "summary": "Test the complete admin panel access flow end-to-end: authenticate as an admin user using the caffeineAdminToken, navigate to /admin via direct URL and via the header link, verify the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and confirm no routing errors occur",
-      "reqIds": [
-        "REQ-51"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-52",
-      "summary": "Test the complete end-to-end admin panel access flow: authenticate as admin user using caffeineAdminToken, navigate to /admin via both direct URL and header link, verify AdminDashboardPage loads with all tabs (Products, Orders, Users) accessible, and confirm zero routing errors occur",
-      "reqIds": [
-        "REQ-55"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-53",
-      "summary": "Add a visible Admin Panel navigation link in the Header component (frontend/src/components/Header.tsx) that displays only for authenticated admin users. The link must be prominently placed in the desktop header navigation area, styled consistently with other header elements, and navigate to /admin when clicked.",
-      "reqIds": [
-        "REQ-56"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-54",
-      "summary": "Add an Admin Panel navigation link in the MobileMenu component (frontend/src/components/MobileMenu.tsx) that displays only for authenticated admin users. The link must be visible in the mobile slide-out menu, styled consistently with other menu items, and navigate to /admin when clicked.",
-      "reqIds": [
-        "REQ-57"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-55",
-      "summary": "Verify that the useIsCallerAdmin hook correctly identifies admin users based on authentication state and admin role assignment. Ensure the hook returns accurate boolean values for admin status checking across all components.",
-      "reqIds": [
-        "REQ-58"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-56",
-      "summary": "Test the complete admin panel access workflow end-to-end: authenticate as an admin user, verify the Admin Panel link appears in both desktop header and mobile menu, click the link to navigate to /admin, confirm the AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible, and verify zero routing errors occur throughout the flow.",
-      "reqIds": [
-        "REQ-59"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-60",
-      "summary": "Verify the AdminRoute protection component (frontend/src/components/AdminRoute.tsx) properly renders the AdminDashboardPage without interfering with TanStack Router path matching - ensure the component wraps the dashboard page correctly while still performing necessary authorization checks",
-      "reqIds": [
-        "REQ-63"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-63",
-      "summary": "Verify the Admin Panel link in Header component (frontend/src/components/Header.tsx) remains permanently visible to all users without any conditional rendering based on authentication or admin status",
-      "reqIds": [
-        "REQ-66"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-64",
-      "summary": "Verify the Admin Panel link in MobileMenu component (frontend/src/components/MobileMenu.tsx) remains permanently visible to all users without any conditional rendering based on authentication or admin status",
-      "reqIds": [
-        "REQ-67"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-65",
-      "summary": "Test the complete admin panel access flow end-to-end: navigate to /admin via direct URL and via header/mobile menu links, verify AdminDashboardPage loads successfully with all tabs (Products, Orders, Users) accessible without any routing errors or authorization blocks",
-      "reqIds": [
-        "REQ-68"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-66",
-      "summary": "Debug and fix the backend product creation API in backend/main.mo to ensure new products are successfully saved when submitted through the admin panel Add Product form - verify the createProduct function properly stores products in the Map storage and returns success confirmation",
-      "reqIds": [
-        "REQ-69"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-67",
-      "summary": "Debug and fix the backend getAllProducts query function in backend/main.mo to ensure it returns all stored products including demo products - verify the function correctly retrieves products from Map storage and formats them for frontend consumption",
-      "reqIds": [
-        "REQ-70"
+        "REQ-9"
       ],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
   "projectName": "StudyNeeds",
   "clarification_mode": "instant",
   "clarification_rounds": 0
