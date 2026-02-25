@@ -1,0 +1,27 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T17:43:37.531Z",
+  "summary": "All three requirements appear to be implemented in the diff. REQ-1 is addressed by the new WhatsAppButton.tsx component with correct number and green styling. REQ-2 is addressed by Call Now links in Header.tsx, Footer.tsx, and DocumentationPage.tsx. REQ-3 is addressed by the Visit Centre button in DocumentationPage.tsx and the address in Footer.tsx. However, there is no evidence in the diff that WhatsAppButton is actually rendered in the app layout (e.g., App.tsx), which is needed for it to appear on all pages.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Floating WhatsApp button must be visible on ALL pages in the bottom-right corner",
+      "reason": "WhatsAppButton.tsx is created, but there is no evidence in the diff that it is imported and rendered in App.tsx or any global layout component. The file-summaries.txt description of App.tsx does not mention WhatsAppButton being added there.",
+      "evidence": [
+        "frontend/src/components/WhatsAppButton.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "hallucinated_features": [],
+  "confidence": 0.72,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/WhatsAppButton.tsx",
+    "frontend/src/pages/DocumentationPage.tsx",
+    "project_state.json"
+  ]
+}

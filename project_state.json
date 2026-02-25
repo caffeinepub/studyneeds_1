@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Documentation & Cyber Services website for a business in Barh, Patna, Bihar. Includes service request forms, file uploads, admin panel, and home tuition section.",
+  "architectural_notes": [
+    "Business contact: WhatsApp/Phone 9102171138, Address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213",
+    "Admin panel uses Internet Identity for secure login",
+    "Service request form supports file uploads and status tracking (Pending/Processing/Completed)"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-add-a-floating-whatsapp-button-fixed-to-the-bottom-right-corner-of-every-page-that-opens-a-whatsapp-chat-with-the-number-9102171138-the-button-should-be-clearly-visible-and-use-the-standard-whatsapp-green-color-with-the-whatsapp-icon",
+      "title": "Add a floating WhatsApp button fixed to the bottom-right corner of every page that opens a WhatsApp chat with the number 9102171138. The button should be clearly visible and use the standard WhatsApp green color with the WhatsApp icon.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-call-now-button-link-in-the-header-footer-and-or-documentation-page-hero-section-that-triggers-a-phone-call-to-9102171138-tel-9102171138-when-clicked",
+      "title": "Add a 'Call Now' button/link in the header, footer, and/or Documentation page hero section that triggers a phone call to 9102171138 (tel:9102171138) when clicked.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visit-centre-button-section-in-the-documentation-page-and-footer-that-displays-the-business-address-kajichak-dhelbagosain-road-barh-patna-bihar-803213-the-button-or-section-should-clearly-show-the-full-address-so-users-know-where-to-visit",
+      "title": "Add a 'Visit Centre' button/section in the Documentation page and footer that displays the business address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213. The button or section should clearly show the full address so users know where to visit.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add WhatsApp floating button with number 9102171138",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add Call Now button with phone number 9102171138",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add Visit Centre button with address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Documentation & Cyber Services",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

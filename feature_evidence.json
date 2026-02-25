@@ -1,0 +1,68 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-floating-whatsapp-button-fixed-to-the-bottom-right-corner-of-every-page-that-opens-a-whatsapp-chat-with-the-number-9102171138-the-button-should-be-clearly-visible-and-use-the-standard-whatsapp-green-color-with-the-whatsapp-icon",
+      "featureTitle": "Add a floating WhatsApp button fixed to the bottom-right corner of every page that opens a WhatsApp chat with the number 9102171138. The button should be clearly visible and use the standard WhatsApp green color with the WhatsApp icon.",
+      "files": [
+        "frontend/src/components/WhatsAppButton.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-call-now-button-link-in-the-header-footer-and-or-documentation-page-hero-section-that-triggers-a-phone-call-to-9102171138-tel-9102171138-when-clicked",
+      "featureTitle": "Add a 'Call Now' button/link in the header, footer, and/or Documentation page hero section that triggers a phone call to 9102171138 (tel:9102171138) when clicked.",
+      "files": [
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Header.tsx",
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-visit-centre-button-section-in-the-documentation-page-and-footer-that-displays-the-business-address-kajichak-dhelbagosain-road-barh-patna-bihar-803213-the-button-or-section-should-clearly-show-the-full-address-so-users-know-where-to-visit",
+      "featureTitle": "Add a 'Visit Centre' button/section in the Documentation page and footer that displays the business address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213. The button or section should clearly show the full address so users know where to visit.",
+      "files": [
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/pages/DocumentationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

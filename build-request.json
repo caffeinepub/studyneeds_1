@@ -1,0 +1,84 @@
+{
+  "kind": "build_request",
+  "title": "Add WhatsApp Button, Call Now Button, and Visit Centre Button with Business Details",
+  "projectName": "StudyNeeds",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add a floating WhatsApp button fixed to the bottom-right corner of every page that opens a WhatsApp chat with the number 9102171138. The button should be clearly visible and use the standard WhatsApp green color with the WhatsApp icon.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6",
+          "msg-7"
+        ],
+        "quotes": [
+          "watsapp number 9102171138",
+          "WhatsApp Button: 9102171138"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A floating WhatsApp button is visible on all pages in the bottom-right corner",
+        "Clicking the button opens WhatsApp (wa.me/919102171138) in a new tab",
+        "The button displays the WhatsApp icon and is styled in WhatsApp green"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a 'Call Now' button/link in the header, footer, and/or Documentation page hero section that triggers a phone call to 9102171138 (tel:9102171138) when clicked.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6",
+          "msg-7"
+        ],
+        "quotes": [
+          "phone number 9102171138",
+          "Phone Number: 9102171138"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Call Now' button is present and visible on the Documentation page and footer",
+        "Clicking the button initiates a phone call to 9102171138 via tel: link",
+        "The phone number 9102171138 is displayed alongside the button"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a 'Visit Centre' button/section in the Documentation page and footer that displays the business address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213. The button or section should clearly show the full address so users know where to visit.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6",
+          "msg-7"
+        ],
+        "quotes": [
+          "business adress kajichak dhelbagosain road barh patna bihar 803213",
+          "Business Address: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Visit Centre' button or address section is visible on the Documentation page",
+        "The full address 'Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213' is displayed",
+        "The address is also present in the site footer under Contact info",
+        "The Visit Centre button/section is styled consistently with the rest of the page"
+      ]
+    }
+  ],
+  "constraints": [
+    "WhatsApp number must be exactly 9102171138",
+    "Phone number must be exactly 9102171138",
+    "Business address must be exactly: Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213",
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui"
+  ],
+  "nonGoals": [
+    "No backend changes required",
+    "No changes to existing service request forms or file upload functionality",
+    "No changes to admin panel or authentication flow"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

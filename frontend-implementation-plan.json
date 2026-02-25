@@ -1,0 +1,71 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add WhatsApp Button, Call Now Button, and Visit Centre Button with Business Details",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add a floating WhatsApp button fixed to the bottom-right corner of every page that opens a WhatsApp chat with the number 9102171138",
+      "acceptanceCriteria": [
+        "A floating WhatsApp button is visible on all pages in the bottom-right corner",
+        "Clicking the button opens WhatsApp (wa.me/919102171138) in a new tab",
+        "The button displays the WhatsApp icon and is styled in WhatsApp green"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/WhatsAppButton.tsx",
+          "operation": "modify",
+          "description": "Update the WhatsApp button component to use the phone number 9102171138 (formatted as 919102171138 for wa.me link). Ensure the button is styled with WhatsApp green color (#25D366), displays the WhatsApp icon, and is fixed to the bottom-right corner. The button already exists in App.tsx and is conditionally rendered after user profile setup, so verify it remains visible on all pages for all users."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add a 'Call Now' button/link in the header, footer, and Documentation page that triggers a phone call to 9102171138",
+      "acceptanceCriteria": [
+        "A 'Call Now' button is present and visible on the Documentation page and footer",
+        "Clicking the button initiates a phone call to 9102171138 via tel: link",
+        "The phone number 9102171138 is displayed alongside the button"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Add a 'Call Now' button/link in the header navigation area that displays the phone number 9102171138 and uses tel:9102171138 as the href. Style it to be visible and accessible on both desktop and mobile views. Position it appropriately within the existing header layout without disrupting the logo, search bar, or authentication controls."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Add a 'Call Now' button/link in the Contact section of the footer that displays 'Phone: 9102171138' with a tel:9102171138 link. Integrate it naturally into the existing contact information column alongside social media links."
+        },
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add a 'Call Now' button in the hero section of the Documentation page that prominently displays the phone number 9102171138 and uses tel:9102171138 as the link. Style it consistently with other CTA buttons on the page and position it alongside existing action buttons (online application, WhatsApp, visit centre)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add a 'Visit Centre' button/section in the Documentation page and footer that displays the business address",
+      "acceptanceCriteria": [
+        "A 'Visit Centre' button or address section is visible on the Documentation page",
+        "The full address 'Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213' is displayed",
+        "The address is also present in the site footer under Contact info",
+        "The Visit Centre button/section is styled consistently with the rest of the page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DocumentationPage.tsx",
+          "operation": "modify",
+          "description": "Add a 'Visit Centre' button or address display section in the hero area of the Documentation page that shows the full business address: 'Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213'. Style it as a prominent call-to-action alongside other hero buttons, using an appropriate icon (location/map pin). Consider making it a button that could open Google Maps with the address or simply display the address clearly."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Add the business address 'Kajichak Dhelbagosain Road, Barh, Patna, Bihar - 803213' to the Contact section of the footer under a 'Visit Us' or 'Address' heading. Format it clearly with line breaks for readability and integrate it into the existing footer contact column structure."
+        }
+      ]
+    }
+  ]
+}
